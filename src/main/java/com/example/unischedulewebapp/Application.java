@@ -1,5 +1,7 @@
 package com.example.unischedulewebapp;
 
+import com.example.unischedulewebapp.model.AcademicDepartment;
+import com.example.unischedulewebapp.model.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
