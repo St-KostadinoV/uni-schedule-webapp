@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "department")
+@Table(
+        name = "department"
+)
 public class AcademicDepartment extends AcademicStructure {
 
     public AcademicDepartment() {
