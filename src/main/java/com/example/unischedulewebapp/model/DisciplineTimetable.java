@@ -9,7 +9,7 @@ import static javax.persistence.FetchType.LAZY;
 public class DisciplineTimetable {
 
     @EmbeddedId
-    private DisciplineTimetableId id;
+    private DisciplineTimetablePK id;
 
     @ManyToOne(
             fetch = LAZY
@@ -36,7 +36,7 @@ public class DisciplineTimetable {
     public DisciplineTimetable() {
     }
 
-    public DisciplineTimetable(DisciplineTimetableId id,
+    public DisciplineTimetable(DisciplineTimetablePK id,
                                AcademicDiscipline discipline,
                                AcademicTimetable timetable,
                                AcademicClassType classType,
@@ -58,11 +58,11 @@ public class DisciplineTimetable {
         this.studentGroup = studentGroup;
     }
 
-    public DisciplineTimetableId getId() {
+    public DisciplineTimetablePK getId() {
         return id;
     }
 
-    public void setId(DisciplineTimetableId id) {
+    public void setId(DisciplineTimetablePK id) {
         this.id = id;
     }
 

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class DisciplineTimetableId implements Serializable {
+public class DisciplineTimetablePK implements Serializable {
 
     @Column(
             name = "discipline_id"
@@ -19,10 +19,10 @@ public class DisciplineTimetableId implements Serializable {
     private Long timetableId;
 
 
-    public DisciplineTimetableId() {
+    public DisciplineTimetablePK() {
     }
 
-    public DisciplineTimetableId(Long disciplineId, Long timetableId) {
+    public DisciplineTimetablePK(Long disciplineId, Long timetableId) {
         this.disciplineId = disciplineId;
         this.timetableId = timetableId;
     }
@@ -31,7 +31,7 @@ public class DisciplineTimetableId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DisciplineTimetableId that = (DisciplineTimetableId) o;
+        DisciplineTimetablePK that = (DisciplineTimetablePK) o;
         return Objects.equals(disciplineId, that.disciplineId) && Objects.equals(timetableId, that.timetableId);
     }
 

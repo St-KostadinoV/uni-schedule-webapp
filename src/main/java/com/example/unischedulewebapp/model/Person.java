@@ -8,11 +8,16 @@ import javax.persistence.*;
 public abstract class Person {
 
     @Id
-    @OneToOne
-    @JoinColumn(
+    @Column(
             name = "user_details_id",
-            updatable = false,
-            referencedColumnName = "id"
+            updatable = false
+    )
+    private Long id;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(
+            name = "user_details_id"
     )
     private AppUser userDetails;
 
@@ -43,6 +48,20 @@ public abstract class Person {
     public Person() {
     }
 
+    public Person(Long id,
+                  AppUser userDetails,
+                  String firstName,
+                  String middleName,
+                  String lastName,
+                  String email) {
+        this.id = id;
+        this.userDetails = userDetails;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
     public Person(AppUser userDetails,
                   String firstName,
                   String middleName,
@@ -63,6 +82,14 @@ public abstract class Person {
         this.middleName = middleName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public Long getId(){
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public AppUser getUserDetails() {

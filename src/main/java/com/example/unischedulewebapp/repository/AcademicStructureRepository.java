@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
-public interface AcademicStructureRepository
-        extends JpaRepository<AcademicStructure, Long> {
+public interface AcademicStructureRepository<T extends AcademicStructure>
+        extends JpaRepository<T, Long> {
 }
