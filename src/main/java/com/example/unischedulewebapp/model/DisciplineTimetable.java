@@ -2,6 +2,7 @@ package com.example.unischedulewebapp.model;
 
 import javax.persistence.*;
 
+import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
@@ -15,7 +16,7 @@ public class DisciplineTimetable {
             fetch = LAZY
     )
     @MapsId("disciplineId")
-    private AcademicDiscipline discipline;
+    private ProgramDiscipline programDiscipline;
 
     @ManyToOne(
             fetch = LAZY
@@ -23,8 +24,10 @@ public class DisciplineTimetable {
     @MapsId("timetableId")
     private AcademicTimetable timetable;
 
+    @Enumerated(value = STRING)
     @Column(
-            name = "class_type"
+            name = "class_type",
+            nullable = false
     )
     private AcademicClassType classType;
 
@@ -37,22 +40,22 @@ public class DisciplineTimetable {
     }
 
     public DisciplineTimetable(DisciplineTimetablePK id,
-                               AcademicDiscipline discipline,
+                               ProgramDiscipline programDiscipline,
                                AcademicTimetable timetable,
                                AcademicClassType classType,
                                Integer studentGroup) {
         this.id = id;
-        this.discipline = discipline;
+        this.programDiscipline = programDiscipline;
         this.timetable = timetable;
         this.classType = classType;
         this.studentGroup = studentGroup;
     }
 
-    public DisciplineTimetable(AcademicDiscipline discipline,
+    public DisciplineTimetable(ProgramDiscipline programDiscipline,
                                AcademicTimetable timetable,
                                AcademicClassType classType,
                                Integer studentGroup) {
-        this.discipline = discipline;
+        this.programDiscipline = programDiscipline;
         this.timetable = timetable;
         this.classType = classType;
         this.studentGroup = studentGroup;
@@ -66,12 +69,12 @@ public class DisciplineTimetable {
         this.id = id;
     }
 
-    public AcademicDiscipline getDiscipline() {
-        return discipline;
+    public ProgramDiscipline getProgramDiscipline() {
+        return programDiscipline;
     }
 
-    public void setDiscipline(AcademicDiscipline discipline) {
-        this.discipline = discipline;
+    public void setProgramDiscipline(ProgramDiscipline programDiscipline) {
+        this.programDiscipline = programDiscipline;
     }
 
     public AcademicTimetable getTimetable() {

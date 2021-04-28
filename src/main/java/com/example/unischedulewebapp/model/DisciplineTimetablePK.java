@@ -9,9 +9,9 @@ import java.util.Objects;
 public class DisciplineTimetablePK implements Serializable {
 
     @Column(
-            name = "discipline_id"
+            name = "program_discipline_id"
     )
-    private Long disciplineId;
+    private Long programDisciplineId;
 
     @Column(
             name = "timetable_id"
@@ -22,8 +22,8 @@ public class DisciplineTimetablePK implements Serializable {
     public DisciplineTimetablePK() {
     }
 
-    public DisciplineTimetablePK(Long disciplineId, Long timetableId) {
-        this.disciplineId = disciplineId;
+    public DisciplineTimetablePK(Long programDisciplineId, Long timetableId) {
+        this.programDisciplineId = programDisciplineId;
         this.timetableId = timetableId;
     }
 
@@ -32,11 +32,11 @@ public class DisciplineTimetablePK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DisciplineTimetablePK that = (DisciplineTimetablePK) o;
-        return Objects.equals(disciplineId, that.disciplineId) && Objects.equals(timetableId, that.timetableId);
+        return Objects.equals(programDisciplineId, that.programDisciplineId) && Objects.equals(timetableId, that.timetableId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(disciplineId, timetableId);
+        return Objects.hash(programDisciplineId, timetableId);
     }
 }

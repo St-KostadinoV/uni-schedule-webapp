@@ -5,7 +5,6 @@ import com.example.unischedulewebapp.auth.AppUser;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
@@ -34,6 +33,11 @@ public class Teacher extends Person implements Serializable {
     private AcademicDepartment department;
 
     @Column(
+            name = "office"
+    )
+    private String office;
+
+    @Column(
             name = "honorary",
             nullable = false
     )
@@ -42,17 +46,38 @@ public class Teacher extends Person implements Serializable {
     public Teacher() {
     }
 
+    public Teacher(Long id,
+                   AppUser userDetails,
+                   String firstName,
+                   String middleName,
+                   String lastName,
+                   String email,
+                   String phone,
+                   AcademicTitle academicTitle,
+                   AcademicDepartment department,
+                   String office,
+                   Boolean isHonorary) {
+        super(id, userDetails, firstName, middleName, lastName, email, phone);
+        this.academicTitle = academicTitle;
+        this.department = department;
+        this.office = office;
+        this.isHonorary = isHonorary;
+    }
+
     public Teacher(AppUser userDetails,
                    String firstName,
                    String middleName,
                    String lastName,
                    String email,
+                   String phone,
                    AcademicTitle academicTitle,
                    AcademicDepartment department,
+                   String office,
                    Boolean isHonorary) {
-        super(userDetails, firstName, middleName, lastName, email);
+        super(userDetails, firstName, middleName, lastName, email, phone);
         this.academicTitle = academicTitle;
         this.department = department;
+        this.office = office;
         this.isHonorary = isHonorary;
     }
 
@@ -60,12 +85,15 @@ public class Teacher extends Person implements Serializable {
                    String middleName,
                    String lastName,
                    String email,
+                   String phone,
                    AcademicTitle academicTitle,
                    AcademicDepartment department,
+                   String office,
                    Boolean isHonorary) {
-        super(firstName, middleName, lastName, email);
+        super(firstName, middleName, lastName, email, phone);
         this.academicTitle = academicTitle;
         this.department = department;
+        this.office = office;
         this.isHonorary = isHonorary;
     }
 
@@ -83,6 +111,14 @@ public class Teacher extends Person implements Serializable {
 
     public void setDepartment(AcademicDepartment department) {
         this.department = department;
+    }
+
+    public String getOffice() {
+        return office;
+    }
+
+    public void setOffice(String office) {
+        this.office = office;
     }
 
     public Boolean getHonorary() {

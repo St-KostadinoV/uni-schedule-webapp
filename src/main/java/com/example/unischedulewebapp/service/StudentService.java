@@ -4,7 +4,6 @@ import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicProgram;
 import com.example.unischedulewebapp.model.Student;
-import com.example.unischedulewebapp.model.Teacher;
 import com.example.unischedulewebapp.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

@@ -45,6 +45,12 @@ public abstract class Person {
     )
     private String email;
 
+    @Column(
+            name = "phone_number"
+    )
+    private String phone;
+
+
     public Person() {
     }
 
@@ -53,35 +59,41 @@ public abstract class Person {
                   String firstName,
                   String middleName,
                   String lastName,
-                  String email) {
+                  String email,
+                  String phone) {
         this.id = id;
         this.userDetails = userDetails;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.email = email;
+        this.phone = phone;
     }
 
     public Person(AppUser userDetails,
                   String firstName,
                   String middleName,
                   String lastName,
-                  String email) {
+                  String email,
+                  String phone) {
         this.userDetails = userDetails;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.email = email;
+        this.phone = phone;
     }
 
     public Person(String firstName,
                   String middleName,
                   String lastName,
-                  String email) {
+                  String email,
+                  String phone) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.email = email;
+        this.phone = phone;
     }
 
     public Long getId(){
@@ -130,6 +142,14 @@ public abstract class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getFullName() {

@@ -57,18 +57,41 @@ public class Student extends Person implements Serializable {
     public Student() {
     }
 
-    public Student(AppUser userDetails,
+    public Student(Long id,
+                   AppUser userDetails,
                    String firstName,
                    String middleName,
                    String lastName,
                    String email,
+                   String phone,
                    String facultyNumber,
                    Integer admissionStream,
                    AcademicProgram academicProgram,
                    Integer academicYear,
                    Integer studentGroup,
                    Boolean isActive) {
-        super(userDetails, firstName, middleName, lastName, email);
+        super(id, userDetails, firstName, middleName, lastName, email, phone);
+        this.facultyNumber = facultyNumber;
+        this.admissionStream = admissionStream;
+        this.academicProgram = academicProgram;
+        this.academicYear = academicYear;
+        this.studentGroup = studentGroup;
+        this.isActive = isActive;
+    }
+
+    public Student(AppUser userDetails,
+                   String firstName,
+                   String middleName,
+                   String lastName,
+                   String email,
+                   String phone,
+                   String facultyNumber,
+                   Integer admissionStream,
+                   AcademicProgram academicProgram,
+                   Integer academicYear,
+                   Integer studentGroup,
+                   Boolean isActive) {
+        super(userDetails, firstName, middleName, lastName, email, phone);
         this.facultyNumber = facultyNumber;
         this.admissionStream = admissionStream;
         this.academicProgram = academicProgram;
@@ -81,14 +104,17 @@ public class Student extends Person implements Serializable {
                    String middleName,
                    String lastName,
                    String email,
+                   String phone,
                    String facultyNumber,
                    Integer admissionStream,
+                   AcademicProgram academicProgram,
                    Integer academicYear,
                    Integer studentGroup,
                    Boolean isActive) {
-        super(firstName, middleName, lastName, email);
+        super(firstName, middleName, lastName, email, phone);
         this.facultyNumber = facultyNumber;
         this.admissionStream = admissionStream;
+        this.academicProgram = academicProgram;
         this.academicYear = academicYear;
         this.studentGroup = studentGroup;
         this.isActive = isActive;
