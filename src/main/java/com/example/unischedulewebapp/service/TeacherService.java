@@ -41,6 +41,25 @@ public class TeacherService {
                         ));
     }
 
+    public List<Teacher> findByTitle(AcademicTitle title) {
+        return teacherRepository
+                .findByTitle(title)
+                .stream()
+                .toList();
+    }
+
+    public List<Teacher> findByDepartment(AcademicDepartment department) {
+        return teacherRepository
+                .findByDepartment(department)
+                .stream()
+                .toList();
+    }
+
+    public List<Teacher> findAll() {
+        return teacherRepository
+                .findAll();
+    }
+
     public List<Teacher> findAll(int pageNumber, int rowsPerPage) {
         return teacherRepository
                 .findAll(PageRequest.of(pageNumber - 1, rowsPerPage))
@@ -118,7 +137,7 @@ public class TeacherService {
                                 String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
                         ));
 
-        teacher.setAcademicTitle(title);
+        teacher.setTitle(title);
         teacherRepository.save(teacher);
     }
 
@@ -130,7 +149,7 @@ public class TeacherService {
                                 String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
                         ));
 
-        teacher.setHonorary(isHonorary);
+        teacher.setHonoraryStatus(isHonorary);
         teacherRepository.save(teacher);
     }
 

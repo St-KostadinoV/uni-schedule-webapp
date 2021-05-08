@@ -52,7 +52,7 @@ public class Student extends Person implements Serializable {
             name = "active",
             nullable = false
     )
-    private Boolean isActive;
+    private Boolean activeStatus;
 
     public Student() {
     }
@@ -69,14 +69,14 @@ public class Student extends Person implements Serializable {
                    AcademicProgram academicProgram,
                    Integer academicYear,
                    Integer studentGroup,
-                   Boolean isActive) {
+                   Boolean activeStatus) {
         super(id, userDetails, firstName, middleName, lastName, email, phone);
         this.facultyNumber = facultyNumber;
         this.admissionStream = admissionStream;
         this.academicProgram = academicProgram;
         this.academicYear = academicYear;
         this.studentGroup = studentGroup;
-        this.isActive = isActive;
+        this.activeStatus = activeStatus;
     }
 
     public Student(AppUser userDetails,
@@ -90,14 +90,14 @@ public class Student extends Person implements Serializable {
                    AcademicProgram academicProgram,
                    Integer academicYear,
                    Integer studentGroup,
-                   Boolean isActive) {
+                   Boolean activeStatus) {
         super(userDetails, firstName, middleName, lastName, email, phone);
         this.facultyNumber = facultyNumber;
         this.admissionStream = admissionStream;
         this.academicProgram = academicProgram;
         this.academicYear = academicYear;
         this.studentGroup = studentGroup;
-        this.isActive = isActive;
+        this.activeStatus = activeStatus;
     }
 
     public Student(String firstName,
@@ -110,14 +110,14 @@ public class Student extends Person implements Serializable {
                    AcademicProgram academicProgram,
                    Integer academicYear,
                    Integer studentGroup,
-                   Boolean isActive) {
+                   Boolean activeStatus) {
         super(firstName, middleName, lastName, email, phone);
         this.facultyNumber = facultyNumber;
         this.admissionStream = admissionStream;
         this.academicProgram = academicProgram;
         this.academicYear = academicYear;
         this.studentGroup = studentGroup;
-        this.isActive = isActive;
+        this.activeStatus = activeStatus;
     }
 
     public String getFacultyNumber() {
@@ -160,11 +160,11 @@ public class Student extends Person implements Serializable {
         this.studentGroup = studentGroup;
     }
 
-    public Boolean getActive() {
-        return isActive;
+    public Boolean getActiveStatus() {
+        return activeStatus;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setActiveStatus(Boolean activeStatus) {
+        this.activeStatus = activeStatus;
     }
 }

@@ -20,7 +20,7 @@ public class Teacher extends Person implements Serializable {
             name = "title",
             nullable = false
     )
-    private AcademicTitle academicTitle;
+    private AcademicTitle title;
 
     @ManyToOne(
             fetch = LAZY
@@ -41,7 +41,7 @@ public class Teacher extends Person implements Serializable {
             name = "honorary",
             nullable = false
     )
-    private Boolean isHonorary;
+    private Boolean honoraryStatus;
 
     public Teacher() {
     }
@@ -53,15 +53,15 @@ public class Teacher extends Person implements Serializable {
                    String lastName,
                    String email,
                    String phone,
-                   AcademicTitle academicTitle,
+                   AcademicTitle title,
                    AcademicDepartment department,
                    String office,
-                   Boolean isHonorary) {
+                   Boolean honoraryStatus) {
         super(id, userDetails, firstName, middleName, lastName, email, phone);
-        this.academicTitle = academicTitle;
+        this.title = title;
         this.department = department;
         this.office = office;
-        this.isHonorary = isHonorary;
+        this.honoraryStatus = honoraryStatus;
     }
 
     public Teacher(AppUser userDetails,
@@ -70,15 +70,15 @@ public class Teacher extends Person implements Serializable {
                    String lastName,
                    String email,
                    String phone,
-                   AcademicTitle academicTitle,
+                   AcademicTitle title,
                    AcademicDepartment department,
                    String office,
-                   Boolean isHonorary) {
+                   Boolean honoraryStatus) {
         super(userDetails, firstName, middleName, lastName, email, phone);
-        this.academicTitle = academicTitle;
+        this.title = title;
         this.department = department;
         this.office = office;
-        this.isHonorary = isHonorary;
+        this.honoraryStatus = honoraryStatus;
     }
 
     public Teacher(String firstName,
@@ -86,23 +86,23 @@ public class Teacher extends Person implements Serializable {
                    String lastName,
                    String email,
                    String phone,
-                   AcademicTitle academicTitle,
+                   AcademicTitle title,
                    AcademicDepartment department,
                    String office,
-                   Boolean isHonorary) {
+                   Boolean honoraryStatus) {
         super(firstName, middleName, lastName, email, phone);
-        this.academicTitle = academicTitle;
+        this.title = title;
         this.department = department;
         this.office = office;
-        this.isHonorary = isHonorary;
+        this.honoraryStatus = honoraryStatus;
     }
 
-    public AcademicTitle getAcademicTitle() {
-        return academicTitle;
+    public AcademicTitle getTitle() {
+        return title;
     }
 
-    public void setAcademicTitle(AcademicTitle academicTitle) {
-        this.academicTitle = academicTitle;
+    public void setTitle(AcademicTitle title) {
+        this.title = title;
     }
 
     public AcademicDepartment getDepartment() {
@@ -121,16 +121,16 @@ public class Teacher extends Person implements Serializable {
         this.office = office;
     }
 
-    public Boolean getHonorary() {
-        return isHonorary;
+    public Boolean getHonoraryStatus() {
+        return honoraryStatus;
     }
 
-    public void setHonorary(Boolean honorary) {
-        isHonorary = honorary;
+    public void setHonoraryStatus(Boolean honoraryStatus) {
+        this.honoraryStatus = honoraryStatus;
     }
 
     public String getFullNameWithTitle(){
-        return academicTitle.getTitle() + " " + super.getFullName();
+        return title.getTitle() + " " + super.getFullName();
     }
 
 }

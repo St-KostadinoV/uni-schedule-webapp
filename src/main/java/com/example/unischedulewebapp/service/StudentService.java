@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -47,6 +48,46 @@ public class StudentService {
                         new ResourceNotFoundException(
                                 String.format(STUDENT_NOT_FOUND_MSG, "with faculty number '" + facultyNumber + "'")
                         ));
+    }
+
+    public List<Student> findByAdmissionStream(Integer stream) {
+        return studentRepository
+                .findByAdmissionStream(stream)
+                .stream()
+                .toList();
+    }
+
+    public List<Student> findByAcademicProgram(AcademicProgram program) {
+        return studentRepository
+                .findByAcademicProgram(program)
+                .stream()
+                .toList();
+    }
+
+    public List<Student> findByAcademicYear(Integer year) {
+        return studentRepository
+                .findByAcademicYear(year)
+                .stream()
+                .toList();
+    }
+
+    public List<Student> findByAcademicProgramAndStudentGroup(AcademicProgram program, Integer group) {
+        return studentRepository
+                .findByAcademicProgramAndStudentGroup(program, group)
+                .stream()
+                .toList();
+    }
+
+    public List<Student> findByActiveStatus(Boolean activeStatus) {
+        return studentRepository
+                .findByActiveStatus(activeStatus)
+                .stream()
+                .toList();
+    }
+
+    public List<Student> findAll() {
+        return studentRepository
+                .findAll();
     }
 
     public List<Student> findAll(int pageNumber, int rowsPerPage) {
@@ -132,7 +173,7 @@ public class StudentService {
                                 String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
                         ));
 
-        student.setActive(isActive);
+        student.setActiveStatus(isActive);
         studentRepository.save(student);
     }
 

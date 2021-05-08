@@ -55,7 +55,46 @@ public class AcademicTimetable {
     )
     private String designatedRoom;
 
+    @ManyToOne(
+            fetch = LAZY
+    )
+    @JoinColumn(
+            name = "program_discipline_id",
+            nullable = false,
+            referencedColumnName = "id"
+    )
+    private ProgramDiscipline programDiscipline;
+
+    @Column(
+            name = "class_type",
+            nullable = false
+    )
+    private AcademicClassType classType;
+
+    @Column(
+            name = "student_group"
+    )
+    private Integer studentGroup;
+
     public AcademicTimetable() {
+    }
+
+    public AcademicTimetable(Teacher assignedTeacher,
+                             DayOfWeek dayOfWeek,
+                             LocalTime startTime,
+                             LocalTime endTime,
+                             String designatedRoom,
+                             ProgramDiscipline programDiscipline,
+                             AcademicClassType classType,
+                             Integer studentGroup) {
+        this.assignedTeacher = assignedTeacher;
+        this.dayOfWeek = dayOfWeek;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.designatedRoom = designatedRoom;
+        this.programDiscipline = programDiscipline;
+        this.classType = classType;
+        this.studentGroup = studentGroup;
     }
 
     public AcademicTimetable(Long id,
@@ -63,25 +102,19 @@ public class AcademicTimetable {
                              DayOfWeek dayOfWeek,
                              LocalTime startTime,
                              LocalTime endTime,
-                             String designatedRoom) {
+                             String designatedRoom,
+                             ProgramDiscipline programDiscipline,
+                             AcademicClassType classType,
+                             Integer studentGroup) {
         this.id = id;
         this.assignedTeacher = assignedTeacher;
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
         this.endTime = endTime;
         this.designatedRoom = designatedRoom;
-    }
-
-    public AcademicTimetable(Teacher assignedTeacher,
-                             DayOfWeek dayOfWeek,
-                             LocalTime startTime,
-                             LocalTime endTime,
-                             String designatedRoom) {
-        this.assignedTeacher = assignedTeacher;
-        this.dayOfWeek = dayOfWeek;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.designatedRoom = designatedRoom;
+        this.programDiscipline = programDiscipline;
+        this.classType = classType;
+        this.studentGroup = studentGroup;
     }
 
     public Long getId() {
@@ -130,5 +163,29 @@ public class AcademicTimetable {
 
     public void setDesignatedRoom(String designatedRoom) {
         this.designatedRoom = designatedRoom;
+    }
+
+    public ProgramDiscipline getProgramDiscipline() {
+        return programDiscipline;
+    }
+
+    public void setProgramDiscipline(ProgramDiscipline programDiscipline) {
+        this.programDiscipline = programDiscipline;
+    }
+
+    public AcademicClassType getClassType() {
+        return classType;
+    }
+
+    public void setClassType(AcademicClassType classType) {
+        this.classType = classType;
+    }
+
+    public Integer getStudentGroup() {
+        return studentGroup;
+    }
+
+    public void setStudentGroup(Integer studentGroup) {
+        this.studentGroup = studentGroup;
     }
 }
