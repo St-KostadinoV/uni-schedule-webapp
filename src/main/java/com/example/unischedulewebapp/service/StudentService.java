@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -51,38 +52,28 @@ public class StudentService {
     }
 
     public List<Student> findByAdmissionStream(Integer stream) {
-        return studentRepository
-                .findByAdmissionStream(stream)
-                .stream()
-                .toList();
+        return new ArrayList<>(studentRepository
+                .findByAdmissionStream(stream));
     }
 
     public List<Student> findByAcademicProgram(AcademicProgram program) {
-        return studentRepository
-                .findByAcademicProgram(program)
-                .stream()
-                .toList();
+        return new ArrayList<>(studentRepository
+                .findByAcademicProgram(program));
     }
 
     public List<Student> findByAcademicYear(Integer year) {
-        return studentRepository
-                .findByAcademicYear(year)
-                .stream()
-                .toList();
+        return new ArrayList<>(studentRepository
+                .findByAcademicYear(year));
     }
 
     public List<Student> findByAcademicProgramAndStudentGroup(AcademicProgram program, Integer group) {
-        return studentRepository
-                .findByAcademicProgramAndStudentGroup(program, group)
-                .stream()
-                .toList();
+        return new ArrayList<>(studentRepository
+                .findByAcademicProgramAndStudentGroup(program, group));
     }
 
     public List<Student> findByActiveStatus(Boolean activeStatus) {
-        return studentRepository
-                .findByActiveStatus(activeStatus)
-                .stream()
-                .toList();
+        return new ArrayList<>(studentRepository
+                .findByActiveStatus(activeStatus));
     }
 
     public List<Student> findAll() {
@@ -102,6 +93,7 @@ public class StudentService {
                     String.format(STUDENT_EXISTS_MSG, "with id=" + student.getId())
             );
 
+        studentRepository.save(student);
     }
 
     public void updateStudent(Long id, Student student) throws ResourceNotFoundException {

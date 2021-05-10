@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TeacherService {
@@ -42,17 +44,13 @@ public class TeacherService {
     }
 
     public List<Teacher> findByTitle(AcademicTitle title) {
-        return teacherRepository
-                .findByTitle(title)
-                .stream()
-                .toList();
+        return new ArrayList<>(teacherRepository
+                .findByTitle(title));
     }
 
     public List<Teacher> findByDepartment(AcademicDepartment department) {
-        return teacherRepository
-                .findByDepartment(department)
-                .stream()
-                .toList();
+        return new ArrayList<>(teacherRepository
+                .findByDepartment(department));
     }
 
     public List<Teacher> findAll() {

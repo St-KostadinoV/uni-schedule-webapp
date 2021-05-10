@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
@@ -28,7 +29,7 @@ public class Student extends Person implements Serializable {
     private Integer admissionStream;
 
     @ManyToOne(
-            fetch = LAZY
+            fetch = EAGER
     )
     @JoinColumn(
             name = "program_id",
