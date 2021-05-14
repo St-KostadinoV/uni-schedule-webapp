@@ -3,7 +3,7 @@ package com.example.unischedulewebapp.service;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDepartment;
-import com.example.unischedulewebapp.model.AcademicTitle;
+import com.example.unischedulewebapp.model.enums.AcademicTitle;
 import com.example.unischedulewebapp.model.Teacher;
 import com.example.unischedulewebapp.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TeacherService {
@@ -65,7 +64,7 @@ public class TeacherService {
     }
 
     public void addTeacher(Teacher teacher) throws ResourceAlreadyExistsException {
-        if (teacher.getId() != null && !teacherRepository.existsById(teacher.getId()))
+        if (teacher.getId() != null && existsById(teacher.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(TEACHER_EXISTS_MSG, "with id=" + teacher.getId())
             );
@@ -76,9 +75,8 @@ public class TeacherService {
     }
 
     // TODO - check if updated data is still valid
-
     public void updateTeacher(Long id, Teacher teacher) throws ResourceNotFoundException {
-        if(!teacherRepository.existsById(id))
+        if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
             );
@@ -87,72 +85,72 @@ public class TeacherService {
         teacherRepository.save(teacher);
     }
 
-    public void updateTeacherNames(Long id, String firstName, String middleName, String lastName) throws ResourceNotFoundException {
-        Teacher teacher = teacherRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
-                        ));
-
-        teacher.setFirstName(firstName);
-        teacher.setMiddleName(middleName);
-        teacher.setLastName(lastName);
-        teacherRepository.save(teacher);
-    }
-
-    public void updateTeacherEmail(Long id, String email) throws ResourceNotFoundException {
-        Teacher teacher = teacherRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
-                        ));
-
-        teacher.setEmail(email);
-        teacherRepository.save(teacher);
-    }
-
-    public void updateTeacherDepartment(Long id, AcademicDepartment department) throws ResourceNotFoundException {
-        Teacher teacher = teacherRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
-                        ));
-
-        // TODO - check if department exists
-
-        teacher.setDepartment(department);
-        teacherRepository.save(teacher);
-    }
-
-    public void updateTeacherTitle(Long id, AcademicTitle title) throws ResourceNotFoundException {
-        Teacher teacher = teacherRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
-                        ));
-
-        teacher.setTitle(title);
-        teacherRepository.save(teacher);
-    }
-
-    public void updateTeacherHonorary(Long id, Boolean isHonorary) throws ResourceNotFoundException {
-        Teacher teacher = teacherRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
-                        ));
-
-        teacher.setHonoraryStatus(isHonorary);
-        teacherRepository.save(teacher);
-    }
+//    public void updateTeacherNames(Long id, String firstName, String middleName, String lastName) throws ResourceNotFoundException {
+//        Teacher teacher = teacherRepository
+//                .findById(id)
+//                .orElseThrow(() ->
+//                        new ResourceNotFoundException(
+//                                String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
+//                        ));
+//
+//        teacher.setFirstName(firstName);
+//        teacher.setMiddleName(middleName);
+//        teacher.setLastName(lastName);
+//        teacherRepository.save(teacher);
+//    }
+//
+//    public void updateTeacherEmail(Long id, String email) throws ResourceNotFoundException {
+//        Teacher teacher = teacherRepository
+//                .findById(id)
+//                .orElseThrow(() ->
+//                        new ResourceNotFoundException(
+//                                String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
+//                        ));
+//
+//        teacher.setEmail(email);
+//        teacherRepository.save(teacher);
+//    }
+//
+//    public void updateTeacherDepartment(Long id, AcademicDepartment department) throws ResourceNotFoundException {
+//        Teacher teacher = teacherRepository
+//                .findById(id)
+//                .orElseThrow(() ->
+//                        new ResourceNotFoundException(
+//                                String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
+//                        ));
+//
+//        // TODO - check if department exists
+//
+//        teacher.setDepartment(department);
+//        teacherRepository.save(teacher);
+//    }
+//
+//    public void updateTeacherTitle(Long id, AcademicTitle title) throws ResourceNotFoundException {
+//        Teacher teacher = teacherRepository
+//                .findById(id)
+//                .orElseThrow(() ->
+//                        new ResourceNotFoundException(
+//                                String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
+//                        ));
+//
+//        teacher.setTitle(title);
+//        teacherRepository.save(teacher);
+//    }
+//
+//    public void updateTeacherHonorary(Long id, Boolean isHonorary) throws ResourceNotFoundException {
+//        Teacher teacher = teacherRepository
+//                .findById(id)
+//                .orElseThrow(() ->
+//                        new ResourceNotFoundException(
+//                                String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
+//                        ));
+//
+//        teacher.setHonoraryStatus(isHonorary);
+//        teacherRepository.save(teacher);
+//    }
 
     public void deleteTeacher(Long id) throws ResourceNotFoundException {
-        if(!teacherRepository.existsById(id))
+        if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
             );

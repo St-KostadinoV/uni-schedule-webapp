@@ -1,13 +1,13 @@
 package com.example.unischedulewebapp.model;
 
 import com.example.unischedulewebapp.auth.AppUser;
+import com.example.unischedulewebapp.model.generic.Person;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
 
 import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Table(

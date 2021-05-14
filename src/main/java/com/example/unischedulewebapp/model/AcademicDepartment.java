@@ -1,5 +1,7 @@
 package com.example.unischedulewebapp.model;
 
+import com.example.unischedulewebapp.model.generic.AcademicStructure;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;

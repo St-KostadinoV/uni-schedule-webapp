@@ -1,5 +1,7 @@
 package com.example.unischedulewebapp.model;
 
+import com.example.unischedulewebapp.model.enums.AcademicClassType;
+
 import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalTime;

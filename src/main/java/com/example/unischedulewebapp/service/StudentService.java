@@ -88,7 +88,7 @@ public class StudentService {
     }
 
     public void addStudent(Student student) throws ResourceAlreadyExistsException {
-        if(student.getId() != null && !studentRepository.existsById(student.getId()))
+        if(student.getId() != null && existsById(student.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(STUDENT_EXISTS_MSG, "with id=" + student.getId())
             );
@@ -97,7 +97,7 @@ public class StudentService {
     }
 
     public void updateStudent(Long id, Student student) throws ResourceNotFoundException {
-        if(!studentRepository.existsById(id))
+        if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
             );
@@ -107,70 +107,70 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    public void updateStudentStream(Long id, Integer admissionStream) throws ResourceNotFoundException {
-        Student student = studentRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
-                        ));
-
-        student.setAdmissionStream(admissionStream);
-        studentRepository.save(student);
-    }
-
-    public void updateStudentProgram(Long id, AcademicProgram program) throws ResourceNotFoundException {
-        Student student = studentRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
-                        ));
-
-        // TODO - check if program exists
-
-        student.setAcademicProgram(program);
-        studentRepository.save(student);
-    }
-
-    public void updateStudentYear(Long id, Integer year) throws ResourceNotFoundException {
-        Student student = studentRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
-                        ));
-
-        student.setAcademicYear(year);
-        studentRepository.save(student);
-    }
-
-    public void updateStudentGroup(Long id, Integer group) throws ResourceNotFoundException {
-        Student student = studentRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
-                        ));
-
-        student.setStudentGroup(group);
-        studentRepository.save(student);
-    }
-
-    public void updateStudentStatus(Long id, Boolean isActive) throws ResourceNotFoundException {
-        Student student = studentRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
-                        ));
-
-        student.setActiveStatus(isActive);
-        studentRepository.save(student);
-    }
+//    public void updateStudentStream(Long id, Integer admissionStream) throws ResourceNotFoundException {
+//        Student student = studentRepository
+//                .findById(id)
+//                .orElseThrow(() ->
+//                        new ResourceNotFoundException(
+//                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
+//                        ));
+//
+//        student.setAdmissionStream(admissionStream);
+//        studentRepository.save(student);
+//    }
+//
+//    public void updateStudentProgram(Long id, AcademicProgram program) throws ResourceNotFoundException {
+//        Student student = studentRepository
+//                .findById(id)
+//                .orElseThrow(() ->
+//                        new ResourceNotFoundException(
+//                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
+//                        ));
+//
+//        // TODO - check if program exists
+//
+//        student.setAcademicProgram(program);
+//        studentRepository.save(student);
+//    }
+//
+//    public void updateStudentYear(Long id, Integer year) throws ResourceNotFoundException {
+//        Student student = studentRepository
+//                .findById(id)
+//                .orElseThrow(() ->
+//                        new ResourceNotFoundException(
+//                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
+//                        ));
+//
+//        student.setAcademicYear(year);
+//        studentRepository.save(student);
+//    }
+//
+//    public void updateStudentGroup(Long id, Integer group) throws ResourceNotFoundException {
+//        Student student = studentRepository
+//                .findById(id)
+//                .orElseThrow(() ->
+//                        new ResourceNotFoundException(
+//                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
+//                        ));
+//
+//        student.setStudentGroup(group);
+//        studentRepository.save(student);
+//    }
+//
+//    public void updateStudentStatus(Long id, Boolean isActive) throws ResourceNotFoundException {
+//        Student student = studentRepository
+//                .findById(id)
+//                .orElseThrow(() ->
+//                        new ResourceNotFoundException(
+//                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
+//                        ));
+//
+//        student.setActiveStatus(isActive);
+//        studentRepository.save(student);
+//    }
 
     public void deleteStudent(Long id) throws ResourceNotFoundException {
-        if(!studentRepository.existsById(id))
+        if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
             );

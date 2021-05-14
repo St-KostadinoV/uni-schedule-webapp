@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.model;
+package com.example.unischedulewebapp.model.enums;
 
 public enum AcademicClassType {
     LECTURE("лекция"),

@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.model;
+package com.example.unischedulewebapp.model.generic;
 
 import com.example.unischedulewebapp.auth.AppUser;
 

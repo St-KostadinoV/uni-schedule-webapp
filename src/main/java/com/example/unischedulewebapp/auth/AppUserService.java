@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +27,7 @@ public class AppUserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return appUserRepository
                 .findByUsername(username)
                 .orElseThrow(() ->
@@ -38,8 +36,7 @@ public class AppUserService implements UserDetailsService {
                         ));
     }
 
-    public void registerUser(AppUser appUser)
-            throws UserAlreadyExistsException {
+    public void registerUser(AppUser appUser) throws UserAlreadyExistsException {
         boolean userExists = appUserRepository
                 .findByUsername(appUser.getUsername())
                 .isPresent();

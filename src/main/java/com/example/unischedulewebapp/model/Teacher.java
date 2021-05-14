@@ -1,6 +1,8 @@
 package com.example.unischedulewebapp.model;
 
 import com.example.unischedulewebapp.auth.AppUser;
+import com.example.unischedulewebapp.model.enums.AcademicTitle;
+import com.example.unischedulewebapp.model.generic.Person;
 
 import javax.persistence.*;
 
