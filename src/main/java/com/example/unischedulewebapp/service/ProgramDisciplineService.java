@@ -2,12 +2,16 @@ package com.example.unischedulewebapp.service;
 
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
+import com.example.unischedulewebapp.model.AcademicDiscipline;
+import com.example.unischedulewebapp.model.AcademicProgram;
 import com.example.unischedulewebapp.model.ProgramDiscipline;
 import com.example.unischedulewebapp.repository.ProgramDisciplineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,6 +51,21 @@ public class ProgramDisciplineService {
                         new ResourceNotFoundException(
                                 String.format(PROGRAM_DSCPL_NOT_FOUND_MSG, id)
                         ));
+    }
+
+    public List<ProgramDiscipline> findByProgram(AcademicProgram program) {
+        return new ArrayList<>(programDisciplineRepository
+                .findByProgram(program));
+    }
+
+    public List<ProgramDiscipline> findByDiscipline(AcademicDiscipline discipline) {
+        return new ArrayList<>(programDisciplineRepository
+                .findByDiscipline(discipline));
+    }
+
+    public List<ProgramDiscipline> findByProgramAndAcademicYear(AcademicProgram program, Integer year) {
+        return new ArrayList<>(programDisciplineRepository
+                .findByProgramAndAcademicYear(program, year));
     }
 
     public List<ProgramDiscipline> findAll() {

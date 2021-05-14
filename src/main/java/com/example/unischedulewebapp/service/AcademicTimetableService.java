@@ -3,11 +3,17 @@ package com.example.unischedulewebapp.service;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicTimetable;
+import com.example.unischedulewebapp.model.ProgramDiscipline;
+import com.example.unischedulewebapp.model.Teacher;
+import com.example.unischedulewebapp.model.enums.AcademicClassType;
 import com.example.unischedulewebapp.repository.AcademicTimetableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -45,6 +51,41 @@ public class AcademicTimetableService {
                         new ResourceNotFoundException(
                                 String.format(TIMETBL_NOT_FOUND_MSG, "with id=" + id)
                         ));
+    }
+
+    public List<AcademicTimetable> findByAssignedTeacher(Teacher teacher) {
+        return new ArrayList<>(timetableRepository
+                .findByAssignedTeacher(teacher));
+    }
+
+    public List<AcademicTimetable> findByDayOfWeek(DayOfWeek dayOfWeek) {
+        return new ArrayList<>(timetableRepository
+                .findByDayOfWeek(dayOfWeek));
+    }
+
+    public List<AcademicTimetable> findByStartTime(LocalTime startTime) {
+        return new ArrayList<>(timetableRepository
+                .findByStartTime(startTime));
+    }
+
+    public List<AcademicTimetable> findByDesignatedRoom(String room) {
+        return new ArrayList<>(timetableRepository
+                .findByDesignatedRoom(room));
+    }
+
+    public List<AcademicTimetable> findByProgramDiscipline(ProgramDiscipline programDiscipline) {
+        return new ArrayList<>(timetableRepository
+                .findByProgramDiscipline(programDiscipline));
+    }
+
+    public List<AcademicTimetable> findByClassType(AcademicClassType classType) {
+        return new ArrayList<>(timetableRepository
+                .findByClassType(classType));
+    }
+
+    public List<AcademicTimetable> findByProgramDisciplineAndStudentGroup(ProgramDiscipline programDiscipline, Integer year) {
+        return new ArrayList<>(timetableRepository
+                .findByProgramDisciplineAndStudentGroup(programDiscipline, year));
     }
 
     public List<AcademicTimetable> findAll() {

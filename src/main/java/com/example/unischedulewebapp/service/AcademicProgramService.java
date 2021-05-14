@@ -2,12 +2,14 @@ package com.example.unischedulewebapp.service;
 
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
+import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.AcademicProgram;
 import com.example.unischedulewebapp.repository.AcademicProgramRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,6 +44,11 @@ public class AcademicProgramService {
                         new ResourceNotFoundException(
                                 String.format(PROGRAM_NOT_FOUND_MSG, "with id=" + id)
                         ));
+    }
+
+    public List<AcademicProgram> findByDepartment(AcademicDepartment department) {
+        return new ArrayList<>(programRepository
+                .findByDepartment(department));
     }
 
     public List<AcademicProgram> findAll() {

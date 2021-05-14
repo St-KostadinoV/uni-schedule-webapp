@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,6 +44,11 @@ public class AcademicDisciplineService {
                         new ResourceNotFoundException(
                                 String.format(DSCPL_NOT_FOUND_MSG, "with id=" + id)
                         ));
+    }
+
+    public List<AcademicDiscipline> findByLeadingTeacher(Teacher teacher) {
+        return new ArrayList<>(disciplineRepository
+                .findByLeadingTeacher(teacher));
     }
 
     public List<AcademicDiscipline> findAll() {
