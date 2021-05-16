@@ -28,9 +28,7 @@ public class Student extends Person implements Serializable {
     )
     private Integer admissionStream;
 
-    @ManyToOne(
-            fetch = EAGER
-    )
+    @ManyToOne
     @JoinColumn(
             name = "program_id",
             nullable = false,

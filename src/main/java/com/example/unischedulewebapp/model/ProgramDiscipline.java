@@ -2,6 +2,7 @@ package com.example.unischedulewebapp.model;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -19,9 +20,7 @@ public class ProgramDiscipline {
     )
     private Long id;
 
-    @ManyToOne(
-            fetch = LAZY
-    )
+    @ManyToOne
     @JoinColumn(
             name = "program_id",
             nullable = false,
@@ -29,9 +28,7 @@ public class ProgramDiscipline {
     )
     private AcademicProgram program;
 
-    @ManyToOne(
-            fetch = LAZY
-    )
+    @ManyToOne
     @JoinColumn(
             name = "discipline_id",
             nullable = false,

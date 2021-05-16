@@ -13,9 +13,7 @@ import static javax.persistence.FetchType.LAZY;
 )
 public class AcademicDiscipline extends AcademicStructure {
 
-    @ManyToOne(
-            fetch = LAZY
-    )
+    @ManyToOne
     @JoinColumn(
             name = "teacher_id",
             nullable = false,
@@ -23,15 +21,16 @@ public class AcademicDiscipline extends AcademicStructure {
     )
     private Teacher leadingTeacher;
 
-    @ManyToMany(
-            fetch = LAZY
-    )
+    @ManyToMany
     @JoinTable(
             name = "discipline_teacher",
             joinColumns = @JoinColumn(name = "discipline_id"),
             inverseJoinColumns = @JoinColumn(name = "teacher_id")
     )
     private Set<Teacher> assistingTeachers;
+
+    // TODO - finish property
+    private String link;
 
     public AcademicDiscipline() {
     }

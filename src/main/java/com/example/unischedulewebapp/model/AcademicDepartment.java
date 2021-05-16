@@ -15,9 +15,7 @@ import static javax.persistence.FetchType.LAZY;
 )
 public class AcademicDepartment extends AcademicStructure {
 
-    @ManyToOne(
-            fetch = LAZY
-    )
+    @ManyToOne
     @JoinColumn(
             name = "faculty_id",
             nullable = false,

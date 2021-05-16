@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -23,9 +24,7 @@ public class AcademicTimetable {
     )
     private Long id;
 
-    @ManyToOne(
-            fetch = LAZY
-    )
+    @ManyToOne
     @JoinColumn(
             name = "teacher_id",
             nullable = false,
@@ -57,9 +56,7 @@ public class AcademicTimetable {
     )
     private String designatedRoom;
 
-    @ManyToOne(
-            fetch = LAZY
-    )
+    @ManyToOne
     @JoinColumn(
             name = "program_discipline_id",
             nullable = false,

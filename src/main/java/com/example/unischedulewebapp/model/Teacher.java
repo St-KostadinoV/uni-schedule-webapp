@@ -24,9 +24,7 @@ public class Teacher extends Person implements Serializable {
     )
     private AcademicTitle title;
 
-    @ManyToOne(
-            fetch = LAZY
-    )
+    @ManyToOne
     @JoinColumn(
             name = "department_id",
             nullable = false,
