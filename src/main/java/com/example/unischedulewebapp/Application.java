@@ -42,6 +42,8 @@ public class Application {
 
 			AcademicDepartment department = new AcademicDepartment("New Department",  "ND", faculty);
 			departmentRepository.save(department);
+			AcademicDepartment department2 = new AcademicDepartment("Another New Department",  "AND", faculty);
+			departmentRepository.save(department2);
 
 			AcademicProgram program = new AcademicProgram("New Program", "NP",  department);
 			programRepository.save(program);
@@ -66,8 +68,10 @@ public class Application {
 			);
 			teacherRepository.save(teacher);
 
-			AcademicDiscipline discipline = new AcademicDiscipline("New Discipline", "ND", teacher);
+			AcademicDiscipline discipline = new AcademicDiscipline("New Discipline", "ND", department, teacher);
 			disciplineRepository.save(discipline);
+			AcademicDiscipline discipline2 = new AcademicDiscipline("Another New Discipline", "AND", department2, teacher);
+			disciplineRepository.save(discipline2);
 
 			fName = faker.name().firstName();
 			mName = faker.name().lastName();

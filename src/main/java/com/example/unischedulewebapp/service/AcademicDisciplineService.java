@@ -2,11 +2,13 @@ package com.example.unischedulewebapp.service;
 
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
+import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.AcademicDiscipline;
 import com.example.unischedulewebapp.model.Teacher;
 import com.example.unischedulewebapp.repository.AcademicDisciplineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -46,6 +48,11 @@ public class AcademicDisciplineService {
                         ));
     }
 
+    public List<AcademicDiscipline> findByDepartment(AcademicDepartment department) {
+        return new ArrayList<>(disciplineRepository
+                .findByDepartment(department));
+    }
+
     public List<AcademicDiscipline> findByLeadingTeacher(Teacher teacher) {
         return new ArrayList<>(disciplineRepository
                 .findByLeadingTeacher(teacher));
@@ -60,6 +67,11 @@ public class AcademicDisciplineService {
         return disciplineRepository
                 .findAll(PageRequest.of(pageNumber - 1, rowsPerPage))
                 .toList();
+    }
+
+    public List<AcademicDiscipline> findAll(Sort sort) {
+        return disciplineRepository
+                .findAll(sort);
     }
 
     public void addDiscipline(AcademicDiscipline discipline) throws ResourceAlreadyExistsException, ResourceNotFoundException {
