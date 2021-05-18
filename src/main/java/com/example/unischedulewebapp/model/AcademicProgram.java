@@ -1,11 +1,13 @@
 package com.example.unischedulewebapp.model;
 
 import com.example.unischedulewebapp.model.generic.AcademicStructure;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
+@JsonFilter("ProgramFilter")
 @Entity
 @Table(
         name = "program"

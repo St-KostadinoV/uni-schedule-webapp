@@ -1,6 +1,7 @@
 package com.example.unischedulewebapp.model.generic;
 
 import com.example.unischedulewebapp.auth.AppUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -152,6 +153,7 @@ public abstract class Person {
         this.phone = phone;
     }
 
+    @JsonIgnore
     public String getFullName() {
         return firstName + " " + middleName + " " + lastName;
     }

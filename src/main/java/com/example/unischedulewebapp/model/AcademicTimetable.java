@@ -1,6 +1,7 @@
 package com.example.unischedulewebapp.model;
 
 import com.example.unischedulewebapp.model.enums.AcademicClassType;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
@@ -10,6 +11,7 @@ import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
+@JsonFilter("TimetableFilter")
 @Entity
 @Table(
         name = "timetable"

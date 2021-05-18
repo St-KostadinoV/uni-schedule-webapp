@@ -1,10 +1,12 @@
 package com.example.unischedulewebapp.model;
 
 import com.example.unischedulewebapp.model.generic.AcademicStructure;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+@JsonFilter("FacultyFilter")
 @Entity
 @Table(
         name = "faculty"

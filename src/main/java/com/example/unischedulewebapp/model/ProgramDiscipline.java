@@ -1,11 +1,14 @@
 package com.example.unischedulewebapp.model;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
+@JsonFilter("ProgramDisciplineFilter")
 @Entity
 @Table(
         name = "program_discipline"

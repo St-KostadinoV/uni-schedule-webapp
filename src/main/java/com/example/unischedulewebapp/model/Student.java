@@ -2,6 +2,7 @@ package com.example.unischedulewebapp.model;
 
 import com.example.unischedulewebapp.auth.AppUser;
 import com.example.unischedulewebapp.model.generic.Person;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 import javax.persistence.*;
 
@@ -9,6 +10,7 @@ import java.io.Serializable;
 
 import static javax.persistence.FetchType.EAGER;
 
+@JsonFilter("StudentFilter")
 @Entity
 @Table(
         name = "student"
