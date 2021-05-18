@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +98,11 @@ public class AcademicTimetableService {
         return timetableRepository
                 .findAll(PageRequest.of(pageNumber - 1, rowsPerPage))
                 .toList();
+    }
+
+    public List<AcademicTimetable> findTeacherDailySchedule(Teacher teacher) {
+        return new ArrayList<>(timetableRepository
+                .findByAssignedTeacherAndDayOfWeek(teacher, LocalDate.now().getDayOfWeek()));
     }
 
     public void addTimetable(AcademicTimetable timetable) throws ResourceAlreadyExistsException, ResourceNotFoundException {

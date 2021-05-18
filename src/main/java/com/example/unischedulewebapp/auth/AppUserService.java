@@ -50,7 +50,6 @@ public class AppUserService implements UserDetailsService {
                 .encode(appUser.getPassword());
 
         appUser.setPassword(encodedPassword);
-
         appUserRepository.save(appUser);
     }
 }

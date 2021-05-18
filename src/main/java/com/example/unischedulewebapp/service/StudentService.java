@@ -1,5 +1,7 @@
 package com.example.unischedulewebapp.service;
 
+import com.example.unischedulewebapp.auth.AppUserService;
+import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicProgram;
@@ -7,11 +9,11 @@ import com.example.unischedulewebapp.model.Student;
 import com.example.unischedulewebapp.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -20,12 +22,20 @@ public class StudentService {
             "Student %s not found!";
     private final static String STUDENT_EXISTS_MSG =
             "Student %s already exists!";
+    private final static String STUDENT_PROGRAM_NOT_FOUND_MSG =
+            "Student is part of a non-existent program!";
 
     private final StudentRepository studentRepository;
+    private final AppUserService userService;
+    private final AcademicProgramService programService;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository,
+                          AppUserService userService,
+                          AcademicProgramService programService) {
         this.studentRepository = studentRepository;
+        this.userService = userService;
+        this.programService = programService;
     }
 
     public boolean existsById(Long id) {
@@ -81,17 +91,27 @@ public class StudentService {
                 .findAll();
     }
 
+    public List<Student> findAll(Sort sort) {
+        return studentRepository
+                .findAll(sort);
+    }
+
     public List<Student> findAll(int pageNumber, int rowsPerPage) {
         return studentRepository
                 .findAll(PageRequest.of(pageNumber - 1, rowsPerPage))
                 .toList();
     }
 
-    public void addStudent(Student student) throws ResourceAlreadyExistsException {
+    public void addStudent(Student student) throws ResourceAlreadyExistsException, UserAlreadyExistsException, ResourceNotFoundException {
         if(student.getId() != null && existsById(student.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(STUDENT_EXISTS_MSG, "with id=" + student.getId())
             );
+
+        if(!programService.existsById(student.getAcademicProgram().getId()))
+            throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
+
+        userService.registerUser(student.getUserDetails());
 
         studentRepository.save(student);
     }
@@ -102,72 +122,13 @@ public class StudentService {
                     String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
             );
 
-        // TODO - check if student data is valid
+        // TODO - check user details
+
+        if(!programService.existsById(student.getAcademicProgram().getId()))
+            throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
 
         studentRepository.save(student);
     }
-
-//    public void updateStudentStream(Long id, Integer admissionStream) throws ResourceNotFoundException {
-//        Student student = studentRepository
-//                .findById(id)
-//                .orElseThrow(() ->
-//                        new ResourceNotFoundException(
-//                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
-//                        ));
-//
-//        student.setAdmissionStream(admissionStream);
-//        studentRepository.save(student);
-//    }
-//
-//    public void updateStudentProgram(Long id, AcademicProgram program) throws ResourceNotFoundException {
-//        Student student = studentRepository
-//                .findById(id)
-//                .orElseThrow(() ->
-//                        new ResourceNotFoundException(
-//                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
-//                        ));
-//
-//        // TODO - check if program exists
-//
-//        student.setAcademicProgram(program);
-//        studentRepository.save(student);
-//    }
-//
-//    public void updateStudentYear(Long id, Integer year) throws ResourceNotFoundException {
-//        Student student = studentRepository
-//                .findById(id)
-//                .orElseThrow(() ->
-//                        new ResourceNotFoundException(
-//                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
-//                        ));
-//
-//        student.setAcademicYear(year);
-//        studentRepository.save(student);
-//    }
-//
-//    public void updateStudentGroup(Long id, Integer group) throws ResourceNotFoundException {
-//        Student student = studentRepository
-//                .findById(id)
-//                .orElseThrow(() ->
-//                        new ResourceNotFoundException(
-//                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
-//                        ));
-//
-//        student.setStudentGroup(group);
-//        studentRepository.save(student);
-//    }
-//
-//    public void updateStudentStatus(Long id, Boolean isActive) throws ResourceNotFoundException {
-//        Student student = studentRepository
-//                .findById(id)
-//                .orElseThrow(() ->
-//                        new ResourceNotFoundException(
-//                                String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
-//                        ));
-//
-//        student.setActiveStatus(isActive);
-//        studentRepository.save(student);
-//    }
 
     public void deleteStudent(Long id) throws ResourceNotFoundException {
         if(!existsById(id))

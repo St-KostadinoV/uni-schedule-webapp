@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(
@@ -36,7 +32,7 @@ public class DisciplinesController {
     }
 
     @GetMapping
-    public ResponseEntity getAllDisciplines() {
+    public ResponseEntity<Object> getAllDisciplines() {
         List<AcademicDiscipline> disciplines = disciplineService
                 .findAll(Sort.by(Sort.Direction.ASC, "name"));
 
@@ -44,7 +40,7 @@ public class DisciplinesController {
 
         FilterProvider filters = new SimpleFilterProvider()
                 .addFilter("DisciplineFilter",
-                            SimpleBeanPropertyFilter.filterOutAllExcept("name","abbreviation","disciplineUrl"));
+                            SimpleBeanPropertyFilter.filterOutAllExcept("id","name","abbreviation","disciplineUrl"));
 
         wrapper.setFilters(filters);
 
@@ -56,7 +52,7 @@ public class DisciplinesController {
     @GetMapping(
             path = "{disciplineId}"
     )
-    public ResponseEntity getDisciplineDetails(@PathVariable("disciplineId") Long id) {
+    public ResponseEntity<Object> getDisciplineDetails(@PathVariable("disciplineId") Long id) {
         try {
             AcademicDiscipline discipline = disciplineService
                     .findById(id);
@@ -65,11 +61,11 @@ public class DisciplinesController {
 
             FilterProvider filters = new SimpleFilterProvider()
                     .addFilter("DisciplineFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("name","abbreviation","department","leadingTeacher","disciplineUrl"))
+                                SimpleBeanPropertyFilter.filterOutAllExcept("id","name","abbreviation","department","leadingTeacher","disciplineUrl"))
                     .addFilter("DepartmentFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("name"))
                     .addFilter("TeacherFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("title","firstName","middleName","lastName"));
+                                SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus","title","firstName","middleName","lastName"));
 
             wrapper.setFilters(filters);
 
@@ -78,9 +74,10 @@ public class DisciplinesController {
                     .body(wrapper);
 
         } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .build();
+                    .body(e.getMessage());
         }
     }
 }

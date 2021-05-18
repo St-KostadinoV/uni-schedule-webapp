@@ -5,18 +5,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @MappedSuperclass
 public abstract class Person {
 
     @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(
-            name = "user_details_id",
+            name = "id",
             updatable = false
     )
     private Long id;
 
     @OneToOne
-    @MapsId
     @JoinColumn(
             name = "user_details_id"
     )

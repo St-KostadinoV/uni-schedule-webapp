@@ -83,10 +83,10 @@ public class AcademicDisciplineService {
         if(!teacherService.existsById(discipline.getLeadingTeacher().getId()))
             throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
 
-        for(Teacher teacher : discipline.getAssistingTeachers()) {
-            if(!teacherService.existsById(teacher.getId()))
-                throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
-        }
+        if(discipline.getAssistingTeachers() != null)
+            for(Teacher teacher : discipline.getAssistingTeachers())
+                if(!teacherService.existsById(teacher.getId()))
+                    throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
 
         disciplineRepository.save(discipline);
     }
@@ -100,10 +100,10 @@ public class AcademicDisciplineService {
         if(!teacherService.existsById(discipline.getLeadingTeacher().getId()))
             throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
 
-        for(Teacher teacher : discipline.getAssistingTeachers()) {
-            if(!teacherService.existsById(teacher.getId()))
-                throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
-        }
+        if(discipline.getAssistingTeachers() != null)
+            for(Teacher teacher : discipline.getAssistingTeachers())
+                if(!teacherService.existsById(teacher.getId()))
+                    throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
 
         discipline.setId(id);
         disciplineRepository.save(discipline);

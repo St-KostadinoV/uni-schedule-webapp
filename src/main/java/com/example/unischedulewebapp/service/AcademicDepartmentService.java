@@ -19,7 +19,7 @@ public class AcademicDepartmentService {
             "Department %s not found!";
     private final static String DEPT_EXISTS_MSG =
             "Department %s already exists!";
-    private final static String DEPT_FACULTY_NOT_FOUND =
+    private final static String DEPT_FACULTY_NOT_FOUND_MSG =
             "Department is part of a non-existent faculty!";
 
     private final AcademicDepartmentRepository departmentRepository;
@@ -69,7 +69,7 @@ public class AcademicDepartmentService {
             );
 
         if(!facultyService.existsById(department.getFaculty().getId()))
-            throw new ResourceNotFoundException(DEPT_FACULTY_NOT_FOUND);
+            throw new ResourceNotFoundException(DEPT_FACULTY_NOT_FOUND_MSG);
 
         departmentRepository.save(department);
     }
@@ -81,7 +81,7 @@ public class AcademicDepartmentService {
             );
 
         if(!facultyService.existsById(department.getFaculty().getId()))
-            throw new ResourceNotFoundException(DEPT_FACULTY_NOT_FOUND);
+            throw new ResourceNotFoundException(DEPT_FACULTY_NOT_FOUND_MSG);
 
         department.setId(id);
         departmentRepository.save(department);
