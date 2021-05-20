@@ -199,7 +199,6 @@ public class StudentController {
         }
     }
 
-    // TODO - finish method
     @PostMapping(
             path = "pass-change"
     )
@@ -212,12 +211,15 @@ public class StudentController {
 
         try {
             userService.updatePassword(currentUser, password, oldPassword);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .build();
+
         } catch (PasswordsMatchException e) {
             // TODO - log stack trace
-
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(e.getMessage());
         }
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .build();
     }
 }

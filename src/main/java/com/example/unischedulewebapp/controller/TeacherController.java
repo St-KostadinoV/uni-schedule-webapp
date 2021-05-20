@@ -197,14 +197,6 @@ public class TeacherController {
         }
     }
 
-    @GetMapping(
-            path = "email-change"
-    )
-    public String email(){
-        return "You tried to change your email";
-    }
-
-    // TODO - finish method
     @PostMapping(
             path = "email-change"
     )
@@ -217,16 +209,18 @@ public class TeacherController {
         try {
             Teacher teacher = teacherService.findByUserDetails(currentUser);
             teacherService.updateTeacherEmail(teacher, email);
-        } catch (ResourceNotFoundException e) {
-            e.printStackTrace();
-        }
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .build();
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .build();
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
     }
 
-    // TODO - finish method
     @PostMapping(
             path = "pass-change"
     )
@@ -239,12 +233,15 @@ public class TeacherController {
 
         try {
             userService.updatePassword(currentUser, password, oldPassword);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .build();
+
         } catch (PasswordsMatchException e) {
             // TODO - log stack trace
-
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(e.getMessage());
         }
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .build();
     }
 }
