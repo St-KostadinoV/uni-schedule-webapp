@@ -125,6 +125,7 @@ public class AcademicTimetableService {
                 ));
     }
 
+    // TODO - rework method, implement collision algorithm
     public void addTimetable(AcademicTimetable timetable) throws ResourceAlreadyExistsException, ResourceNotFoundException {
         if(timetable.getId()!=null && existsById(timetable.getId()))
             throw new ResourceAlreadyExistsException(
@@ -136,6 +137,8 @@ public class AcademicTimetableService {
 
         if(!teacherService.existsById(timetable.getAssignedTeacher().getId()))
             throw new ResourceNotFoundException();
+
+        // TODO - check if teacher is associated with chosen  discipline
 
         timetableRepository.save(timetable);
     }

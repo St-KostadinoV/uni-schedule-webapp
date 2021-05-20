@@ -40,7 +40,10 @@ public class DisciplinesController {
 
         FilterProvider filters = new SimpleFilterProvider()
                 .addFilter("DisciplineFilter",
-                            SimpleBeanPropertyFilter.filterOutAllExcept("id","name","abbreviation","disciplineUrl"));
+                            SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                        "name",
+                                                                        "abbreviation",
+                                                                        "disciplineUrl"));
 
         wrapper.setFilters(filters);
 
@@ -61,11 +64,20 @@ public class DisciplinesController {
 
             FilterProvider filters = new SimpleFilterProvider()
                     .addFilter("DisciplineFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("id","name","abbreviation","department","leadingTeacher","disciplineUrl"))
+                                SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                            "name",
+                                                                            "abbreviation",
+                                                                            "department",
+                                                                            "leadingTeacher",
+                                                                            "disciplineUrl"))
                     .addFilter("DepartmentFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("name"))
                     .addFilter("TeacherFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus","title","firstName","middleName","lastName"));
+                                SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
+                                                                            "title",
+                                                                            "firstName",
+                                                                            "middleName",
+                                                                            "lastName"));
 
             wrapper.setFilters(filters);
 

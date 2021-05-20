@@ -167,7 +167,8 @@ public class TeacherController {
 
             FilterProvider filters = new SimpleFilterProvider()
                     .addFilter("TimetableFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("startTime",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("dayOfWeek",
+                                                                            "startTime",
                                                                             "endTime",
                                                                             "classType",
                                                                             "programDiscipline",
@@ -196,11 +197,18 @@ public class TeacherController {
         }
     }
 
+    @GetMapping(
+            path = "email-change"
+    )
+    public String email(){
+        return "You tried to change your email";
+    }
+
     // TODO - finish method
     @PostMapping(
             path = "email-change"
     )
-    public ResponseEntity<Object> updateTeacherEmail(String email) {
+    public ResponseEntity<Object> updateTeacherEmail(@RequestParam("email") String email) {
         AppUser currentUser = (AppUser) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
@@ -222,8 +230,8 @@ public class TeacherController {
     @PostMapping(
             path = "pass-change"
     )
-    public ResponseEntity<Object> updateTeacherPassword(String password,
-                                                        String oldPassword) {
+    public ResponseEntity<Object> updateTeacherPassword(@RequestParam("password") String password,
+                                                        @RequestParam("oldPassword") String oldPassword) {
         AppUser currentUser = (AppUser) SecurityContextHolder
                 .getContext()
                 .getAuthentication()

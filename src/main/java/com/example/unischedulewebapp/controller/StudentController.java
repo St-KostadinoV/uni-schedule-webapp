@@ -1,6 +1,8 @@
 package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.auth.AppUser;
+import com.example.unischedulewebapp.auth.AppUserService;
+import com.example.unischedulewebapp.auth.exception.PasswordsMatchException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicTimetable;
 import com.example.unischedulewebapp.model.Student;
@@ -15,10 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,11 +29,15 @@ public class StudentController {
 
     private final StudentService studentService;
     private final AcademicTimetableService timetableService;
+    private final AppUserService userService;
 
     @Autowired
-    public StudentController(StudentService studentService, AcademicTimetableService timetableService) {
+    public StudentController(StudentService studentService,
+                             AcademicTimetableService timetableService,
+                             AppUserService userService) {
         this.studentService = studentService;
         this.timetableService = timetableService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -165,7 +168,8 @@ public class StudentController {
 
             FilterProvider filters = new SimpleFilterProvider()
                     .addFilter("TimetableFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("startTime",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("dayOfWeek",
+                                                                            "startTime",
                                                                             "endTime",
                                                                             "classType",
                                                                             "programDiscipline",
@@ -193,5 +197,27 @@ public class StudentController {
                     .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
         }
+    }
+
+    // TODO - finish method
+    @PostMapping(
+            path = "pass-change"
+    )
+    public ResponseEntity<Object> updateTeacherPassword(@RequestParam("password") String password,
+                                                        @RequestParam("oldPassword") String oldPassword) {
+        AppUser currentUser = (AppUser) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        try {
+            userService.updatePassword(currentUser, password, oldPassword);
+        } catch (PasswordsMatchException e) {
+            // TODO - log stack trace
+
+        }
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .build();
     }
 }

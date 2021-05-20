@@ -22,5 +22,7 @@ public interface StudentRepository
 
     Collection<Student> findByAcademicProgramAndStudentGroup(AcademicProgram program, Integer group);
 
+    Collection<Student> findByAcademicProgramAndStudentGroupAndAcademicYear(AcademicProgram program, Integer group, Integer year);
+
     Collection<Student> findByActiveStatus(Boolean activeStatus);
 }

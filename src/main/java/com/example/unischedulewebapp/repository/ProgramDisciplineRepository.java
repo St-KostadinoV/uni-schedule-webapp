@@ -16,6 +16,8 @@ public interface ProgramDisciplineRepository
 
     Collection<ProgramDiscipline> findByDiscipline(AcademicDiscipline discipline);
 
+    Collection<ProgramDiscipline> findByProgramAndDiscipline(AcademicProgram program, AcademicDiscipline discipline);
+
     Collection<ProgramDiscipline> findByProgramAndAcademicYear(AcademicProgram program, Integer year);
 
 }

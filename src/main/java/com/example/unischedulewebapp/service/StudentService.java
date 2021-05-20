@@ -91,6 +91,11 @@ public class StudentService {
                 .findByAcademicProgramAndStudentGroup(program, group));
     }
 
+    public List<Student> findByAcademicProgramAndStudentGroupAndAcademicYear(AcademicProgram program, Integer group, Integer year) {
+        return new ArrayList<>(studentRepository
+                .findByAcademicProgramAndStudentGroupAndAcademicYear(program, group, year));
+    }
+
     public List<Student> findByActiveStatus(Boolean activeStatus) {
         return new ArrayList<>(studentRepository
                 .findByActiveStatus(activeStatus));

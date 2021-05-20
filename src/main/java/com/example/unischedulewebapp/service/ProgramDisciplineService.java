@@ -63,6 +63,11 @@ public class ProgramDisciplineService {
                 .findByDiscipline(discipline));
     }
 
+    public List<ProgramDiscipline> findByProgramAndDiscipline(AcademicProgram program, AcademicDiscipline discipline) {
+        return new ArrayList<>(programDisciplineRepository
+                .findByProgramAndDiscipline(program, discipline));
+    }
+
     public List<ProgramDiscipline> findByProgramAndAcademicYear(AcademicProgram program, Integer year) {
         return new ArrayList<>(programDisciplineRepository
                 .findByProgramAndAcademicYear(program, year));
@@ -80,7 +85,12 @@ public class ProgramDisciplineService {
     }
 
     public void addProgramDiscipline(ProgramDiscipline programDiscipline) throws ResourceAlreadyExistsException, ResourceNotFoundException {
-        if(programDiscipline.getId()!=null && existsById(programDiscipline.getId()))
+        if(programDiscipline.getId() != null && existsById(programDiscipline.getId()))
+            throw new ResourceAlreadyExistsException(
+                    String.format(PROGRAM_DSCPL_EXISTS_MSG, programDiscipline.getId())
+            );
+
+        if(!findByProgramAndDiscipline(programDiscipline.getProgram(), programDiscipline.getDiscipline()).isEmpty())
             throw new ResourceAlreadyExistsException(
                     String.format(PROGRAM_DSCPL_EXISTS_MSG, programDiscipline.getId())
             );
