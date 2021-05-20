@@ -18,9 +18,9 @@ import java.util.List;
 public class ProgramDisciplineService {
 
     private final static String PROGRAM_DSCPL_NOT_FOUND_MSG =
-            "Discipline %s is not part of program !";         // TODO - rework message
+            "Program-discipline combination %s not found!";
     private final static String PROGRAM_DSCPL_EXISTS_MSG =
-            "Discipline %s is already part of program !";     // TODO - rework message
+            "Program-discipline combination %s already exists!";
     private final static String PROGRAM_NOT_FOUND_MSG =
             "Non-existent program!";
     private final static String DSCPL_NOT_FOUND_MSG =

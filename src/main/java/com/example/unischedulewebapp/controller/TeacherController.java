@@ -1,6 +1,8 @@
 package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.auth.AppUser;
+import com.example.unischedulewebapp.auth.AppUserService;
+import com.example.unischedulewebapp.auth.exception.PasswordsMatchException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicTimetable;
 import com.example.unischedulewebapp.model.Teacher;
@@ -15,10 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,12 +29,15 @@ public class TeacherController {
 
     private final TeacherService teacherService;
     private final AcademicTimetableService timetableService;
+    private final AppUserService userService;
 
     @Autowired
     public TeacherController(TeacherService teacherService,
-                             AcademicTimetableService timetableService) {
+                             AcademicTimetableService timetableService,
+                             AppUserService userService) {
         this.teacherService = teacherService;
         this.timetableService = timetableService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -47,7 +49,13 @@ public class TeacherController {
 
         FilterProvider filters = new SimpleFilterProvider()
                 .addFilter("TeacherFilter",
-                            SimpleBeanPropertyFilter.filterOutAllExcept("id","honoraryStatus","title","firstName","middleName","lastName","department"))
+                            SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                        "honoraryStatus",
+                                                                        "title",
+                                                                        "firstName",
+                                                                        "middleName",
+                                                                        "lastName",
+                                                                        "department"))
                 .addFilter("DepartmentFilter",
                             SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"));
 
@@ -69,9 +77,18 @@ public class TeacherController {
 
             FilterProvider filters = new SimpleFilterProvider()
                     .addFilter("TeacherFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("id","honoraryStatus","title","firstName","middleName","lastName","department"))
+                                SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                            "honoraryStatus",
+                                                                            "title",
+                                                                            "firstName",
+                                                                            "middleName",
+                                                                            "lastName",
+                                                                            "department",
+                                                                            "office",
+                                                                            "email",
+                                                                            "phone"))
                     .addFilter("DepartmentFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"));
+                                SimpleBeanPropertyFilter.filterOutAllExcept("name"));
 
             wrapper.setFilters(filters);
 
@@ -104,9 +121,16 @@ public class TeacherController {
 
             FilterProvider filters = new SimpleFilterProvider()
                     .addFilter("TimetableFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("startTime","endTime","classType","programDiscipline","designatedRoom","studentGroup"))
+                                SimpleBeanPropertyFilter.filterOutAllExcept("startTime",
+                                                                            "endTime",
+                                                                            "classType",
+                                                                            "programDiscipline",
+                                                                            "designatedRoom",
+                                                                            "studentGroup"))
                     .addFilter("ProgramDisciplineFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("program","discipline","academicYear"))
+                                SimpleBeanPropertyFilter.filterOutAllExcept("program",
+                                                                            "discipline",
+                                                                            "academicYear"))
                     .addFilter("ProgramFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
                     .addFilter("DisciplineFilter",
@@ -143,9 +167,16 @@ public class TeacherController {
 
             FilterProvider filters = new SimpleFilterProvider()
                     .addFilter("TimetableFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("startTime","endTime","classType","programDiscipline","designatedRoom","studentGroup"))
+                                SimpleBeanPropertyFilter.filterOutAllExcept("startTime",
+                                                                            "endTime",
+                                                                            "classType",
+                                                                            "programDiscipline",
+                                                                            "designatedRoom",
+                                                                            "studentGroup"))
                     .addFilter("ProgramDisciplineFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("program","discipline","academicYear"))
+                                SimpleBeanPropertyFilter.filterOutAllExcept("program",
+                                                                            "discipline",
+                                                                            "academicYear"))
                     .addFilter("ProgramFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
                     .addFilter("DisciplineFilter",
@@ -163,5 +194,49 @@ public class TeacherController {
                     .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
         }
+    }
+
+    // TODO - finish method
+    @PostMapping(
+            path = "email-change"
+    )
+    public ResponseEntity<Object> updateTeacherEmail(String email) {
+        AppUser currentUser = (AppUser) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        try {
+            Teacher teacher = teacherService.findByUserDetails(currentUser);
+            teacherService.updateTeacherEmail(teacher, email);
+        } catch (ResourceNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .build();
+    }
+
+    // TODO - finish method
+    @PostMapping(
+            path = "pass-change"
+    )
+    public ResponseEntity<Object> updateTeacherPassword(String password,
+                                                        String oldPassword) {
+        AppUser currentUser = (AppUser) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        try {
+            userService.updatePassword(currentUser, password, oldPassword);
+        } catch (PasswordsMatchException e) {
+            // TODO - log stack trace
+
+        }
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .build();
     }
 }

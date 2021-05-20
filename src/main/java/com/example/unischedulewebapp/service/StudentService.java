@@ -1,5 +1,6 @@
 package com.example.unischedulewebapp.service;
 
+import com.example.unischedulewebapp.auth.AppUser;
 import com.example.unischedulewebapp.auth.AppUserService;
 import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
@@ -49,6 +50,15 @@ public class StudentService {
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
                                 String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
+                        ));
+    }
+
+    public Student findByUserDetails(AppUser userDetails) throws ResourceNotFoundException {
+        return studentRepository
+                .findByUserDetails(userDetails)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                String.format(STUDENT_NOT_FOUND_MSG, "with userId=" + userDetails.getId())
                         ));
     }
 
@@ -121,8 +131,6 @@ public class StudentService {
             throw new ResourceNotFoundException(
                     String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
             );
-
-        // TODO - check user details
 
         if(!programService.existsById(student.getAcademicProgram().getId()))
             throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);

@@ -28,6 +28,7 @@ public class AppUser implements UserDetails {
     @Column(
             name = "username",
             nullable = false,
+            updatable = false,
             unique = true
     )
     private String username;
@@ -79,7 +80,7 @@ public class AppUser implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
-                new SimpleGrantedAuthority(appUserRole.name());
+                new SimpleGrantedAuthority("ROLE_" + appUserRole.name());
 
         return Collections.singletonList(authority);
     }

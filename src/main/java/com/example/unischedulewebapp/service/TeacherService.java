@@ -109,12 +109,23 @@ public class TeacherService {
                     String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
             );
 
-        // TODO - check user details
-
         if(!departmentService.existsById(teacher.getDepartment().getId()))
             throw new ResourceNotFoundException(TEACHER_DEPT_NOT_FOUND_MSG);
 
         teacher.setId(id);
+        teacherRepository.save(teacher);
+    }
+
+    public void updateTeacherEmail(Teacher teacher, String email) throws ResourceNotFoundException {
+        if(teacher.getId() == null && !existsById(teacher.getId()))
+            throw new ResourceNotFoundException(
+                    String.format(TEACHER_NOT_FOUND_MSG, "with id=" + teacher.getId())
+            );
+
+        if(!departmentService.existsById(teacher.getDepartment().getId()))
+            throw new ResourceNotFoundException(TEACHER_DEPT_NOT_FOUND_MSG);
+
+        teacher.setEmail(email);
         teacherRepository.save(teacher);
     }
 

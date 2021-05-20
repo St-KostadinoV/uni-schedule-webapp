@@ -1,5 +1,6 @@
 package com.example.unischedulewebapp.auth;
 
+import com.example.unischedulewebapp.auth.exception.PasswordsMatchException;
 import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,8 @@ public class AppUserService implements UserDetailsService {
             "User '%s' not found!";
     private final static String USER_EXISTS_MSG =
             "User '%s' already exists!";
+    private final static String INVALID_PASSWORD_MSG =
+            "The password you entered is incorrect!";
 
     private final PasswordEncoder passwordEncoder;
     private final AppUserRepository appUserRepository;
@@ -36,20 +39,40 @@ public class AppUserService implements UserDetailsService {
                         ));
     }
 
-    public void registerUser(AppUser appUser) throws UserAlreadyExistsException {
+    public void registerUser(AppUser user) throws UserAlreadyExistsException {
         boolean userExists = appUserRepository
-                .findByUsername(appUser.getUsername())
+                .findByUsername(user.getUsername())
                 .isPresent();
 
         if(userExists)
             throw new UserAlreadyExistsException(
-                    String.format(USER_EXISTS_MSG, appUser.getUsername())
+                    String.format(USER_EXISTS_MSG, user.getUsername())
             );
 
         String encodedPassword = passwordEncoder
-                .encode(appUser.getPassword());
+                .encode(user.getPassword());
 
-        appUser.setPassword(encodedPassword);
-        appUserRepository.save(appUser);
+        user.setPassword(encodedPassword);
+        appUserRepository.save(user);
+    }
+
+    public void updatePassword(AppUser user, String password, String oldPassword) throws PasswordsMatchException {
+        boolean userExists = appUserRepository
+                .findByUsername(user.getUsername())
+                .isPresent();
+
+        if(!userExists)
+            throw new UsernameNotFoundException(
+                    String.format(USER_NOT_FOUND_MSG, user.getUsername())
+            );
+
+        if(!passwordEncoder.matches(user.getPassword(), oldPassword))
+            throw new PasswordsMatchException(INVALID_PASSWORD_MSG);
+
+        String encodedPassword = passwordEncoder
+                .encode(user.getPassword());
+
+        user.setPassword(encodedPassword);
+        appUserRepository.save(user);
     }
 }

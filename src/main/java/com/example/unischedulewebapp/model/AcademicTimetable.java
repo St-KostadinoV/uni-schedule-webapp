@@ -30,7 +30,7 @@ public class AcademicTimetable {
     @JoinColumn(
             name = "teacher_id",
             nullable = false,
-            referencedColumnName = "user_details_id"
+            referencedColumnName = "id"
     )
     private Teacher assignedTeacher;
 

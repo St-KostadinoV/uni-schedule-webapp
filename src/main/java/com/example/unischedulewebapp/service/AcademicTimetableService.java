@@ -4,6 +4,7 @@ import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicTimetable;
 import com.example.unischedulewebapp.model.ProgramDiscipline;
+import com.example.unischedulewebapp.model.Student;
 import com.example.unischedulewebapp.model.Teacher;
 import com.example.unischedulewebapp.model.enums.AcademicClassType;
 import com.example.unischedulewebapp.repository.AcademicTimetableRepository;
@@ -103,6 +104,25 @@ public class AcademicTimetableService {
     public List<AcademicTimetable> findTeacherDailySchedule(Teacher teacher) {
         return new ArrayList<>(timetableRepository
                 .findByAssignedTeacherAndDayOfWeek(teacher, LocalDate.now().getDayOfWeek()));
+    }
+
+    public List<AcademicTimetable> findStudentDailySchedule(Student student) {
+        return new ArrayList<>(timetableRepository
+                .findStudentDailySchedule(
+                        student.getAcademicProgram(),
+                        student.getAcademicYear(),
+                        student.getStudentGroup(),
+                        LocalDate.now().getDayOfWeek()
+                ));
+    }
+
+    public List<AcademicTimetable> findStudentWeeklySchedule(Student student) {
+        return new ArrayList<>(timetableRepository
+                .findStudentWeeklySchedule(
+                        student.getAcademicProgram(),
+                        student.getAcademicYear(),
+                        student.getStudentGroup()
+                ));
     }
 
     public void addTimetable(AcademicTimetable timetable) throws ResourceAlreadyExistsException, ResourceNotFoundException {

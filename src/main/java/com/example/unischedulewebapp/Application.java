@@ -102,7 +102,7 @@ public class Application {
 			LocalTime end = LocalTime.of(11,0);
 			AcademicTimetable timetable = new AcademicTimetable(
 					teacher,
-					DayOfWeek.TUESDAY,
+					DayOfWeek.WEDNESDAY,
 					start,
 					end,
 					"114NF",
