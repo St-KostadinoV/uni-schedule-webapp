@@ -117,7 +117,7 @@ public class StudentService {
                 .toList();
     }
 
-    public void addStudent(Student student) throws ResourceAlreadyExistsException, UserAlreadyExistsException, ResourceNotFoundException {
+    public Student addStudent(Student student) throws ResourceAlreadyExistsException, UserAlreadyExistsException, ResourceNotFoundException {
         if(student.getId() != null && existsById(student.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(STUDENT_EXISTS_MSG, "with id=" + student.getId())
@@ -128,10 +128,10 @@ public class StudentService {
 
         userService.registerUser(student.getUserDetails());
 
-        studentRepository.save(student);
+        return studentRepository.save(student);
     }
 
-    public void updateStudent(Long id, Student student) throws ResourceNotFoundException {
+    public Student updateStudent(Long id, Student student) throws ResourceNotFoundException {
         if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
@@ -140,7 +140,7 @@ public class StudentService {
         if(!programService.existsById(student.getAcademicProgram().getId()))
             throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
 
-        studentRepository.save(student);
+        return studentRepository.save(student);
     }
 
     public void deleteStudent(Long id) throws ResourceNotFoundException {

@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.security;
+package com.example.unischedulewebapp.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

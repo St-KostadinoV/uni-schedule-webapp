@@ -84,7 +84,7 @@ public class ProgramDisciplineService {
                 .toList();
     }
 
-    public void addProgramDiscipline(ProgramDiscipline programDiscipline) throws ResourceAlreadyExistsException, ResourceNotFoundException {
+    public ProgramDiscipline addProgramDiscipline(ProgramDiscipline programDiscipline) throws ResourceAlreadyExistsException, ResourceNotFoundException {
         if(programDiscipline.getId() != null && existsById(programDiscipline.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(PROGRAM_DSCPL_EXISTS_MSG, programDiscipline.getId())
@@ -105,10 +105,10 @@ public class ProgramDisciplineService {
                     DSCPL_NOT_FOUND_MSG
             );
 
-        programDisciplineRepository.save(programDiscipline);
+        return programDisciplineRepository.save(programDiscipline);
     }
 
-    public void updateProgramDiscipline(Long id, ProgramDiscipline programDiscipline) throws ResourceNotFoundException {
+    public ProgramDiscipline updateProgramDiscipline(Long id, ProgramDiscipline programDiscipline) throws ResourceNotFoundException {
         if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(PROGRAM_DSCPL_NOT_FOUND_MSG, id)
@@ -125,7 +125,7 @@ public class ProgramDisciplineService {
             );
 
         programDiscipline.setId(id);
-        programDisciplineRepository.save(programDiscipline);
+        return programDisciplineRepository.save(programDiscipline);
     }
 
     public void deleteProgramDiscipline(Long id) throws ResourceNotFoundException {

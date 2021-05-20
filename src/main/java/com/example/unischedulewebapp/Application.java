@@ -26,7 +26,8 @@ public class Application {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(AcademicDepartmentService  departmentService,
+	CommandLineRunner commandLineRunner(AppUserService userService,
+										AcademicDepartmentService  departmentService,
 										AcademicDisciplineService disciplineService,
 										AcademicFacultyService facultyService,
 										AcademicProgramService programService,
@@ -358,6 +359,9 @@ public class Application {
 				);
 				timetableService.addTimetable(timetable);
 			}
+
+			user = new AppUser("FRONT","1234",AppUserRole.FRONT_DESK);
+			userService.registerUser(user);
 		};
 	}
 }

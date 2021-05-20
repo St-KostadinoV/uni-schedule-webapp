@@ -62,7 +62,7 @@ public class AcademicProgramService {
                 .toList();
     }
 
-    public void addProgram(AcademicProgram program) throws ResourceAlreadyExistsException, ResourceNotFoundException {
+    public AcademicProgram addProgram(AcademicProgram program) throws ResourceAlreadyExistsException, ResourceNotFoundException {
         if(program.getId() != null && existsById(program.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(PROGRAM_EXISTS_MSG, "with id=" + program.getId())
@@ -71,10 +71,10 @@ public class AcademicProgramService {
         if(!departmentService.existsById(program.getDepartment().getId()))
             throw new ResourceNotFoundException(PROGRAM_DEPT_NOT_FOUND);
 
-        programRepository.save(program);
+        return programRepository.save(program);
     }
 
-    public void updateProgram(Long id, AcademicProgram program) throws ResourceNotFoundException {
+    public AcademicProgram updateProgram(Long id, AcademicProgram program) throws ResourceNotFoundException {
         if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(PROGRAM_NOT_FOUND_MSG, "with id=" + id)
@@ -84,7 +84,7 @@ public class AcademicProgramService {
             throw new ResourceNotFoundException(PROGRAM_DEPT_NOT_FOUND);
 
         program.setId(id);
-        programRepository.save(program);
+        return programRepository.save(program);
     }
 
     public void deleteProgram(Long id) throws ResourceNotFoundException {

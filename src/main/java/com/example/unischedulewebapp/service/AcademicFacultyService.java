@@ -50,23 +50,23 @@ public class AcademicFacultyService {
                 .toList();
     }
 
-    public void addFaculty(AcademicFaculty faculty) throws ResourceAlreadyExistsException {
+    public AcademicFaculty addFaculty(AcademicFaculty faculty) throws ResourceAlreadyExistsException {
         if(faculty.getId() != null && existsById(faculty.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(FACULTY_EXISTS_MSG, "with  id=" + faculty.getId())
             );
 
-        facultyRepository.save(faculty);
+        return facultyRepository.save(faculty);
     }
 
-    public void updateFaculty(Long id, AcademicFaculty faculty) throws ResourceNotFoundException {
+    public AcademicFaculty updateFaculty(Long id, AcademicFaculty faculty) throws ResourceNotFoundException {
         if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(FACULTY_NOT_FOUND_MSG, "with id=" + id)
             );
 
         faculty.setId(id);
-        facultyRepository.save(faculty);
+        return facultyRepository.save(faculty);
     }
 
     public void deleteFaculty(Long id) throws ResourceNotFoundException {

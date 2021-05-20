@@ -89,7 +89,7 @@ public class TeacherService {
                 .toList();
     }
 
-    public void addTeacher(Teacher teacher) throws ResourceAlreadyExistsException, UserAlreadyExistsException, ResourceNotFoundException {
+    public Teacher addTeacher(Teacher teacher) throws ResourceAlreadyExistsException, UserAlreadyExistsException, ResourceNotFoundException {
         if (teacher.getId() != null && existsById(teacher.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(TEACHER_EXISTS_MSG, "with id=" + teacher.getId())
@@ -100,10 +100,10 @@ public class TeacherService {
 
         userService.registerUser(teacher.getUserDetails());
 
-        teacherRepository.save(teacher);
+        return teacherRepository.save(teacher);
     }
 
-    public void updateTeacher(Long id, Teacher teacher) throws ResourceNotFoundException {
+    public Teacher updateTeacher(Long id, Teacher teacher) throws ResourceNotFoundException {
         if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(TEACHER_NOT_FOUND_MSG, "with id=" + id)
@@ -113,10 +113,10 @@ public class TeacherService {
             throw new ResourceNotFoundException(TEACHER_DEPT_NOT_FOUND_MSG);
 
         teacher.setId(id);
-        teacherRepository.save(teacher);
+        return teacherRepository.save(teacher);
     }
 
-    public void updateTeacherEmail(Teacher teacher, String email) throws ResourceNotFoundException {
+    public Teacher updateTeacherEmail(Teacher teacher, String email) throws ResourceNotFoundException {
         if(teacher.getId() == null && !existsById(teacher.getId()))
             throw new ResourceNotFoundException(
                     String.format(TEACHER_NOT_FOUND_MSG, "with id=" + teacher.getId())
@@ -126,7 +126,7 @@ public class TeacherService {
             throw new ResourceNotFoundException(TEACHER_DEPT_NOT_FOUND_MSG);
 
         teacher.setEmail(email);
-        teacherRepository.save(teacher);
+        return teacherRepository.save(teacher);
     }
 
     public void deleteTeacher(Long id) throws ResourceNotFoundException {

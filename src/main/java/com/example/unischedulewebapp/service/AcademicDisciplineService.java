@@ -74,7 +74,7 @@ public class AcademicDisciplineService {
                 .findAll(sort);
     }
 
-    public void addDiscipline(AcademicDiscipline discipline) throws ResourceAlreadyExistsException, ResourceNotFoundException {
+    public AcademicDiscipline addDiscipline(AcademicDiscipline discipline) throws ResourceAlreadyExistsException, ResourceNotFoundException {
         if(discipline.getId()!=null && existsById(discipline.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(DSCPL_EXISTS_MSG, "with id=" + discipline.getId())
@@ -88,10 +88,10 @@ public class AcademicDisciplineService {
                 if(!teacherService.existsById(teacher.getId()))
                     throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
 
-        disciplineRepository.save(discipline);
+        return disciplineRepository.save(discipline);
     }
 
-    public void updateDiscipline(Long id, AcademicDiscipline discipline) throws ResourceNotFoundException {
+    public AcademicDiscipline updateDiscipline(Long id, AcademicDiscipline discipline) throws ResourceNotFoundException {
         if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(DSCPL_NOT_FOUND_MSG, "with id=" + id)
@@ -106,7 +106,7 @@ public class AcademicDisciplineService {
                     throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
 
         discipline.setId(id);
-        disciplineRepository.save(discipline);
+        return disciplineRepository.save(discipline);
     }
 
     public void deleteDiscipline(Long id) throws ResourceNotFoundException {

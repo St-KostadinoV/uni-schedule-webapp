@@ -62,7 +62,7 @@ public class AcademicDepartmentService {
                 .toList();
     }
 
-    public void addDepartment(AcademicDepartment department) throws ResourceAlreadyExistsException, ResourceNotFoundException {
+    public AcademicDepartment addDepartment(AcademicDepartment department) throws ResourceAlreadyExistsException, ResourceNotFoundException {
         if(department.getId() != null && existsById(department.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(DEPT_EXISTS_MSG, "with id=" + department.getId())
@@ -71,10 +71,10 @@ public class AcademicDepartmentService {
         if(!facultyService.existsById(department.getFaculty().getId()))
             throw new ResourceNotFoundException(DEPT_FACULTY_NOT_FOUND_MSG);
 
-        departmentRepository.save(department);
+        return departmentRepository.save(department);
     }
 
-    public void updateDepartment(Long id, AcademicDepartment department) throws ResourceNotFoundException {
+    public AcademicDepartment updateDepartment(Long id, AcademicDepartment department) throws ResourceNotFoundException {
         if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(DEPT_NOT_FOUND_MSG, "with id=" + id)
@@ -84,7 +84,7 @@ public class AcademicDepartmentService {
             throw new ResourceNotFoundException(DEPT_FACULTY_NOT_FOUND_MSG);
 
         department.setId(id);
-        departmentRepository.save(department);
+        return departmentRepository.save(department);
     }
 
     public void deleteDepartment(Long id) throws ResourceNotFoundException {
