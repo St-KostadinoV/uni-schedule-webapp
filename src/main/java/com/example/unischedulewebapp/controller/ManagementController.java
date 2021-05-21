@@ -1,6 +1,7 @@
 package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
+import com.example.unischedulewebapp.exception.BadResourceException;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.*;
@@ -401,6 +402,12 @@ public class ManagementController {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
+
+        } catch (BadResourceException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
         }
     }
 
@@ -416,6 +423,12 @@ public class ManagementController {
             // TODO - log stack trace
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+
+        } catch (BadResourceException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());
         }
     }
