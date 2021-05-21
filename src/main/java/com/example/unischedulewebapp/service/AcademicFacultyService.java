@@ -6,6 +6,7 @@ import com.example.unischedulewebapp.model.AcademicFaculty;
 import com.example.unischedulewebapp.repository.AcademicFacultyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +43,11 @@ public class AcademicFacultyService {
     public List<AcademicFaculty> findAll() {
         return facultyRepository
                 .findAll();
+    }
+
+    public List<AcademicFaculty> findAll(Sort sort) {
+        return facultyRepository
+                .findAll(sort);
     }
 
     public List<AcademicFaculty> findAll(int pageNumber, int rowsPerPage) {

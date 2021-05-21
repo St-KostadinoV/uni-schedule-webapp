@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface StudentRepository
         extends PersonRepository<Student> {
 
+    boolean existsByFacultyNumber(String facultyNumber);
+
     Optional<Student> findByFacultyNumber(String facultyNumber);
 
     Collection<Student> findByAdmissionStream(Integer stream);

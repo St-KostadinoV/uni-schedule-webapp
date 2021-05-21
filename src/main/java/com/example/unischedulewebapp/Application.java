@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -127,7 +128,7 @@ public class Application {
 				lName = faker.name().lastName();
 				email = String.format("%s.%s@tu-varna.bg", fName, lName);
 				phone = faker.phoneNumber().phoneNumber();
-				facNum = String.valueOf(faker.number().numberBetween(1000, 9999));
+				facNum = "FN3" + (100+i);
 				user = new AppUser("STUDENT_1_1_" + (i+1), "1234", AppUserRole.STUDENT);
 				student = new Student(
 						user,
@@ -152,7 +153,7 @@ public class Application {
 				lName = faker.name().lastName();
 				email = String.format("%s.%s@tu-varna.bg", fName, lName);
 				phone = faker.phoneNumber().phoneNumber();
-				facNum = String.valueOf(faker.number().numberBetween(1000, 9999));
+				facNum = "FN4" + (100+i);
 				user = new AppUser("STUDENT_1_2_" + (i+1), "1234", AppUserRole.STUDENT);
 				student = new Student(
 						user,
@@ -177,7 +178,7 @@ public class Application {
 				lName = faker.name().lastName();
 				email = String.format("%s.%s@tu-varna.bg", fName, lName);
 				phone = faker.phoneNumber().phoneNumber();
-				facNum = String.valueOf(faker.number().numberBetween(1000, 9999));
+				facNum = "FN1" + (100+i);
 				user = new AppUser("STUDENT_2_1_" + (i+1), "1234", AppUserRole.STUDENT);
 				student = new Student(
 						user,
@@ -202,7 +203,7 @@ public class Application {
 				lName = faker.name().lastName();
 				email = String.format("%s.%s@tu-varna.bg", fName, lName);
 				phone = faker.phoneNumber().phoneNumber();
-				facNum = String.valueOf(faker.number().numberBetween(1000, 9999));
+				facNum = "FN2" + (100+i);
 				user = new AppUser("STUDENT_2_2_" + (i+1), "1234", AppUserRole.STUDENT);
 				student = new Student(
 						user,
@@ -362,6 +363,7 @@ public class Application {
 
 			user = new AppUser("FRONT","1234",AppUserRole.FRONT_DESK);
 			userService.registerUser(user);
+			System.out.println(LocalDateTime.now() + "\ttesting input data inserted");
 		};
 	}
 }

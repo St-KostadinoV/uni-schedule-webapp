@@ -25,14 +25,6 @@ public class AcademicProgram extends AcademicStructure {
     public AcademicProgram() {
     }
 
-    public AcademicProgram(Long id,
-                           String name,
-                           String abbreviation,
-                           AcademicDepartment department) {
-        super(id, name, abbreviation);
-        this.department = department;
-    }
-
     public AcademicProgram(String name,
                            String abbreviation,
                            AcademicDepartment department) {

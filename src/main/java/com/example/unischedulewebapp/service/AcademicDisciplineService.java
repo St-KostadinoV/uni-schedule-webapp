@@ -63,15 +63,15 @@ public class AcademicDisciplineService {
                 .findAll();
     }
 
+    public List<AcademicDiscipline> findAll(Sort sort) {
+        return disciplineRepository
+                .findAll(sort);
+    }
+
     public List<AcademicDiscipline> findAll(int pageNumber, int rowsPerPage) {
         return disciplineRepository
                 .findAll(PageRequest.of(pageNumber - 1, rowsPerPage))
                 .toList();
-    }
-
-    public List<AcademicDiscipline> findAll(Sort sort) {
-        return disciplineRepository
-                .findAll(sort);
     }
 
     public AcademicDiscipline addDiscipline(AcademicDiscipline discipline) throws ResourceAlreadyExistsException, ResourceNotFoundException {
@@ -83,10 +83,9 @@ public class AcademicDisciplineService {
         if(!teacherService.existsById(discipline.getLeadingTeacher().getId()))
             throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
 
-        if(discipline.getAssistingTeachers() != null)
-            for(Teacher teacher : discipline.getAssistingTeachers())
-                if(!teacherService.existsById(teacher.getId()))
-                    throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
+        for(Teacher teacher : discipline.getAssistingTeachers())
+            if(!teacherService.existsById(teacher.getId()))
+                throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
 
         return disciplineRepository.save(discipline);
     }
@@ -100,10 +99,9 @@ public class AcademicDisciplineService {
         if(!teacherService.existsById(discipline.getLeadingTeacher().getId()))
             throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
 
-        if(discipline.getAssistingTeachers() != null)
-            for(Teacher teacher : discipline.getAssistingTeachers())
-                if(!teacherService.existsById(teacher.getId()))
-                    throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
+        for(Teacher teacher : discipline.getAssistingTeachers())
+            if(!teacherService.existsById(teacher.getId()))
+                throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
 
         discipline.setId(id);
         return disciplineRepository.save(discipline);

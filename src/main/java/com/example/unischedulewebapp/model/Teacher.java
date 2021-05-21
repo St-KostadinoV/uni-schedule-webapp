@@ -49,24 +49,6 @@ public class Teacher extends Person implements Serializable {
     public Teacher() {
     }
 
-    public Teacher(Long id,
-                   AppUser userDetails,
-                   String firstName,
-                   String middleName,
-                   String lastName,
-                   String email,
-                   String phone,
-                   AcademicTitle title,
-                   AcademicDepartment department,
-                   String office,
-                   Boolean honoraryStatus) {
-        super(id, userDetails, firstName, middleName, lastName, email, phone);
-        this.title = title;
-        this.department = department;
-        this.office = office;
-        this.honoraryStatus = honoraryStatus;
-    }
-
     public Teacher(AppUser userDetails,
                    String firstName,
                    String middleName,
@@ -78,22 +60,6 @@ public class Teacher extends Person implements Serializable {
                    String office,
                    Boolean honoraryStatus) {
         super(userDetails, firstName, middleName, lastName, email, phone);
-        this.title = title;
-        this.department = department;
-        this.office = office;
-        this.honoraryStatus = honoraryStatus;
-    }
-
-    public Teacher(String firstName,
-                   String middleName,
-                   String lastName,
-                   String email,
-                   String phone,
-                   AcademicTitle title,
-                   AcademicDepartment department,
-                   String office,
-                   Boolean honoraryStatus) {
-        super(firstName, middleName, lastName, email, phone);
         this.title = title;
         this.department = department;
         this.office = office;

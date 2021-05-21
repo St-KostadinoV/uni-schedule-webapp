@@ -10,6 +10,7 @@ import com.example.unischedulewebapp.model.enums.AcademicClassType;
 import com.example.unischedulewebapp.repository.AcademicTimetableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
@@ -93,6 +94,11 @@ public class AcademicTimetableService {
     public List<AcademicTimetable> findAll() {
         return timetableRepository
                 .findAll();
+    }
+
+    public List<AcademicTimetable> findAll(Sort sort) {
+        return timetableRepository
+                .findAll(sort);
     }
 
     public List<AcademicTimetable> findAll(int pageNumber, int rowsPerPage) {

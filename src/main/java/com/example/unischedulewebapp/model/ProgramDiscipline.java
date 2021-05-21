@@ -48,16 +48,6 @@ public class ProgramDiscipline {
     public ProgramDiscipline() {
     }
 
-    public ProgramDiscipline(Long id,
-                             AcademicProgram program,
-                             AcademicDiscipline discipline,
-                             Integer academicYear) {
-        this.id = id;
-        this.program = program;
-        this.discipline = discipline;
-        this.academicYear = academicYear;
-    }
-
     public ProgramDiscipline(AcademicProgram program,
                              AcademicDiscipline discipline,
                              Integer academicYear) {

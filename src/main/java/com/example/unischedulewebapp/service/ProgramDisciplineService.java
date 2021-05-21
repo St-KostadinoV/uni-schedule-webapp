@@ -8,9 +8,9 @@ import com.example.unischedulewebapp.model.ProgramDiscipline;
 import com.example.unischedulewebapp.repository.ProgramDisciplineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +76,11 @@ public class ProgramDisciplineService {
     public List<ProgramDiscipline> findAll() {
         return programDisciplineRepository
                 .findAll();
+    }
+
+    public List<ProgramDiscipline> findAll(Sort sort) {
+        return programDisciplineRepository
+                .findAll(sort);
     }
 
     public List<ProgramDiscipline> findAll(int pageNumber, int rowsPerPage) {

@@ -28,14 +28,6 @@ public class AcademicDepartment extends AcademicStructure {
     public AcademicDepartment() {
     }
 
-    public AcademicDepartment(Long id,
-                              String name,
-                              String abbreviation,
-                              AcademicFaculty faculty) {
-        super(id, name, abbreviation);
-        this.faculty = faculty;
-    }
-
     public AcademicDepartment(String name,
                               String abbreviation,
                               AcademicFaculty faculty) {

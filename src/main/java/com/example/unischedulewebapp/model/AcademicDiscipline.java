@@ -4,6 +4,7 @@ import com.example.unischedulewebapp.model.generic.AcademicStructure;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.FetchType.LAZY;
@@ -47,54 +48,6 @@ public class AcademicDiscipline extends AcademicStructure {
     public AcademicDiscipline() {
     }
 
-    public AcademicDiscipline(Long id,
-                              String name,
-                              String abbreviation,
-                              AcademicDepartment department,
-                              Teacher leadingTeacher,
-                              Set<Teacher> assistingTeachers,
-                              String disciplineUrl) {
-        super(id, name, abbreviation);
-        this.department = department;
-        this.leadingTeacher = leadingTeacher;
-        this.assistingTeachers = assistingTeachers;
-        this.disciplineUrl = disciplineUrl;
-    }
-
-    public AcademicDiscipline(Long id,
-                              String name,
-                              String abbreviation,
-                              AcademicDepartment department,
-                              Teacher leadingTeacher,
-                              Set<Teacher> assistingTeachers) {
-        super(id, name, abbreviation);
-        this.department = department;
-        this.leadingTeacher = leadingTeacher;
-        this.assistingTeachers = assistingTeachers;
-    }
-
-    public AcademicDiscipline(Long id,
-                              String name,
-                              String abbreviation,
-                              AcademicDepartment department,
-                              Teacher leadingTeacher,
-                              String disciplineUrl) {
-        super(id, name, abbreviation);
-        this.department = department;
-        this.leadingTeacher = leadingTeacher;
-        this.disciplineUrl = disciplineUrl;
-    }
-
-    public AcademicDiscipline(Long id,
-                              String name,
-                              String abbreviation,
-                              AcademicDepartment department,
-                              Teacher leadingTeacher) {
-        super(id, name, abbreviation);
-        this.department = department;
-        this.leadingTeacher = leadingTeacher;
-    }
-
     public AcademicDiscipline(String name,
                               String abbreviation,
                               AcademicDepartment department,
@@ -127,6 +80,7 @@ public class AcademicDiscipline extends AcademicStructure {
         super(name, abbreviation);
         this.department = department;
         this.leadingTeacher = leadingTeacher;
+        this.assistingTeachers = new HashSet<>();
         this.disciplineUrl = disciplineUrl;
     }
 
@@ -137,6 +91,7 @@ public class AcademicDiscipline extends AcademicStructure {
         super(name, abbreviation);
         this.department = department;
         this.leadingTeacher = leadingTeacher;
+        this.assistingTeachers = new HashSet<>();
     }
 
     public AcademicDepartment getDepartment() {

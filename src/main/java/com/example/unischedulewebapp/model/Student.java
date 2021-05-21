@@ -58,28 +58,6 @@ public class Student extends Person implements Serializable {
     public Student() {
     }
 
-    public Student(Long id,
-                   AppUser userDetails,
-                   String firstName,
-                   String middleName,
-                   String lastName,
-                   String email,
-                   String phone,
-                   String facultyNumber,
-                   Integer admissionStream,
-                   AcademicProgram academicProgram,
-                   Integer academicYear,
-                   Integer studentGroup,
-                   Boolean activeStatus) {
-        super(id, userDetails, firstName, middleName, lastName, email, phone);
-        this.facultyNumber = facultyNumber;
-        this.admissionStream = admissionStream;
-        this.academicProgram = academicProgram;
-        this.academicYear = academicYear;
-        this.studentGroup = studentGroup;
-        this.activeStatus = activeStatus;
-    }
-
     public Student(AppUser userDetails,
                    String firstName,
                    String middleName,
@@ -93,26 +71,6 @@ public class Student extends Person implements Serializable {
                    Integer studentGroup,
                    Boolean activeStatus) {
         super(userDetails, firstName, middleName, lastName, email, phone);
-        this.facultyNumber = facultyNumber;
-        this.admissionStream = admissionStream;
-        this.academicProgram = academicProgram;
-        this.academicYear = academicYear;
-        this.studentGroup = studentGroup;
-        this.activeStatus = activeStatus;
-    }
-
-    public Student(String firstName,
-                   String middleName,
-                   String lastName,
-                   String email,
-                   String phone,
-                   String facultyNumber,
-                   Integer admissionStream,
-                   AcademicProgram academicProgram,
-                   Integer academicYear,
-                   Integer studentGroup,
-                   Boolean activeStatus) {
-        super(firstName, middleName, lastName, email, phone);
         this.facultyNumber = facultyNumber;
         this.admissionStream = admissionStream;
         this.academicProgram = academicProgram;

@@ -15,12 +15,6 @@ public class AcademicFaculty extends AcademicStructure {
     public AcademicFaculty() {
     }
 
-    public AcademicFaculty(Long id,
-                           String name,
-                           String abbreviation) {
-        super(id, name, abbreviation);
-    }
-
     public AcademicFaculty(String name,
                            String abbreviation) {
         super(name, abbreviation);

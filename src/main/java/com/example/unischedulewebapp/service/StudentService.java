@@ -44,6 +44,11 @@ public class StudentService {
                 .existsById(id);
     }
 
+    public boolean existsByFacultyNumber(String facultyNumber) {
+        return studentRepository
+                .existsByFacultyNumber(facultyNumber);
+    }
+
     public Student findById(Long id) throws ResourceNotFoundException {
         return studentRepository
                 .findById(id)
@@ -123,6 +128,11 @@ public class StudentService {
                     String.format(STUDENT_EXISTS_MSG, "with id=" + student.getId())
             );
 
+        if(existsByFacultyNumber(student.getFacultyNumber()))
+            throw new ResourceAlreadyExistsException(
+                    String.format(STUDENT_EXISTS_MSG, "with faculty number '" + student.getFacultyNumber() + "'")
+            );
+
         if(!programService.existsById(student.getAcademicProgram().getId()))
             throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
 
@@ -136,6 +146,8 @@ public class StudentService {
             throw new ResourceNotFoundException(
                     String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
             );
+
+        // TODO - check if updated data overwrites faculty number
 
         if(!programService.existsById(student.getAcademicProgram().getId()))
             throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
