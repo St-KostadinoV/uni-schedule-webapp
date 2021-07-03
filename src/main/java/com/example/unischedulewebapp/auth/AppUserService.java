@@ -66,11 +66,11 @@ public class AppUserService implements UserDetailsService {
                     String.format(USER_NOT_FOUND_MSG, user.getUsername())
             );
 
-        if(!passwordEncoder.matches(user.getPassword(), oldPassword))
+        if(!passwordEncoder.matches(oldPassword, user.getPassword()))
             throw new PasswordsMatchException(INVALID_PASSWORD_MSG);
 
         String encodedPassword = passwordEncoder
-                .encode(user.getPassword());
+                .encode(password);
 
         user.setPassword(encodedPassword);
         appUserRepository.save(user);

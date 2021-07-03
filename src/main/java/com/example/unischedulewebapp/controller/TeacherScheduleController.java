@@ -36,32 +36,6 @@ public class TeacherScheduleController {
         this.timetableService = timetableService;
     }
 
-    @GetMapping
-    public ResponseEntity<Object> getAllTeachers() {
-        List<Teacher> teachers = teacherService
-                .findAll(Sort.by(Sort.Direction.ASC, "lastName"));
-
-        MappingJacksonValue wrapper = new MappingJacksonValue(teachers);
-
-        FilterProvider filters = new SimpleFilterProvider()
-                .addFilter("TeacherFilter",
-                            SimpleBeanPropertyFilter.filterOutAllExcept("id",
-                                                                        "honoraryStatus",
-                                                                        "title",
-                                                                        "firstName",
-                                                                        "middleName",
-                                                                        "lastName",
-                                                                        "department"))
-                .addFilter("DepartmentFilter",
-                            SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"));
-
-        wrapper.setFilters(filters);
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(wrapper);
-    }
-
     @GetMapping(
             path = "{teacherId}"
     )
