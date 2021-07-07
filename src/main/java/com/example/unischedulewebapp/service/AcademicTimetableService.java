@@ -160,7 +160,9 @@ public class AcademicTimetableService {
 
     public AcademicTimetable updateTimetable(Long id, AcademicTimetable timetable) throws ResourceNotFoundException, BadResourceException {
         if(!existsById(id))
-            throw new ResourceNotFoundException();
+            throw new ResourceNotFoundException(
+                    String.format(TIMETBL_NOT_FOUND_MSG, "with id=" + id)
+            );
 
         if(!programDisciplineService.existsById(timetable.getProgramDiscipline().getId()))
             throw new ResourceNotFoundException(TIMETBL_PD_NOT_FOUND_MSG);
@@ -180,7 +182,9 @@ public class AcademicTimetableService {
 
     public void deleteTimetable(Long id) throws ResourceNotFoundException {
         if(!existsById(id))
-            throw new ResourceNotFoundException();
+            throw new ResourceNotFoundException(
+                    String.format(TIMETBL_NOT_FOUND_MSG, "with id=" + id)
+            );
 
         timetableRepository.deleteById(id);
     }

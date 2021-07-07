@@ -202,7 +202,7 @@ public class StudentController {
     @PostMapping(
             path = "pass-change"
     )
-    public ResponseEntity<Object> updateTeacherPassword(@RequestParam("password") String password,
+    public ResponseEntity<Object> updateStudentPassword(@RequestParam("newPassword") String newPassword,
                                                         @RequestParam("oldPassword") String oldPassword) {
         AppUser currentUser = (AppUser) SecurityContextHolder
                 .getContext()
@@ -210,7 +210,7 @@ public class StudentController {
                 .getPrincipal();
 
         try {
-            userService.updatePassword(currentUser, password, oldPassword);
+            userService.updatePassword(currentUser, newPassword, oldPassword);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .build();

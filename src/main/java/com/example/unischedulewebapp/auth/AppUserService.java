@@ -56,7 +56,7 @@ public class AppUserService implements UserDetailsService {
         appUserRepository.save(user);
     }
 
-    public void updatePassword(AppUser user, String password, String oldPassword) throws PasswordsMatchException {
+    public void updatePassword(AppUser user, String newPassword, String oldPassword) throws PasswordsMatchException {
         boolean userExists = appUserRepository
                 .findByUsername(user.getUsername())
                 .isPresent();
@@ -70,7 +70,7 @@ public class AppUserService implements UserDetailsService {
             throw new PasswordsMatchException(INVALID_PASSWORD_MSG);
 
         String encodedPassword = passwordEncoder
-                .encode(password);
+                .encode(newPassword);
 
         user.setPassword(encodedPassword);
         appUserRepository.save(user);
