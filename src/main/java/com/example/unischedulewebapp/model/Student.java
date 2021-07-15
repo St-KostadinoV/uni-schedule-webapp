@@ -1,14 +1,12 @@
 package com.example.unischedulewebapp.model;
 
 import com.example.unischedulewebapp.auth.AppUser;
-import com.example.unischedulewebapp.model.generic.Person;
+import com.example.unischedulewebapp.model.base.Person;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
-
-import static javax.persistence.FetchType.EAGER;
 
 @JsonFilter("StudentFilter")
 @Entity
@@ -23,12 +21,6 @@ public class Student extends Person implements Serializable {
             unique = true
     )
     private String facultyNumber;
-
-    @Column(
-            name = "stream",
-            nullable = false
-    )
-    private Integer admissionStream;
 
     @ManyToOne
     @JoinColumn(
@@ -65,14 +57,12 @@ public class Student extends Person implements Serializable {
                    String email,
                    String phone,
                    String facultyNumber,
-                   Integer admissionStream,
                    AcademicProgram academicProgram,
                    Integer academicYear,
                    Integer studentGroup,
                    Boolean activeStatus) {
         super(userDetails, firstName, middleName, lastName, email, phone);
         this.facultyNumber = facultyNumber;
-        this.admissionStream = admissionStream;
         this.academicProgram = academicProgram;
         this.academicYear = academicYear;
         this.studentGroup = studentGroup;
@@ -85,14 +75,6 @@ public class Student extends Person implements Serializable {
 
     public void setFacultyNumber(String facultyNumber) {
         this.facultyNumber = facultyNumber;
-    }
-
-    public Integer getAdmissionStream() {
-        return admissionStream;
-    }
-
-    public void setAdmissionStream(Integer admissionStream) {
-        this.admissionStream = admissionStream;
     }
 
     public AcademicProgram getAcademicProgram() {

@@ -1,7 +1,8 @@
-package com.example.unischedulewebapp.controller;
+package com.example.unischedulewebapp.controller.v2;
 
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDiscipline;
+import com.example.unischedulewebapp.model.Teacher;
 import com.example.unischedulewebapp.service.AcademicDisciplineService;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -20,14 +21,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping(
-        path = "api/v1/discipline"
+        path = "disciplines"
 )
-public class DisciplinesController {
+public class DisciplineController {
 
     private final AcademicDisciplineService disciplineService;
 
     @Autowired
-    public DisciplinesController(AcademicDisciplineService disciplineService) {
+    public DisciplineController(AcademicDisciplineService disciplineService) {
         this.disciplineService = disciplineService;
     }
 
@@ -55,7 +56,7 @@ public class DisciplinesController {
     @GetMapping(
             path = "{disciplineId}"
     )
-    public ResponseEntity<Object> getDisciplineDetails(@PathVariable("disciplineId") Long id) {
+    public ResponseEntity<Object> getDiscipline(@PathVariable("disciplineId") Long id) {
         try {
             AcademicDiscipline discipline = disciplineService
                     .findById(id);
@@ -78,6 +79,43 @@ public class DisciplinesController {
                                                                             "firstName",
                                                                             "middleName",
                                                                             "lastName"));
+
+            wrapper.setFilters(filters);
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(wrapper);
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
+
+    @GetMapping(
+            path = "{disciplineId}/teachers"
+    )
+    public ResponseEntity<Object> getDisciplineTeachers(@PathVariable("disciplineId") Long id) {
+        try {
+            AcademicDiscipline discipline = disciplineService
+                    .findById(id);
+
+            List<Teacher> disciplineTeachers = discipline
+                    .getAllTeachers();
+
+            MappingJacksonValue wrapper = new MappingJacksonValue(disciplineTeachers);
+
+            FilterProvider filters = new SimpleFilterProvider()
+                    .addFilter("TeacherFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                            "firstName",
+                                                                            "middleName",
+                                                                            "lastName",
+                                                                            "title",
+                                                                            "honoraryStatus",
+                                                                            "office"));
 
             wrapper.setFilters(filters);
 

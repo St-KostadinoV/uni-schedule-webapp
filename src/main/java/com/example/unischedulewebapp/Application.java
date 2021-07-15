@@ -63,21 +63,21 @@ public class Application {
 				departmentService.addDepartment(department);
 
 			List<AcademicProgram> programs = List.of(
-					new AcademicProgram("Компютъризирани технологии в машиностроенето", "КТМ", departments.get(0)),
-					new AcademicProgram("Производствен инженеринг", "ПИ", departments.get(0)),
-					new AcademicProgram("Машиностроителна техника и технологии", "МТТ", departments.get(1)),
-					new AcademicProgram("Химическо машиностроене", "ХМ", departments.get(1)),
-					new AcademicProgram("Индустриален мениджмънт", "ИМ", departments.get(2)),
-					new AcademicProgram("Технологично предприемачество и иновации", "ТПИ", departments.get(2)),
-					new AcademicProgram("Корабостроене и морска техника", "КМТ", departments.get(3)),
-					new AcademicProgram("Корабни машини и механизми", "КММ", departments.get(3)),
-					new AcademicProgram("Инженерна екология", "ИЕ", departments.get(4)),
-					new AcademicProgram("Защита на населението при бедствия и аварии", "ЗНБА",  departments.get(4)),
-					new AcademicProgram("Индустриален дизайн", "ИД",  departments.get(5)),
-					new AcademicProgram("Електротехника и електротехнологии", "ЕТЕТ", departments.get(6)),
-					new AcademicProgram("Възобновяеми енергийни източници", "ВЕИ", departments.get(6)),
-					new AcademicProgram("Компютърни системи и технологии", "КСТ", departments.get(8)),
-					new AcademicProgram("Софтуерни и интернет технологии", "СИТ", departments.get(9))
+					new AcademicProgram("Компютъризирани технологии в машиностроенето", "КТМ", departments.get(0), 1),
+					new AcademicProgram("Производствен инженеринг", "ПИ", departments.get(0), 1),
+					new AcademicProgram("Машиностроителна техника и технологии", "МТТ", departments.get(1), 1),
+					new AcademicProgram("Химическо машиностроене", "ХМ", departments.get(1), 1),
+					new AcademicProgram("Индустриален мениджмънт", "ИМ", departments.get(2), 7),
+					new AcademicProgram("Технологично предприемачество и иновации", "ТПИ", departments.get(2), 7),
+					new AcademicProgram("Корабостроене и морска техника", "КМТ", departments.get(3), 2),
+					new AcademicProgram("Корабни машини и механизми", "КММ", departments.get(3), 2),
+					new AcademicProgram("Инженерна екология", "ИЕ", departments.get(4), 7),
+					new AcademicProgram("Защита на населението при бедствия и аварии", "ЗНБА",  departments.get(4), 7),
+					new AcademicProgram("Индустриален дизайн", "ИД",  departments.get(5), 1),
+					new AcademicProgram("Електротехника и електротехнологии", "ЕТЕТ", departments.get(6), 3),
+					new AcademicProgram("Възобновяеми енергийни източници", "ВЕИ", departments.get(6), 3),
+					new AcademicProgram("Компютърни системи и технологии", "КСТ", departments.get(8), 5),
+					new AcademicProgram("Софтуерни и интернет технологии", "СИТ", departments.get(9), 6)
 			);
 			for (AcademicProgram program : programs)
 				programService.addProgram(program);
@@ -119,6 +119,10 @@ public class Application {
 				disciplineService.addDiscipline(discipline);
 			}
 
+			AcademicDiscipline test = new AcademicDiscipline("Discipline#999", "D#999", departments.get(0), teachers.get(0));
+			test.addAssistingTeachers(teachers.get(1));
+			disciplineService.addDiscipline(test);
+
 			List<Student> students = new ArrayList<>();
 			Student student;
 			String facNum;
@@ -138,7 +142,6 @@ public class Application {
 						email,
 						phone,
 						facNum,
-						1,
 						programs.get(random.nextInt(15)),
 						1,
 						1,
@@ -163,7 +166,6 @@ public class Application {
 						email,
 						phone,
 						facNum,
-						1,
 						programs.get(random.nextInt(15)),
 						1,
 						2,
@@ -188,7 +190,6 @@ public class Application {
 						email,
 						phone,
 						facNum,
-						1,
 						programs.get(random.nextInt(15)),
 						2,
 						1,
@@ -213,7 +214,6 @@ public class Application {
 						email,
 						phone,
 						facNum,
-						1,
 						programs.get(random.nextInt(15)),
 						2,
 						2,

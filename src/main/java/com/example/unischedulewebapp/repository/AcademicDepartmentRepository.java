@@ -2,7 +2,7 @@ package com.example.unischedulewebapp.repository;
 
 import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.AcademicFaculty;
-import com.example.unischedulewebapp.repository.generic.AcademicStructureRepository;
+import com.example.unischedulewebapp.repository.base.AcademicStructureRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;

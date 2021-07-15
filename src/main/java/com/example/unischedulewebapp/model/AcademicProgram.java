@@ -1,11 +1,9 @@
 package com.example.unischedulewebapp.model;
 
-import com.example.unischedulewebapp.model.generic.AcademicStructure;
+import com.example.unischedulewebapp.model.base.AcademicStructure;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import javax.persistence.*;
-
-import static javax.persistence.FetchType.LAZY;
 
 @JsonFilter("ProgramFilter")
 @Entity
@@ -22,14 +20,22 @@ public class AcademicProgram extends AcademicStructure {
     )
     private AcademicDepartment department;
 
+    @Column(
+            name = "stream",
+            nullable = false
+    )
+    private Integer academicStream;
+
     public AcademicProgram() {
     }
 
     public AcademicProgram(String name,
                            String abbreviation,
-                           AcademicDepartment department) {
+                           AcademicDepartment department,
+                           Integer academicStream) {
         super(name, abbreviation);
         this.department = department;
+        this.academicStream = academicStream;
     }
 
     public AcademicDepartment getDepartment() {
@@ -38,5 +44,13 @@ public class AcademicProgram extends AcademicStructure {
 
     public void setDepartment(AcademicDepartment department) {
         this.department = department;
+    }
+
+    public Integer getAcademicStream() {
+        return academicStream;
+    }
+
+    public void setAcademicStream(Integer academicStream) {
+        this.academicStream = academicStream;
     }
 }

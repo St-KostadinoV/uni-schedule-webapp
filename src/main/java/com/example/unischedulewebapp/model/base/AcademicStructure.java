@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.model.generic;
+package com.example.unischedulewebapp.model.base;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

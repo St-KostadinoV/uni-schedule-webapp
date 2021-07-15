@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProgramDisciplineService {
@@ -87,6 +88,19 @@ public class ProgramDisciplineService {
         return programDisciplineRepository
                 .findAll(PageRequest.of(pageNumber - 1, rowsPerPage))
                 .toList();
+    }
+
+    public List<AcademicDiscipline> findProgramDisciplines(AcademicProgram program, Integer year) {
+        if (year == null)
+            return findByProgram(program)
+                    .stream()
+                    .map(ProgramDiscipline::getDiscipline)
+                    .collect(Collectors.toList());
+        else
+            return findByProgramAndAcademicYear(program, year)
+                    .stream()
+                    .map(ProgramDiscipline::getDiscipline)
+                    .collect(Collectors.toList());
     }
 
     public ProgramDiscipline addProgramDiscipline(ProgramDiscipline programDiscipline) throws ResourceAlreadyExistsException, ResourceNotFoundException {

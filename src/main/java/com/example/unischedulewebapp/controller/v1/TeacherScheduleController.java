@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.controller;
+package com.example.unischedulewebapp.controller.v1;
 
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicTimetable;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+//@RestController
 @RequestMapping(
         path = "api/v1/teacher-schedule"
 )

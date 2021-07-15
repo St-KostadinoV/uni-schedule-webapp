@@ -1,13 +1,13 @@
-package com.example.unischedulewebapp.controller;
+package com.example.unischedulewebapp.controller.v1;
 
 import com.example.unischedulewebapp.auth.AppUser;
 import com.example.unischedulewebapp.auth.AppUserService;
 import com.example.unischedulewebapp.auth.exception.PasswordsMatchException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicTimetable;
-import com.example.unischedulewebapp.model.Student;
+import com.example.unischedulewebapp.model.Teacher;
 import com.example.unischedulewebapp.service.AcademicTimetableService;
-import com.example.unischedulewebapp.service.StudentService;
+import com.example.unischedulewebapp.service.TeacherService;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
@@ -21,42 +21,42 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+//@RestController
 @RequestMapping(
-        path = "api/v1/student"
+        path = "api/v1/teacher"
 )
-public class StudentController {
+public class TeacherController {
 
-    private final StudentService studentService;
+    private final TeacherService teacherService;
     private final AcademicTimetableService timetableService;
     private final AppUserService userService;
 
     @Autowired
-    public StudentController(StudentService studentService,
+    public TeacherController(TeacherService teacherService,
                              AcademicTimetableService timetableService,
                              AppUserService userService) {
-        this.studentService = studentService;
+        this.teacherService = teacherService;
         this.timetableService = timetableService;
         this.userService = userService;
     }
 
     @GetMapping
-    public ResponseEntity<Object> getAllStudents() {
-        List<Student> students = studentService
+    public ResponseEntity<Object> getAllTeachers() {
+        List<Teacher> teachers = teacherService
                 .findAll(Sort.by(Sort.Direction.ASC, "lastName"));
 
-        MappingJacksonValue wrapper = new MappingJacksonValue(students);
+        MappingJacksonValue wrapper = new MappingJacksonValue(teachers);
 
         FilterProvider filters = new SimpleFilterProvider()
-                .addFilter("StudentFilter",
+                .addFilter("TeacherFilter",
                             SimpleBeanPropertyFilter.filterOutAllExcept("id",
-                                                                        "facultyNumber",
+                                                                        "honoraryStatus",
+                                                                        "title",
                                                                         "firstName",
                                                                         "middleName",
                                                                         "lastName",
-                                                                        "academicYear",
-                                                                        "academicProgram"))
-                .addFilter("ProgramFilter",
+                                                                        "department"))
+                .addFilter("DepartmentFilter",
                             SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"));
 
         wrapper.setFilters(filters);
@@ -67,27 +67,27 @@ public class StudentController {
     }
 
     @GetMapping(
-            path = "{studentId}"
+            path = "{teacherId}"
     )
-    public ResponseEntity<Object> getStudentDetails(@PathVariable("studentId") Long id) {
+    public ResponseEntity<Object> getTeacherDetails(@PathVariable("teacherId") Long id) {
         try {
-            Student student = studentService.findById(id);
+            Teacher teacher = teacherService.findById(id);
 
-            MappingJacksonValue wrapper = new MappingJacksonValue(student);
+            MappingJacksonValue wrapper = new MappingJacksonValue(teacher);
 
             FilterProvider filters = new SimpleFilterProvider()
-                    .addFilter("StudentFilter",
+                    .addFilter("TeacherFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("id",
-                                                                            "facultyNumber",
+                                                                            "honoraryStatus",
+                                                                            "title",
                                                                             "firstName",
                                                                             "middleName",
                                                                             "lastName",
-                                                                            "academicYear",
-                                                                            "academicProgram",
-                                                                            "admissionStream",
-                                                                            "studentGroup",
-                                                                            "activeStatus"))
-                    .addFilter("ProgramFilter",
+                                                                            "department",
+                                                                            "office",
+                                                                            "email",
+                                                                            "phone"))
+                    .addFilter("DepartmentFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("name"));
 
             wrapper.setFilters(filters);
@@ -115,7 +115,7 @@ public class StudentController {
 
         try {
             List<AcademicTimetable> schedule = timetableService
-                    .findStudentDailySchedule(studentService.findByUserDetails(currentUser));
+                    .findTeacherDailySchedule(teacherService.findByUserDetails(currentUser));
 
             MappingJacksonValue wrapper = new MappingJacksonValue(schedule);
 
@@ -126,16 +126,15 @@ public class StudentController {
                                                                             "classType",
                                                                             "programDiscipline",
                                                                             "designatedRoom",
-                                                                            "assignedTeacher"))
+                                                                            "studentGroup"))
                     .addFilter("ProgramDisciplineFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("discipline"))
-                    .addFilter("DisciplineFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("program",
+                                                                            "discipline",
+                                                                            "academicYear"))
+                    .addFilter("ProgramFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
-                    .addFilter("TeacherFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
-                                                                            "title",
-                                                                            "firstName",
-                                                                            "lastName"));
+                    .addFilter("DisciplineFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("name"));
 
             wrapper.setFilters(filters);
 
@@ -162,7 +161,7 @@ public class StudentController {
 
         try {
             List<AcademicTimetable> schedule = timetableService
-                    .findStudentWeeklySchedule(studentService.findByUserDetails(currentUser));
+                    .findByAssignedTeacher(teacherService.findByUserDetails(currentUser));
 
             MappingJacksonValue wrapper = new MappingJacksonValue(schedule);
 
@@ -174,16 +173,15 @@ public class StudentController {
                                                                             "classType",
                                                                             "programDiscipline",
                                                                             "designatedRoom",
-                                                                            "assignedTeacher"))
+                                                                            "studentGroup"))
                     .addFilter("ProgramDisciplineFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("discipline"))
-                    .addFilter("DisciplineFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("program",
+                                                                            "discipline",
+                                                                            "academicYear"))
+                    .addFilter("ProgramFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
-                    .addFilter("TeacherFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
-                                                                            "title",
-                                                                            "firstName",
-                                                                            "lastName"));
+                    .addFilter("DisciplineFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("name"));
 
             wrapper.setFilters(filters);
 
@@ -200,9 +198,33 @@ public class StudentController {
     }
 
     @PostMapping(
+            path = "email-change"
+    )
+    public ResponseEntity<Object> updateTeacherEmail(@RequestParam("email") String email) {
+        AppUser currentUser = (AppUser) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        try {
+            Teacher teacher = teacherService.findByUserDetails(currentUser);
+            teacherService.updateTeacherEmail(teacher, email);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .build();
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
+
+    @PostMapping(
             path = "pass-change"
     )
-    public ResponseEntity<Object> updateStudentPassword(@RequestParam("newPassword") String newPassword,
+    public ResponseEntity<Object> updateTeacherPassword(@RequestParam("newPassword") String newPassword,
                                                         @RequestParam("oldPassword") String oldPassword) {
         AppUser currentUser = (AppUser) SecurityContextHolder
                 .getContext()

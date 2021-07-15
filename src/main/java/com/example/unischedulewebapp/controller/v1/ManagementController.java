@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.controller;
+package com.example.unischedulewebapp.controller.v1;
 
 import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
 import com.example.unischedulewebapp.exception.BadResourceException;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-@RestController
+//@RestController
 @RequestMapping(
         path = "api/v1/management"
 )

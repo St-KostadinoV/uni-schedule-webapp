@@ -1,14 +1,12 @@
 package com.example.unischedulewebapp.model;
 
-import com.example.unischedulewebapp.model.generic.AcademicStructure;
+import com.example.unischedulewebapp.model.base.AcademicStructure;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import static javax.persistence.FetchType.LAZY;
 
 @JsonFilter("DepartmentFilter")
 @Entity

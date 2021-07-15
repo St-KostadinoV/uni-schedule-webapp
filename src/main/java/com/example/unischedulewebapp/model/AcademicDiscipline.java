@@ -1,13 +1,13 @@
 package com.example.unischedulewebapp.model;
 
-import com.example.unischedulewebapp.model.generic.AcademicStructure;
+import com.example.unischedulewebapp.model.base.AcademicStructure;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-
-import static javax.persistence.FetchType.LAZY;
 
 @JsonFilter("DisciplineFilter")
 @Entity
@@ -40,25 +40,7 @@ public class AcademicDiscipline extends AcademicStructure {
     )
     private Set<Teacher> assistingTeachers;
 
-    @Column(
-            name = "url"
-    )
-    private String disciplineUrl;
-
     public AcademicDiscipline() {
-    }
-
-    public AcademicDiscipline(String name,
-                              String abbreviation,
-                              AcademicDepartment department,
-                              Teacher leadingTeacher,
-                              Set<Teacher> assistingTeachers,
-                              String disciplineUrl) {
-        super(name, abbreviation);
-        this.department = department;
-        this.leadingTeacher = leadingTeacher;
-        this.assistingTeachers = assistingTeachers;
-        this.disciplineUrl = disciplineUrl;
     }
 
     public AcademicDiscipline(String name,
@@ -70,18 +52,6 @@ public class AcademicDiscipline extends AcademicStructure {
         this.department = department;
         this.leadingTeacher = leadingTeacher;
         this.assistingTeachers = assistingTeachers;
-    }
-
-    public AcademicDiscipline(String name,
-                              String abbreviation,
-                              AcademicDepartment department,
-                              Teacher leadingTeacher,
-                              String disciplineUrl) {
-        super(name, abbreviation);
-        this.department = department;
-        this.leadingTeacher = leadingTeacher;
-        this.assistingTeachers = new HashSet<>();
-        this.disciplineUrl = disciplineUrl;
     }
 
     public AcademicDiscipline(String name,
@@ -100,14 +70,6 @@ public class AcademicDiscipline extends AcademicStructure {
 
     public void setDepartment(AcademicDepartment department) {
         this.department = department;
-    }
-
-    public String getDisciplineUrl() {
-        return disciplineUrl;
-    }
-
-    public void setDisciplineUrl(String disciplineUrl) {
-        this.disciplineUrl = disciplineUrl;
     }
 
     public Teacher getLeadingTeacher() {
@@ -132,5 +94,12 @@ public class AcademicDiscipline extends AcademicStructure {
 
     public void removeAssistingTeachers(Teacher teacher) {
         assistingTeachers.remove(teacher);
+    }
+
+    public List<Teacher> getAllTeachers() {
+        List<Teacher> teachers = new ArrayList<>();
+        teachers.add(leadingTeacher);
+        teachers.addAll(assistingTeachers);
+        return teachers;
     }
 }

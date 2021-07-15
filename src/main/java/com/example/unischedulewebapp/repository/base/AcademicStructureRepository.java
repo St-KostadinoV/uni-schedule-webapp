@@ -1,6 +1,6 @@
-package com.example.unischedulewebapp.repository.generic;
+package com.example.unischedulewebapp.repository.base;
 
-import com.example.unischedulewebapp.model.generic.AcademicStructure;
+import com.example.unischedulewebapp.model.base.AcademicStructure;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 

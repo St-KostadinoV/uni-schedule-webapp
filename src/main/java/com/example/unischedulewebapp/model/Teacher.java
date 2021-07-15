@@ -2,7 +2,7 @@ package com.example.unischedulewebapp.model;
 
 import com.example.unischedulewebapp.auth.AppUser;
 import com.example.unischedulewebapp.model.enums.AcademicTitle;
-import com.example.unischedulewebapp.model.generic.Person;
+import com.example.unischedulewebapp.model.base.Person;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 import static javax.persistence.EnumType.STRING;
-import static javax.persistence.FetchType.LAZY;
 
 @JsonFilter("TeacherFilter")
 @Entity

@@ -58,6 +58,12 @@ public class AcademicDisciplineService {
                 .findByLeadingTeacher(teacher));
     }
 
+    // TODO - enable once the query is reworked
+//    public List<AcademicDiscipline> findByTeacher(Teacher teacher) {
+//        return new ArrayList<>(disciplineRepository
+//                .findByTeacher(teacher));
+//    }
+
     public List<AcademicDiscipline> findAll() {
         return disciplineRepository
                 .findAll();

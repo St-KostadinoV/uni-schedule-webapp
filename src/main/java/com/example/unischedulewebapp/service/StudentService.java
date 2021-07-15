@@ -76,11 +76,6 @@ public class StudentService {
                         ));
     }
 
-    public List<Student> findByAdmissionStream(Integer stream) {
-        return new ArrayList<>(studentRepository
-                .findByAdmissionStream(stream));
-    }
-
     public List<Student> findByAcademicProgram(AcademicProgram program) {
         return new ArrayList<>(studentRepository
                 .findByAcademicProgram(program));
@@ -91,14 +86,14 @@ public class StudentService {
                 .findByAcademicYear(year));
     }
 
-    public List<Student> findByAcademicProgramAndStudentGroup(AcademicProgram program, Integer group) {
+    public List<Student> findByAcademicProgramAndAcademicYear(AcademicProgram program, Integer year) {
         return new ArrayList<>(studentRepository
-                .findByAcademicProgramAndStudentGroup(program, group));
+                .findByAcademicProgramAndAcademicYear(program, year));
     }
 
-    public List<Student> findByAcademicProgramAndStudentGroupAndAcademicYear(AcademicProgram program, Integer group, Integer year) {
+    public List<Student> findByAcademicProgramAndAcademicYearAndStudentGroup(AcademicProgram program, Integer year, Integer group) {
         return new ArrayList<>(studentRepository
-                .findByAcademicProgramAndStudentGroupAndAcademicYear(program, group, year));
+                .findByAcademicProgramAndAcademicYearAndStudentGroup(program, year, group));
     }
 
     public List<Student> findByActiveStatus(Boolean activeStatus) {

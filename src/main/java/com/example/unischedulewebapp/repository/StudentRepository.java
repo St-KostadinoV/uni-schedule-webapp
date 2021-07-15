@@ -2,7 +2,7 @@ package com.example.unischedulewebapp.repository;
 
 import com.example.unischedulewebapp.model.AcademicProgram;
 import com.example.unischedulewebapp.model.Student;
-import com.example.unischedulewebapp.repository.generic.PersonRepository;
+import com.example.unischedulewebapp.repository.base.PersonRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -16,15 +16,13 @@ public interface StudentRepository
 
     Optional<Student> findByFacultyNumber(String facultyNumber);
 
-    Collection<Student> findByAdmissionStream(Integer stream);
-
     Collection<Student> findByAcademicProgram(AcademicProgram program);
 
     Collection<Student> findByAcademicYear(Integer year);
 
-    Collection<Student> findByAcademicProgramAndStudentGroup(AcademicProgram program, Integer group);
+    Collection<Student> findByAcademicProgramAndAcademicYear(AcademicProgram program, Integer year);
 
-    Collection<Student> findByAcademicProgramAndStudentGroupAndAcademicYear(AcademicProgram program, Integer group, Integer year);
+    Collection<Student> findByAcademicProgramAndAcademicYearAndStudentGroup(AcademicProgram program, Integer year, Integer group);
 
     Collection<Student> findByActiveStatus(Boolean activeStatus);
 }

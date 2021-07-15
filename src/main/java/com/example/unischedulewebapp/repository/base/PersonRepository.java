@@ -1,7 +1,7 @@
-package com.example.unischedulewebapp.repository.generic;
+package com.example.unischedulewebapp.repository.base;
 
 import com.example.unischedulewebapp.auth.AppUser;
-import com.example.unischedulewebapp.model.generic.Person;
+import com.example.unischedulewebapp.model.base.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 

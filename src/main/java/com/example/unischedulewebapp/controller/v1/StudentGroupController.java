@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.controller;
+package com.example.unischedulewebapp.controller.v1;
 
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicProgram;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+//@RestController
 @RequestMapping(
         path = "api/v1/group-data"
 )
@@ -41,7 +41,7 @@ public class StudentGroupController {
                                                @RequestParam("year") Integer year) {
         try {
             AcademicProgram program = programService.findById(programId);
-            List<Student> students = studentService.findByAcademicProgramAndStudentGroupAndAcademicYear(program, group, year);
+            List<Student> students = studentService.findByAcademicProgramAndAcademicYearAndStudentGroup(program, year, group);
 
             MappingJacksonValue wrapper = new MappingJacksonValue(students);
 

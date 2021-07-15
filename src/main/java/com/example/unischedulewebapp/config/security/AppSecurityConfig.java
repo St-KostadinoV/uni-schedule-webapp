@@ -19,10 +19,11 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()   //  TODO - enable CSRF protection and implement logic to verify CSRF tokens
                 .authorizeRequests()
-                .mvcMatchers("/api/v1/teacher/daily-schedule","/api/v1/teacher/weekly-schedule","/api/v1/teacher/email-change","/api/v1/teacher/pass-change").hasRole(TEACHER.name())
-                .mvcMatchers("/api/v1/student/daily-schedule","/api/v1/student/weekly-schedule","/api/v1/student/pass-change").hasRole(STUDENT.name())
-                .mvcMatchers("/api/v1/management/**").hasRole(FRONT_DESK.name())
-                .mvcMatchers("/api/v1/**").permitAll()
+//                .mvcMatchers("/api/v1/teacher/daily-schedule","/api/v1/teacher/weekly-schedule","/api/v1/teacher/email-change","/api/v1/teacher/pass-change").hasRole(TEACHER.name())
+//                .mvcMatchers("/api/v1/student/daily-schedule","/api/v1/student/weekly-schedule","/api/v1/student/pass-change").hasRole(STUDENT.name())
+//                .mvcMatchers("/api/v1/management/**").hasRole(FRONT_DESK.name())
+//                .mvcMatchers("/api/v1/**").permitAll()
+                .mvcMatchers("/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

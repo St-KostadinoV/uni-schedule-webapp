@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.model.generic;
+package com.example.unischedulewebapp.model.base;
 
 import com.example.unischedulewebapp.auth.AppUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
