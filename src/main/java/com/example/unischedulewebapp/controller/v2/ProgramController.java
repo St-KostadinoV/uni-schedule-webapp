@@ -133,69 +133,28 @@ public class ProgramController {
     @GetMapping(
             path = "{programId}/students"
     )
-    public ResponseEntity<Object> getProgramStudents(@PathVariable("programId") Long id) {
-        try {
-            AcademicProgram program = programService
-                    .findById(id);
-
-            List<Student> programStudents = studentService
-                    .findByAcademicProgram(program);
-
-            MappingJacksonValue wrapper = new MappingJacksonValue(programStudents);
-
-            FilterProvider filters = new SimpleFilterProvider()
-                    .addFilter("StudentFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("id",
-                                                                            "facultyNumber",
-                                                                            "firstName",
-                                                                            "middleName",
-                                                                            "lastName",
-                                                                            "academicYear",
-                                                                            "studentGroup",
-                                                                            "activeStatus"));
-
-            wrapper.setFilters(filters);
-
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(wrapper);
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-    }
-
-    @GetMapping(
-            path = "{programId}/students"
-    )
     public ResponseEntity<Object> getProgramStudents(@PathVariable("programId") Long id,
-                                                     @RequestParam(name = "year") Integer year,
+                                                     @RequestParam(name = "year", required = false) Integer year,
                                                      @RequestParam(name = "group", required = false) Integer group) {
         try {
             AcademicProgram program = programService
                     .findById(id);
 
-            List<Student> programStudents = (group == null) ?
-                    studentService
-                            .findByAcademicProgramAndAcademicYear(program, year) :
-                    studentService
-                            .findByAcademicProgramAndAcademicYearAndStudentGroup(program, year, group);
+            List<Student> programStudents = studentService
+                    .findProgramStudents(program, year, group);
 
             MappingJacksonValue wrapper = new MappingJacksonValue(programStudents);
 
             FilterProvider filters = new SimpleFilterProvider()
                     .addFilter("StudentFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("id",
-                                                                            "facultyNumber",
-                                                                            "firstName",
-                                                                            "middleName",
-                                                                            "lastName",
-                                                                            "academicYear",
-                                                                            "studentGroup",
-                                                                            "activeStatus"));
+                            SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                    "facultyNumber",
+                                    "firstName",
+                                    "middleName",
+                                    "lastName",
+                                    "academicYear",
+                                    "studentGroup",
+                                    "activeStatus"));
 
             wrapper.setFilters(filters);
 

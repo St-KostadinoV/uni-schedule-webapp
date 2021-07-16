@@ -149,8 +149,7 @@ public class AcademicTimetableService {
         if(!teacherService.existsById(timetable.getAssignedTeacher().getId()))
             throw new ResourceNotFoundException(TIMETBL_TEACHER_NOT_FOUND_MSG);
 
-//        Commented out to make the test data work
-//
+        // TODO - enable when real data is in db
 //        if(timetable.getProgramDiscipline().getDiscipline().getLeadingTeacher() != timetable.getAssignedTeacher()
 //                && !timetable.getProgramDiscipline().getDiscipline().getAssistingTeachers().contains(timetable.getAssignedTeacher()))
 //            throw new BadResourceException(TIMETBL_UNAFFILIATED_TEACHER_MSG);
@@ -170,8 +169,7 @@ public class AcademicTimetableService {
         if(!teacherService.existsById(timetable.getAssignedTeacher().getId()))
             throw new ResourceNotFoundException(TIMETBL_TEACHER_NOT_FOUND_MSG);
 
-//        Commented out to make the test data work
-//
+        // TODO - enable when real data is in db
 //        if(timetable.getProgramDiscipline().getDiscipline().getLeadingTeacher() != timetable.getAssignedTeacher()
 //                && !timetable.getProgramDiscipline().getDiscipline().getAssistingTeachers().contains(timetable.getAssignedTeacher()))
 //            throw new BadResourceException(TIMETBL_UNAFFILIATED_TEACHER_MSG);
@@ -187,5 +185,9 @@ public class AcademicTimetableService {
             );
 
         timetableRepository.deleteById(id);
+    }
+
+    public void isTimetableValid(AcademicTimetable timetable) {
+
     }
 }

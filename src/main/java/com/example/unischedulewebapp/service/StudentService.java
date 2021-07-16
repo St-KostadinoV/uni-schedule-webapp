@@ -117,6 +117,15 @@ public class StudentService {
                 .toList();
     }
 
+    public List<Student> findProgramStudents(AcademicProgram program, Integer year, Integer group) {
+        if (year == null)
+            return findByAcademicProgram(program);
+        else if (group == null)
+            return findByAcademicProgramAndAcademicYear(program, year);
+        else
+            return findByAcademicProgramAndAcademicYearAndStudentGroup(program, year, group);
+    }
+
     public Student addStudent(Student student) throws ResourceAlreadyExistsException, UserAlreadyExistsException, ResourceNotFoundException {
         if(student.getId() != null && existsById(student.getId()))
             throw new ResourceAlreadyExistsException(
