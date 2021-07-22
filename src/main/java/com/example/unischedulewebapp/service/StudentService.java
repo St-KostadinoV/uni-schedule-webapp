@@ -7,6 +7,7 @@ import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicProgram;
 import com.example.unischedulewebapp.model.Student;
+import com.example.unischedulewebapp.model.StudentGroup;
 import com.example.unischedulewebapp.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -23,20 +24,20 @@ public class StudentService {
             "Student %s not found!";
     private final static String STUDENT_EXISTS_MSG =
             "Student %s already exists!";
-    private final static String STUDENT_PROGRAM_NOT_FOUND_MSG =
-            "Student is part of a non-existent program!";
+    private final static String STUDENT_GROUP_NOT_FOUND_MSG =
+            "Student is part of a non-existent student group!";
 
     private final StudentRepository studentRepository;
     private final AppUserService userService;
-    private final AcademicProgramService programService;
+    private final StudentGroupService studentGroupService;
 
     @Autowired
     public StudentService(StudentRepository studentRepository,
                           AppUserService userService,
-                          AcademicProgramService programService) {
+                          StudentGroupService studentGroupService) {
         this.studentRepository = studentRepository;
         this.userService = userService;
-        this.programService = programService;
+        this.studentGroupService = studentGroupService;
     }
 
     public boolean existsById(Long id) {
@@ -76,24 +77,9 @@ public class StudentService {
                         ));
     }
 
-    public List<Student> findByAcademicProgram(AcademicProgram program) {
+    public List<Student> findByStudentGroup(StudentGroup studentGroup) {
         return new ArrayList<>(studentRepository
-                .findByAcademicProgram(program));
-    }
-
-    public List<Student> findByAcademicYear(Integer year) {
-        return new ArrayList<>(studentRepository
-                .findByAcademicYear(year));
-    }
-
-    public List<Student> findByAcademicProgramAndAcademicYear(AcademicProgram program, Integer year) {
-        return new ArrayList<>(studentRepository
-                .findByAcademicProgramAndAcademicYear(program, year));
-    }
-
-    public List<Student> findByAcademicProgramAndAcademicYearAndStudentGroup(AcademicProgram program, Integer year, Integer group) {
-        return new ArrayList<>(studentRepository
-                .findByAcademicProgramAndAcademicYearAndStudentGroup(program, year, group));
+                .findByStudentGroup(studentGroup));
     }
 
     public List<Student> findByActiveStatus(Boolean activeStatus) {
@@ -117,15 +103,6 @@ public class StudentService {
                 .toList();
     }
 
-    public List<Student> findProgramStudents(AcademicProgram program, Integer year, Integer group) {
-        if (year == null)
-            return findByAcademicProgram(program);
-        else if (group == null)
-            return findByAcademicProgramAndAcademicYear(program, year);
-        else
-            return findByAcademicProgramAndAcademicYearAndStudentGroup(program, year, group);
-    }
-
     public Student addStudent(Student student) throws ResourceAlreadyExistsException, UserAlreadyExistsException, ResourceNotFoundException {
         if(student.getId() != null && existsById(student.getId()))
             throw new ResourceAlreadyExistsException(
@@ -137,8 +114,8 @@ public class StudentService {
                     String.format(STUDENT_EXISTS_MSG, "with faculty number '" + student.getFacultyNumber() + "'")
             );
 
-        if(!programService.existsById(student.getAcademicProgram().getId()))
-            throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
+        if(!studentGroupService.existsById(student.getStudentGroup().getId()))
+            throw new ResourceNotFoundException(STUDENT_GROUP_NOT_FOUND_MSG);
 
         userService.registerUser(student.getUserDetails());
 
@@ -153,9 +130,10 @@ public class StudentService {
 
         // TODO - check if updated data overwrites faculty number
 
-        if(!programService.existsById(student.getAcademicProgram().getId()))
-            throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
+        if(!studentGroupService.existsById(student.getStudentGroup().getId()))
+            throw new ResourceNotFoundException(STUDENT_GROUP_NOT_FOUND_MSG);
 
+        student.setId(id);
         return studentRepository.save(student);
     }
 

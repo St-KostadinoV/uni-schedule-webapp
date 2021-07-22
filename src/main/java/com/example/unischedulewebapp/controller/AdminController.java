@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.controller.v1;
+package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
 import com.example.unischedulewebapp.exception.BadResourceException;
@@ -14,13 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-//@RestController
+@RestController
 @RequestMapping(
-        path = "api/v1/management"
+        path = "admin"
 )
-public class ManagementController {
-
-    // TODO - filter out unnecessary data from JSON results
+public class AdminController {
 
     private final AcademicDepartmentService departmentService;
     private final AcademicDisciplineService disciplineService;
@@ -32,7 +30,7 @@ public class ManagementController {
     private final StudentService studentService;
 
     @Autowired
-    public ManagementController(AcademicDepartmentService departmentService,
+    public AdminController(AcademicDepartmentService departmentService,
                                 AcademicDisciplineService disciplineService,
                                 AcademicFacultyService facultyService,
                                 AcademicProgramService programService,
@@ -48,28 +46,6 @@ public class ManagementController {
         this.programDisciplineService = programDisciplineService;
         this.teacherService = teacherService;
         this.studentService = studentService;
-    }
-
-    @GetMapping("department")
-    public ResponseEntity<Object> getAllDepartments(){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(departmentService.findAll());
-    }
-
-    @GetMapping("department/{departmentId}")
-    public ResponseEntity<Object> getDepartment(@PathVariable("departmentId") Long id){
-        try {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(departmentService.findById(id));
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
     }
 
     @PostMapping("department")
@@ -118,30 +94,6 @@ public class ManagementController {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .build();
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-    }
-
-
-
-    @GetMapping("discipline")
-    public ResponseEntity<Object> getAllDisciplines(){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(disciplineService.findAll());
-    }
-
-    @GetMapping("discipline/{disciplineId}")
-    public ResponseEntity<Object> getDiscipline(@PathVariable("disciplineId") Long id){
-        try {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(disciplineService.findById(id));
 
         } catch (ResourceNotFoundException e) {
             // TODO - log stack trace
@@ -206,30 +158,6 @@ public class ManagementController {
         }
     }
 
-
-
-    @GetMapping("faculty")
-    public ResponseEntity<Object> getAllFaculties(){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(facultyService.findAll());
-    }
-
-    @GetMapping("faculty/{facultyId}")
-    public ResponseEntity<Object> getFaculty(@PathVariable("facultyId") Long id){
-        try {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(facultyService.findById(id));
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-    }
-
     @PostMapping("faculty")
     public ResponseEntity<Object> addFaculty(@RequestBody AcademicFaculty faculty) throws URISyntaxException {
         try {
@@ -270,30 +198,6 @@ public class ManagementController {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .build();
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-    }
-
-
-
-    @GetMapping("program")
-    public ResponseEntity<Object> getAllPrograms(){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(programService.findAll());
-    }
-
-    @GetMapping("program/{programId}")
-    public ResponseEntity<Object> getProgram(@PathVariable("programId") Long id){
-        try {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(programService.findById(id));
 
         } catch (ResourceNotFoundException e) {
             // TODO - log stack trace
@@ -358,121 +262,6 @@ public class ManagementController {
         }
     }
 
-
-
-    @GetMapping("timetable")
-    public ResponseEntity<Object> getAllTimetables(){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(timetableService.findAll());
-    }
-
-    @GetMapping("timetable/{timetableId}")
-    public ResponseEntity<Object> getTimetable(@PathVariable("timetableId") Long id){
-        try {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(timetableService.findById(id));
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-    }
-
-    @PostMapping("timetable")
-    public ResponseEntity<Object> addTimetable(@RequestBody AcademicTimetable timetable) throws URISyntaxException {
-        try {
-            AcademicTimetable newTimetable = timetableService.addTimetable(timetable);
-            return ResponseEntity
-                    .status(HttpStatus.CREATED)
-                    .location(new URI("api/v1/management/timetable/" + newTimetable.getId()))
-                    .body(newTimetable);
-
-        } catch (ResourceAlreadyExistsException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body(e.getMessage());
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-
-        } catch (BadResourceException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body(e.getMessage());
-        }
-    }
-
-    @PutMapping("timetable/{timetableId}")
-    public ResponseEntity<Object> updateTimetable(@PathVariable("timetableId") Long id,
-                                                  @RequestBody AcademicTimetable timetable){
-        try {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(timetableService.updateTimetable(id,timetable));
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-
-        } catch (BadResourceException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body(e.getMessage());
-        }
-    }
-
-    @DeleteMapping("timetable/{timetableId}")
-    public ResponseEntity<Object> deleteTimetable(@PathVariable("timetableId") Long id){
-        try {
-            timetableService.deleteTimetable(id);
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .build();
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-    }
-
-
-
-    @GetMapping("program-discipline")
-    public ResponseEntity<Object> getAllProgramDisciplines(){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(programDisciplineService.findAll());
-    }
-
-    @GetMapping("program-discipline/{programDisciplineId}")
-    public ResponseEntity<Object> getProgramDiscipline(@PathVariable("programDisciplineId") Long id){
-        try {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(programDisciplineService.findById(id));
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-    }
-
     @PostMapping("program-discipline")
     public ResponseEntity<Object> addProgramDiscipline(@RequestBody ProgramDiscipline programDiscipline) throws URISyntaxException {
         try {
@@ -519,30 +308,6 @@ public class ManagementController {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .build();
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-    }
-
-
-
-    @GetMapping("student")
-    public ResponseEntity<Object> getAllStudents(){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(studentService.findAll());
-    }
-
-    @GetMapping("student/{studentId}")
-    public ResponseEntity<Object> getStudent(@PathVariable("studentId") Long id){
-        try {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(studentService.findById(id));
 
         } catch (ResourceNotFoundException e) {
             // TODO - log stack trace
@@ -607,30 +372,6 @@ public class ManagementController {
         }
     }
 
-
-
-    @GetMapping("teacher")
-    public ResponseEntity<Object> getAllTeachers(){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(teacherService.findAll());
-    }
-
-    @GetMapping("teacher/{teacherId}")
-    public ResponseEntity<Object> getTeacher(@PathVariable("teacherId") Long id){
-        try {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(teacherService.findById(id));
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-    }
-
     @PostMapping("teacher")
     public ResponseEntity<Object> addTeacher(@RequestBody Teacher teacher) throws URISyntaxException {
         try {
@@ -674,6 +415,73 @@ public class ManagementController {
     public ResponseEntity<Object> deleteTeacher(@PathVariable("teacherId") Long id){
         try {
             teacherService.deleteTeacher(id);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .build();
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
+
+    @PostMapping("timetable")
+    public ResponseEntity<Object> addTimetable(@RequestBody AcademicTimetable timetable) throws URISyntaxException {
+        try {
+            AcademicTimetable newTimetable = timetableService.addTimetable(timetable);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .location(new URI("api/v1/management/timetable/" + newTimetable.getId()))
+                    .body(newTimetable);
+
+        } catch (ResourceAlreadyExistsException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(e.getMessage());
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+
+        } catch (BadResourceException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
+
+    @PutMapping("timetable/{timetableId}")
+    public ResponseEntity<Object> updateTimetable(@PathVariable("timetableId") Long id,
+                                                  @RequestBody AcademicTimetable timetable){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(timetableService.updateTimetable(id,timetable));
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+
+        } catch (BadResourceException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("timetable/{timetableId}")
+    public ResponseEntity<Object> deleteTimetable(@PathVariable("timetableId") Long id){
+        try {
+            timetableService.deleteTimetable(id);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .build();

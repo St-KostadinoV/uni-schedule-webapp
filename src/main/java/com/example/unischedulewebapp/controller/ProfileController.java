@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.controller.v2;
+package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.auth.AppUser;
 import com.example.unischedulewebapp.auth.AppUserRole;

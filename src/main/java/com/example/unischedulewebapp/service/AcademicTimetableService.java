@@ -120,9 +120,9 @@ public class AcademicTimetableService {
     public List<AcademicTimetable> findStudentDailySchedule(Student student) {
         return new ArrayList<>(timetableRepository
                 .findStudentDailySchedule(
-                        student.getAcademicProgram(),
-                        student.getAcademicYear(),
-                        student.getStudentGroup(),
+                        student.getStudentGroup().getAcademicProgram(),
+                        student.getStudentGroup().getAcademicYear(),
+                        student.getStudentGroup().getGroupNumber(),
                         LocalDate.now().getDayOfWeek()
                 ));
     }
@@ -130,9 +130,9 @@ public class AcademicTimetableService {
     public List<AcademicTimetable> findStudentWeeklySchedule(Student student) {
         return new ArrayList<>(timetableRepository
                 .findStudentWeeklySchedule(
-                        student.getAcademicProgram(),
-                        student.getAcademicYear(),
-                        student.getStudentGroup()
+                        student.getStudentGroup().getAcademicProgram(),
+                        student.getStudentGroup().getAcademicYear(),
+                        student.getStudentGroup().getGroupNumber()
                 ));
     }
 

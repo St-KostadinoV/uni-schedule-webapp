@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.controller.v2;
+package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDepartment;

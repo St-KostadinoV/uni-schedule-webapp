@@ -24,22 +24,11 @@ public class Student extends Person implements Serializable {
 
     @ManyToOne
     @JoinColumn(
-            name = "program_id",
+            name = "student_group_id",
             nullable = false,
             referencedColumnName = "id"
     )
-    private AcademicProgram academicProgram;
-
-    @Column(
-            name = "year",
-            nullable = false
-    )
-    private Integer academicYear;
-
-    @Column(
-            name = "student_group"
-    )
-    private Integer studentGroup;
+    private StudentGroup studentGroup;
 
     @Column(
             name = "active",
@@ -57,14 +46,10 @@ public class Student extends Person implements Serializable {
                    String email,
                    String phone,
                    String facultyNumber,
-                   AcademicProgram academicProgram,
-                   Integer academicYear,
-                   Integer studentGroup,
+                   StudentGroup studentGroup,
                    Boolean activeStatus) {
         super(userDetails, firstName, middleName, lastName, email, phone);
         this.facultyNumber = facultyNumber;
-        this.academicProgram = academicProgram;
-        this.academicYear = academicYear;
         this.studentGroup = studentGroup;
         this.activeStatus = activeStatus;
     }
@@ -77,27 +62,11 @@ public class Student extends Person implements Serializable {
         this.facultyNumber = facultyNumber;
     }
 
-    public AcademicProgram getAcademicProgram() {
-        return academicProgram;
-    }
-
-    public void setAcademicProgram(AcademicProgram academicProgram) {
-        this.academicProgram = academicProgram;
-    }
-
-    public Integer getAcademicYear() {
-        return academicYear;
-    }
-
-    public void setAcademicYear(Integer academicYear) {
-        this.academicYear = academicYear;
-    }
-
-    public Integer getStudentGroup() {
+    public StudentGroup getStudentGroup() {
         return studentGroup;
     }
 
-    public void setStudentGroup(Integer studentGroup) {
+    public void setStudentGroup(StudentGroup studentGroup) {
         this.studentGroup = studentGroup;
     }
 
