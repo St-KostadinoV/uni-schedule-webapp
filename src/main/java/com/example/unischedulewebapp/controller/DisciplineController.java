@@ -1,8 +1,8 @@
-package com.example.unischedulewebapp.controller.v2;
+package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDiscipline;
-import com.example.unischedulewebapp.model.Teacher;
+import com.example.unischedulewebapp.model.Instructor;
 import com.example.unischedulewebapp.service.AcademicDisciplineService;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -43,8 +43,7 @@ public class DisciplineController {
                 .addFilter("DisciplineFilter",
                             SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                         "name",
-                                                                        "abbreviation",
-                                                                        "disciplineUrl"));
+                                                                        "abbreviation"));
 
         wrapper.setFilters(filters);
 
@@ -69,11 +68,10 @@ public class DisciplineController {
                                                                             "name",
                                                                             "abbreviation",
                                                                             "department",
-                                                                            "leadingTeacher",
-                                                                            "disciplineUrl"))
+                                                                            "leadingInstructor"))
                     .addFilter("DepartmentFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("name"))
-                    .addFilter("TeacherFilter",
+                    .addFilter("InstructorFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
                                                                             "title",
                                                                             "firstName",
@@ -95,20 +93,20 @@ public class DisciplineController {
     }
 
     @GetMapping(
-            path = "{disciplineId}/teachers"
+            path = "{disciplineId}/instructors"
     )
-    public ResponseEntity<Object> getDisciplineTeachers(@PathVariable("disciplineId") Long id) {
+    public ResponseEntity<Object> getDisciplineInstructors(@PathVariable("disciplineId") Long id) {
         try {
             AcademicDiscipline discipline = disciplineService
                     .findById(id);
 
-            List<Teacher> disciplineTeachers = discipline
-                    .getAllTeachers();
+            List<Instructor> disciplineInstructors = discipline
+                    .getAllInstructors();
 
-            MappingJacksonValue wrapper = new MappingJacksonValue(disciplineTeachers);
+            MappingJacksonValue wrapper = new MappingJacksonValue(disciplineInstructors);
 
             FilterProvider filters = new SimpleFilterProvider()
-                    .addFilter("TeacherFilter",
+                    .addFilter("InstructorFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                             "firstName",
                                                                             "middleName",

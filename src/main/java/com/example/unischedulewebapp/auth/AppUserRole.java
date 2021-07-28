@@ -2,7 +2,7 @@ package com.example.unischedulewebapp.auth;
 
 public enum AppUserRole {
     STUDENT,
-    TEACHER,
+    INSTRUCTOR,
     FRONT_DESK,
     EDUCATION_DEPT
 }

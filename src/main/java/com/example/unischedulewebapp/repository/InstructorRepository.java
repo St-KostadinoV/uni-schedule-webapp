@@ -2,17 +2,17 @@ package com.example.unischedulewebapp.repository;
 
 import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.enums.AcademicTitle;
-import com.example.unischedulewebapp.model.Teacher;
+import com.example.unischedulewebapp.model.Instructor;
 import com.example.unischedulewebapp.repository.base.PersonRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 
 @Repository
-public interface TeacherRepository
-        extends PersonRepository<Teacher> {
+public interface InstructorRepository
+        extends PersonRepository<Instructor> {
 
-    Collection<Teacher> findByTitle(AcademicTitle title);
+    Collection<Instructor> findByTitle(AcademicTitle title);
 
-    Collection<Teacher> findByDepartment(AcademicDepartment department);
+    Collection<Instructor> findByDepartment(AcademicDepartment department);
 }

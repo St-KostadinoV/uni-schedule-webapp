@@ -2,6 +2,7 @@ package com.example.unischedulewebapp.repository;
 
 import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.AcademicProgram;
+import com.example.unischedulewebapp.model.enums.AcademicDegree;
 import com.example.unischedulewebapp.repository.base.AcademicStructureRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,6 @@ public interface AcademicProgramRepository
     Collection<AcademicProgram> findByDepartment(AcademicDepartment department);
 
     Collection<AcademicProgram> findByAcademicStream(Integer stream);
+
+    Collection<AcademicProgram> findByDegree(AcademicDegree degree);
 }

@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.controller.v2;
+package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDepartment;
@@ -29,7 +29,8 @@ public class FacultyController {
     private final AcademicDepartmentService departmentService;
 
     @Autowired
-    public FacultyController(AcademicFacultyService facultyService, AcademicDepartmentService departmentService) {
+    public FacultyController(AcademicFacultyService facultyService,
+                             AcademicDepartmentService departmentService) {
         this.facultyService = facultyService;
         this.departmentService = departmentService;
     }

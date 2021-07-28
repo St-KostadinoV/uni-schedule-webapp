@@ -10,5 +10,6 @@ import java.util.Optional;
 @NoRepositoryBean
 public interface PersonRepository<T extends Person>
         extends JpaRepository<T, Long> {
+
     Optional<T> findByUserDetails(AppUser userDetails);
 }

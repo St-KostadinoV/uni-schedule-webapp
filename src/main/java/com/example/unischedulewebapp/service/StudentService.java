@@ -126,6 +126,8 @@ public class StudentService {
             return findByAcademicProgramAndAcademicYearAndStudentGroup(program, year, group);
     }
 
+    // TODO - check if student year is valid for his program
+
     public Student addStudent(Student student) throws ResourceAlreadyExistsException, UserAlreadyExistsException, ResourceNotFoundException {
         if(student.getId() != null && existsById(student.getId()))
             throw new ResourceAlreadyExistsException(

@@ -1,14 +1,14 @@
-package com.example.unischedulewebapp.controller.v2;
+package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.AcademicDiscipline;
 import com.example.unischedulewebapp.model.AcademicProgram;
-import com.example.unischedulewebapp.model.Teacher;
+import com.example.unischedulewebapp.model.Instructor;
 import com.example.unischedulewebapp.service.AcademicDepartmentService;
 import com.example.unischedulewebapp.service.AcademicDisciplineService;
 import com.example.unischedulewebapp.service.AcademicProgramService;
-import com.example.unischedulewebapp.service.TeacherService;
+import com.example.unischedulewebapp.service.InstructorService;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
@@ -32,14 +32,17 @@ public class DepartmentController {
     private final AcademicDepartmentService departmentService;
     private final AcademicDisciplineService disciplineService;
     private final AcademicProgramService programService;
-    private final TeacherService teacherService;
+    private final InstructorService instructorService;
 
     @Autowired
-    public DepartmentController(AcademicDepartmentService departmentService, AcademicDisciplineService disciplineService, AcademicProgramService programService, TeacherService teacherService) {
+    public DepartmentController(AcademicDepartmentService departmentService,
+                                AcademicDisciplineService disciplineService,
+                                AcademicProgramService programService,
+                                InstructorService instructorService) {
         this.departmentService = departmentService;
         this.disciplineService = disciplineService;
         this.programService = programService;
-        this.teacherService = teacherService;
+        this.instructorService = instructorService;
     }
 
     @GetMapping
@@ -113,8 +116,8 @@ public class DepartmentController {
                                 SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                             "name",
                                                                             "abbreviation",
-                                                                            "leadingTeacher"))
-                    .addFilter("TeacherFilter",
+                                                                            "leadingInstructor"))
+                    .addFilter("InstructorFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("firstName",
                                                                             "lastName",
                                                                             "title",
@@ -169,20 +172,20 @@ public class DepartmentController {
     }
 
     @GetMapping(
-            path = "{departmentId}/teachers"
+            path = "{departmentId}/instructors"
     )
-    public ResponseEntity<Object> getDepartmentTeachers(@PathVariable("departmentId") Long id) {
+    public ResponseEntity<Object> getDepartmentInstructors(@PathVariable("departmentId") Long id) {
         try {
             AcademicDepartment department = departmentService
                     .findById(id);
 
-            List<Teacher> departmentTeachers = teacherService
+            List<Instructor> departmentInstructors = instructorService
                     .findByDepartment(department);
 
-            MappingJacksonValue wrapper = new MappingJacksonValue(departmentTeachers);
+            MappingJacksonValue wrapper = new MappingJacksonValue(departmentInstructors);
 
             FilterProvider filters = new SimpleFilterProvider()
-                    .addFilter("TeacherFilter",
+                    .addFilter("InstructorFilter",
                             SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                         "firstName",
                                                                         "middleName",

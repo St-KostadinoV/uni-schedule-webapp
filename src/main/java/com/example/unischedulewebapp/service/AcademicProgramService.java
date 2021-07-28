@@ -4,7 +4,7 @@ import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.AcademicProgram;
-import com.example.unischedulewebapp.model.Student;
+import com.example.unischedulewebapp.model.enums.AcademicDegree;
 import com.example.unischedulewebapp.repository.AcademicProgramRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -56,6 +56,11 @@ public class AcademicProgramService {
     public List<AcademicProgram> findByAcademicStream(Integer stream) {
         return new ArrayList<>(programRepository
                 .findByAcademicStream(stream));
+    }
+
+    public List<AcademicProgram> findByDegree(AcademicDegree degree) {
+        return new ArrayList<>(programRepository
+                .findByDegree(degree));
     }
 
     public List<AcademicProgram> findAll() {

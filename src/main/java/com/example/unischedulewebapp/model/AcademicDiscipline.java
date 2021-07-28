@@ -26,19 +26,19 @@ public class AcademicDiscipline extends AcademicStructure {
 
     @ManyToOne
     @JoinColumn(
-            name = "teacher_id",
+            name = "instructor_id",
             nullable = false,
             referencedColumnName = "id"
     )
-    private Teacher leadingTeacher;
+    private Instructor leadingInstructor;
 
     @ManyToMany
     @JoinTable(
-            name = "discipline_teacher",
+            name = "discipline_instructor",
             joinColumns = @JoinColumn(name = "discipline_id"),
-            inverseJoinColumns = @JoinColumn(name = "teacher_id")
+            inverseJoinColumns = @JoinColumn(name = "instructor_id")
     )
-    private Set<Teacher> assistingTeachers;
+    private Set<Instructor> assistingInstructors;
 
     public AcademicDiscipline() {
     }
@@ -46,22 +46,22 @@ public class AcademicDiscipline extends AcademicStructure {
     public AcademicDiscipline(String name,
                               String abbreviation,
                               AcademicDepartment department,
-                              Teacher leadingTeacher,
-                              Set<Teacher> assistingTeachers) {
+                              Instructor leadingInstructor,
+                              Set<Instructor> assistingInstructors) {
         super(name, abbreviation);
         this.department = department;
-        this.leadingTeacher = leadingTeacher;
-        this.assistingTeachers = assistingTeachers;
+        this.leadingInstructor = leadingInstructor;
+        this.assistingInstructors = assistingInstructors;
     }
 
     public AcademicDiscipline(String name,
                               String abbreviation,
                               AcademicDepartment department,
-                              Teacher leadingTeacher) {
+                              Instructor leadingInstructor) {
         super(name, abbreviation);
         this.department = department;
-        this.leadingTeacher = leadingTeacher;
-        this.assistingTeachers = new HashSet<>();
+        this.leadingInstructor = leadingInstructor;
+        this.assistingInstructors = new HashSet<>();
     }
 
     public AcademicDepartment getDepartment() {
@@ -72,34 +72,34 @@ public class AcademicDiscipline extends AcademicStructure {
         this.department = department;
     }
 
-    public Teacher getLeadingTeacher() {
-        return leadingTeacher;
+    public Instructor getLeadingInstructor() {
+        return leadingInstructor;
     }
 
-    public void setLeadingTeacher(Teacher leadingTeacher) {
-        this.leadingTeacher = leadingTeacher;
+    public void setLeadingInstructor(Instructor leadingInstructor) {
+        this.leadingInstructor = leadingInstructor;
     }
 
-    public Set<Teacher> getAssistingTeachers() {
-        return assistingTeachers;
+    public Set<Instructor> getAssistingInstructors() {
+        return assistingInstructors;
     }
 
-    public void setAssistingTeachers(Set<Teacher> assistingTeachers) {
-        this.assistingTeachers = assistingTeachers;
+    public void setAssistingInstructors(Set<Instructor> assistingInstructors) {
+        this.assistingInstructors = assistingInstructors;
     }
 
-    public void addAssistingTeachers(Teacher teacher) {
-        assistingTeachers.add(teacher);
+    public void addAssistingInstructors(Instructor instructor) {
+        assistingInstructors.add(instructor);
     }
 
-    public void removeAssistingTeachers(Teacher teacher) {
-        assistingTeachers.remove(teacher);
+    public void removeAssistingInstructors(Instructor instructor) {
+        assistingInstructors.remove(instructor);
     }
 
-    public List<Teacher> getAllTeachers() {
-        List<Teacher> teachers = new ArrayList<>();
-        teachers.add(leadingTeacher);
-        teachers.addAll(assistingTeachers);
-        return teachers;
+    public List<Instructor> getAllInstructors() {
+        List<Instructor> instructors = new ArrayList<>();
+        instructors.add(leadingInstructor);
+        instructors.addAll(assistingInstructors);
+        return instructors;
     }
 }

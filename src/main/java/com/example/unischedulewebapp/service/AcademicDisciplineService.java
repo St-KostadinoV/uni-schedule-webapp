@@ -4,7 +4,7 @@ import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.AcademicDiscipline;
-import com.example.unischedulewebapp.model.Teacher;
+import com.example.unischedulewebapp.model.Instructor;
 import com.example.unischedulewebapp.repository.AcademicDisciplineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -21,17 +21,17 @@ public class AcademicDisciplineService {
             "Discipline %s not found!";
     private final static String DSCPL_EXISTS_MSG =
             "Discipline %s already exists!";
-    private final static String DSCPL_TEACHER_NOT_FOUND_MSG =
-            "Discipline is taught by non-existent teacher!";
+    private final static String DSCPL_INSTRUCTOR_NOT_FOUND_MSG =
+            "Discipline is taught by non-existent instructor!";
 
     private final AcademicDisciplineRepository disciplineRepository;
-    private final TeacherService teacherService;
+    private final InstructorService instructorService;
 
     @Autowired
     public AcademicDisciplineService(AcademicDisciplineRepository disciplineRepository,
-                                     TeacherService teacherService) {
+                                     InstructorService instructorService) {
         this.disciplineRepository = disciplineRepository;
-        this.teacherService = teacherService;
+        this.instructorService = instructorService;
     }
 
     public boolean existsById(Long id) {
@@ -53,9 +53,9 @@ public class AcademicDisciplineService {
                 .findByDepartment(department));
     }
 
-    public List<AcademicDiscipline> findByLeadingTeacher(Teacher teacher) {
+    public List<AcademicDiscipline> findByLeadingInstructor(Instructor instructor) {
         return new ArrayList<>(disciplineRepository
-                .findByLeadingTeacher(teacher));
+                .findByLeadingInstructor(instructor));
     }
 
     // TODO - enable once the query is reworked
@@ -86,12 +86,12 @@ public class AcademicDisciplineService {
                     String.format(DSCPL_EXISTS_MSG, "with id=" + discipline.getId())
             );
 
-        if(!teacherService.existsById(discipline.getLeadingTeacher().getId()))
-            throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
+        if(!instructorService.existsById(discipline.getLeadingInstructor().getId()))
+            throw new ResourceNotFoundException(DSCPL_INSTRUCTOR_NOT_FOUND_MSG);
 
-        for(Teacher teacher : discipline.getAssistingTeachers())
-            if(!teacherService.existsById(teacher.getId()))
-                throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
+        for(Instructor instructor : discipline.getAssistingInstructors())
+            if(!instructorService.existsById(instructor.getId()))
+                throw new ResourceNotFoundException(DSCPL_INSTRUCTOR_NOT_FOUND_MSG);
 
         return disciplineRepository.save(discipline);
     }
@@ -102,12 +102,12 @@ public class AcademicDisciplineService {
                     String.format(DSCPL_NOT_FOUND_MSG, "with id=" + id)
             );
 
-        if(!teacherService.existsById(discipline.getLeadingTeacher().getId()))
-            throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
+        if(!instructorService.existsById(discipline.getLeadingInstructor().getId()))
+            throw new ResourceNotFoundException(DSCPL_INSTRUCTOR_NOT_FOUND_MSG);
 
-        for(Teacher teacher : discipline.getAssistingTeachers())
-            if(!teacherService.existsById(teacher.getId()))
-                throw new ResourceNotFoundException(DSCPL_TEACHER_NOT_FOUND_MSG);
+        for(Instructor instructor : discipline.getAssistingInstructors())
+            if(!instructorService.existsById(instructor.getId()))
+                throw new ResourceNotFoundException(DSCPL_INSTRUCTOR_NOT_FOUND_MSG);
 
         discipline.setId(id);
         return disciplineRepository.save(discipline);

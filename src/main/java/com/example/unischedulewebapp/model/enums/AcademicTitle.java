@@ -1,20 +1,26 @@
 package com.example.unischedulewebapp.model.enums;
 
 public enum AcademicTitle {
-    PROFESSOR("проф."),                     //  професор
-    ASSOCIATE_PROFESSOR("доц."),            //  доцент
-    SENIOR_ASSISTANT_PROFESSOR("гл. ас."),  //  главен асистент
-    ASSISTANT_PROFESSOR("ас."),             //  асистент
-    SENIOR_TEACHER("ст. пр."),              //  старши преподавател
-    TEACHER("пр.");                         //  преподавател
+    PROFESSOR("професор", "проф."),
+    ASSOCIATE_PROFESSOR("доцент", "доц."),
+    SENIOR_ASSISTANT_PROFESSOR("главен асистент", "гл. ас."),
+    ASSISTANT_PROFESSOR("асистент", "ас."),
+    SENIOR_INSTRUCTOR("старши преподавател", "ст. пр."),
+    INSTRUCTOR("преподавател", "пр.");
 
-    private final String title;
+    private final String name;
+    private final String abbreviation;
 
-    AcademicTitle(String title) {
-        this.title = title;
+    AcademicTitle(String name, String abbreviation) {
+        this.name = name;
+        this.abbreviation = abbreviation;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
+    }
+
+    public String getAbbreviation() {
+        return abbreviation;
     }
 }

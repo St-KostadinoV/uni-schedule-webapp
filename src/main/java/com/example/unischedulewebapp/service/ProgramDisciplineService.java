@@ -103,6 +103,8 @@ public class ProgramDisciplineService {
                     .collect(Collectors.toList());
     }
 
+    // TODO - check if year value is valid for the given program
+
     public ProgramDiscipline addProgramDiscipline(ProgramDiscipline programDiscipline) throws ResourceAlreadyExistsException, ResourceNotFoundException {
         if(programDiscipline.getId() != null && existsById(programDiscipline.getId()))
             throw new ResourceAlreadyExistsException(

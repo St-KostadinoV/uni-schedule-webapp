@@ -12,12 +12,12 @@ import java.io.Serializable;
 
 import static javax.persistence.EnumType.STRING;
 
-@JsonFilter("TeacherFilter")
+@JsonFilter("InstructorFilter")
 @Entity
 @Table(
-        name = "teacher"
+        name = "instructor"
 )
-public class Teacher extends Person implements Serializable {
+public class Instructor extends Person implements Serializable {
 
     @Enumerated(value = STRING)
     @Column(
@@ -45,19 +45,19 @@ public class Teacher extends Person implements Serializable {
     )
     private Boolean honoraryStatus;
 
-    public Teacher() {
+    public Instructor() {
     }
 
-    public Teacher(AppUser userDetails,
-                   String firstName,
-                   String middleName,
-                   String lastName,
-                   String email,
-                   String phone,
-                   AcademicTitle title,
-                   AcademicDepartment department,
-                   String office,
-                   Boolean honoraryStatus) {
+    public Instructor(AppUser userDetails,
+                      String firstName,
+                      String middleName,
+                      String lastName,
+                      String email,
+                      String phone,
+                      AcademicTitle title,
+                      AcademicDepartment department,
+                      String office,
+                      Boolean honoraryStatus) {
         super(userDetails, firstName, middleName, lastName, email, phone);
         this.title = title;
         this.department = department;
@@ -99,7 +99,7 @@ public class Teacher extends Person implements Serializable {
 
     @JsonIgnore
     public String getFullNameWithTitle(){
-        return title.getTitle() + " " + super.getFullName();
+        return title.getName() + " " + super.getFullName();
     }
 
 }

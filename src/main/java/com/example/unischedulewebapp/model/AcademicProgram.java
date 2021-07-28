@@ -1,6 +1,7 @@
 package com.example.unischedulewebapp.model;
 
 import com.example.unischedulewebapp.model.base.AcademicStructure;
+import com.example.unischedulewebapp.model.enums.AcademicDegree;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import javax.persistence.*;
@@ -21,10 +22,22 @@ public class AcademicProgram extends AcademicStructure {
     private AcademicDepartment department;
 
     @Column(
-            name = "stream",
+            name = "academic_stream",
             nullable = false
     )
     private Integer academicStream;
+
+    @Column(
+            name = "degree",
+            nullable = false
+    )
+    private AcademicDegree degree;
+
+    @Column(
+            name = "education_period",
+            nullable = false
+    )
+    private Float educationPeriod;
 
     public AcademicProgram() {
     }
@@ -32,10 +45,14 @@ public class AcademicProgram extends AcademicStructure {
     public AcademicProgram(String name,
                            String abbreviation,
                            AcademicDepartment department,
-                           Integer academicStream) {
+                           Integer academicStream,
+                           AcademicDegree degree,
+                           Float educationPeriod) {
         super(name, abbreviation);
         this.department = department;
         this.academicStream = academicStream;
+        this.degree = degree;
+        this.educationPeriod = educationPeriod;
     }
 
     public AcademicDepartment getDepartment() {
@@ -52,5 +69,21 @@ public class AcademicProgram extends AcademicStructure {
 
     public void setAcademicStream(Integer academicStream) {
         this.academicStream = academicStream;
+    }
+
+    public AcademicDegree getDegree() {
+        return degree;
+    }
+
+    public void setDegree(AcademicDegree degree) {
+        this.degree = degree;
+    }
+
+    public Float getEducationPeriod() {
+        return educationPeriod;
+    }
+
+    public void setEducationPeriod(Float educationPeriod) {
+        this.educationPeriod = educationPeriod;
     }
 }

@@ -6,13 +6,13 @@ public enum AcademicClassType {
     SEMINAR("семинарно упражнение"),
     EDU_PRACTICE("учебна практика");
 
-    private String classType;
+    private String name;
 
-    AcademicClassType(String classType) {
-        this.classType = classType;
+    AcademicClassType(String name) {
+        this.name = name;
     }
 
-    public String getClassType() {
-        return classType;
+    public String getName() {
+        return name;
     }
 }

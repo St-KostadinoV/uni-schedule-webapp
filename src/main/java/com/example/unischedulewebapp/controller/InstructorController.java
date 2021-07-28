@@ -1,13 +1,12 @@
-package com.example.unischedulewebapp.controller.v1;
+package com.example.unischedulewebapp.controller;
 
-import com.example.unischedulewebapp.auth.AppUser;
-import com.example.unischedulewebapp.auth.AppUserService;
-import com.example.unischedulewebapp.auth.exception.PasswordsMatchException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
+import com.example.unischedulewebapp.model.AcademicDiscipline;
 import com.example.unischedulewebapp.model.AcademicTimetable;
-import com.example.unischedulewebapp.model.Teacher;
+import com.example.unischedulewebapp.model.Instructor;
+import com.example.unischedulewebapp.service.AcademicDisciplineService;
 import com.example.unischedulewebapp.service.AcademicTimetableService;
-import com.example.unischedulewebapp.service.TeacherService;
+import com.example.unischedulewebapp.service.InstructorService;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
@@ -16,39 +15,41 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-//@RestController
+@RestController
 @RequestMapping(
-        path = "api/v1/teacher"
+        path = "instructors"
 )
-public class TeacherController {
+public class InstructorController {
 
-    private final TeacherService teacherService;
+    private final InstructorService instructorService;
+    private  final AcademicDisciplineService disciplineService;
     private final AcademicTimetableService timetableService;
-    private final AppUserService userService;
 
     @Autowired
-    public TeacherController(TeacherService teacherService,
-                             AcademicTimetableService timetableService,
-                             AppUserService userService) {
-        this.teacherService = teacherService;
+    public InstructorController(InstructorService instructorService,
+                                AcademicDisciplineService disciplineService,
+                                AcademicTimetableService timetableService) {
+        this.instructorService = instructorService;
+        this.disciplineService = disciplineService;
         this.timetableService = timetableService;
-        this.userService = userService;
     }
 
     @GetMapping
-    public ResponseEntity<Object> getAllTeachers() {
-        List<Teacher> teachers = teacherService
+    public ResponseEntity<Object> getAllInstructors() {
+        List<Instructor> instructors = instructorService
                 .findAll(Sort.by(Sort.Direction.ASC, "lastName"));
 
-        MappingJacksonValue wrapper = new MappingJacksonValue(teachers);
+        MappingJacksonValue wrapper = new MappingJacksonValue(instructors);
 
         FilterProvider filters = new SimpleFilterProvider()
-                .addFilter("TeacherFilter",
+                .addFilter("InstructorFilter",
                             SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                         "honoraryStatus",
                                                                         "title",
@@ -67,16 +68,16 @@ public class TeacherController {
     }
 
     @GetMapping(
-            path = "{teacherId}"
+            path = "{instructorId}"
     )
-    public ResponseEntity<Object> getTeacherDetails(@PathVariable("teacherId") Long id) {
+    public ResponseEntity<Object> getInstructorDetails(@PathVariable("instructorId") Long id) {
         try {
-            Teacher teacher = teacherService.findById(id);
+            Instructor instructor = instructorService.findById(id);
 
-            MappingJacksonValue wrapper = new MappingJacksonValue(teacher);
+            MappingJacksonValue wrapper = new MappingJacksonValue(instructor);
 
             FilterProvider filters = new SimpleFilterProvider()
-                    .addFilter("TeacherFilter",
+                    .addFilter("InstructorFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                             "honoraryStatus",
                                                                             "title",
@@ -105,36 +106,30 @@ public class TeacherController {
     }
 
     @GetMapping(
-            path = "daily-schedule"
+            path = "{instructorId}/disciplines"
     )
-    public ResponseEntity<Object> getDailySchedule() {
-        AppUser currentUser = (AppUser) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-
+    public ResponseEntity<Object> getInstructorDisciplines(@PathVariable("instructorId") Long id) {
         try {
-            List<AcademicTimetable> schedule = timetableService
-                    .findTeacherDailySchedule(teacherService.findByUserDetails(currentUser));
+            Instructor instructor = instructorService.findById(id);
 
-            MappingJacksonValue wrapper = new MappingJacksonValue(schedule);
+            // TODO - rework to show all disciplines the teacher teaches, not only the ones they lead
+            List<AcademicDiscipline> teacherDisciplines = disciplineService
+                    .findByLeadingInstructor(instructor);
+
+            MappingJacksonValue wrapper = new MappingJacksonValue(teacherDisciplines);
 
             FilterProvider filters = new SimpleFilterProvider()
-                    .addFilter("TimetableFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("startTime",
-                                                                            "endTime",
-                                                                            "classType",
-                                                                            "programDiscipline",
-                                                                            "designatedRoom",
-                                                                            "studentGroup"))
-                    .addFilter("ProgramDisciplineFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("program",
-                                                                            "discipline",
-                                                                            "academicYear"))
-                    .addFilter("ProgramFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
                     .addFilter("DisciplineFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("name"));
+                                SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                            "name",
+                                                                            "abbreviation",
+                                                                            "leadingInstructor"))
+                    .addFilter("InstructorFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
+                                                                            "title",
+                                                                            "firstName",
+                                                                            "middleName",
+                                                                            "lastName"));
 
             wrapper.setFilters(filters);
 
@@ -151,19 +146,16 @@ public class TeacherController {
     }
 
     @GetMapping(
-            path = "weekly-schedule"
+            path = "{teacherId}/timetable"
     )
-    public ResponseEntity<Object> getWeeklySchedule() {
-        AppUser currentUser = (AppUser) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-
+    public ResponseEntity<Object> getInstructorTimetable(@PathVariable("teacherId") Long id) {
         try {
-            List<AcademicTimetable> schedule = timetableService
-                    .findByAssignedTeacher(teacherService.findByUserDetails(currentUser));
+            Instructor instructor = instructorService.findById(id);
 
-            MappingJacksonValue wrapper = new MappingJacksonValue(schedule);
+            List<AcademicTimetable> teacherTimetable = timetableService
+                    .findByAssignedInstructor(instructor);
+
+            MappingJacksonValue wrapper = new MappingJacksonValue(teacherTimetable);
 
             FilterProvider filters = new SimpleFilterProvider()
                     .addFilter("TimetableFilter",
@@ -193,54 +185,6 @@ public class TeacherController {
             // TODO - log stack trace
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-    }
-
-    @PostMapping(
-            path = "email-change"
-    )
-    public ResponseEntity<Object> updateTeacherEmail(@RequestParam("email") String email) {
-        AppUser currentUser = (AppUser) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-
-        try {
-            Teacher teacher = teacherService.findByUserDetails(currentUser);
-            teacherService.updateTeacherEmail(teacher, email);
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .build();
-
-        } catch (ResourceNotFoundException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-    }
-
-    @PostMapping(
-            path = "pass-change"
-    )
-    public ResponseEntity<Object> updateTeacherPassword(@RequestParam("newPassword") String newPassword,
-                                                        @RequestParam("oldPassword") String oldPassword) {
-        AppUser currentUser = (AppUser) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-
-        try {
-            userService.updatePassword(currentUser, newPassword, oldPassword);
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .build();
-
-        } catch (PasswordsMatchException e) {
-            // TODO - log stack trace
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
                     .body(e.getMessage());
         }
     }

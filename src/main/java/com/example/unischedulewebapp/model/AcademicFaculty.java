@@ -12,6 +12,7 @@ import javax.persistence.Table;
         name = "faculty"
 )
 public class AcademicFaculty extends AcademicStructure {
+
     public AcademicFaculty() {
     }
 

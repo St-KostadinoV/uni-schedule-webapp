@@ -6,7 +6,7 @@ import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicTimetable;
 import com.example.unischedulewebapp.model.ProgramDiscipline;
 import com.example.unischedulewebapp.model.Student;
-import com.example.unischedulewebapp.model.Teacher;
+import com.example.unischedulewebapp.model.Instructor;
 import com.example.unischedulewebapp.model.enums.AcademicClassType;
 import com.example.unischedulewebapp.repository.AcademicTimetableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,22 +29,22 @@ public class AcademicTimetableService {
             "Timetable %s already exists!";
     private final static String TIMETBL_PD_NOT_FOUND_MSG =
             "Timetable includes non-existent program-discipline combination!";
-    private final static String TIMETBL_TEACHER_NOT_FOUND_MSG =
-            "Timetable includes non-existent teacher!";
-    private final static String TIMETBL_UNAFFILIATED_TEACHER_MSG =
-            "Timetable's assigned teacher is not affiliated with the discipline!";
+    private final static String TIMETBL_INSTRUCTOR_NOT_FOUND_MSG =
+            "Timetable includes non-existent instructor!";
+    private final static String TIMETBL_UNAFFILIATED_INSTRUCTOR_MSG =
+            "Timetable's assigned instructor is not affiliated with the discipline!";
 
     private final AcademicTimetableRepository timetableRepository;
     private final ProgramDisciplineService programDisciplineService;
-    private final TeacherService teacherService;
+    private final InstructorService instructorService;
 
     @Autowired
     public AcademicTimetableService(AcademicTimetableRepository timetableRepository,
                                     ProgramDisciplineService programDisciplineService,
-                                    TeacherService teacherService) {
+                                    InstructorService instructorService) {
         this.timetableRepository = timetableRepository;
         this.programDisciplineService = programDisciplineService;
-        this.teacherService = teacherService;
+        this.instructorService = instructorService;
     }
 
     public boolean existsById(Long id){
@@ -61,9 +61,9 @@ public class AcademicTimetableService {
                         ));
     }
 
-    public List<AcademicTimetable> findByAssignedTeacher(Teacher teacher) {
+    public List<AcademicTimetable> findByAssignedInstructor(Instructor instructor) {
         return new ArrayList<>(timetableRepository
-                .findByAssignedTeacher(teacher));
+                .findByAssignedInstructor(instructor));
     }
 
     public List<AcademicTimetable> findByDayOfWeek(DayOfWeek dayOfWeek) {
@@ -112,9 +112,9 @@ public class AcademicTimetableService {
                 .toList();
     }
 
-    public List<AcademicTimetable> findTeacherDailySchedule(Teacher teacher) {
+    public List<AcademicTimetable> findInstructorDailySchedule(Instructor instructor) {
         return new ArrayList<>(timetableRepository
-                .findByAssignedTeacherAndDayOfWeek(teacher, LocalDate.now().getDayOfWeek()));
+                .findByAssignedInstructorAndDayOfWeek(instructor, LocalDate.now().getDayOfWeek()));
     }
 
     public List<AcademicTimetable> findStudentDailySchedule(Student student) {
@@ -146,8 +146,8 @@ public class AcademicTimetableService {
         if(!programDisciplineService.existsById(timetable.getProgramDiscipline().getId()))
             throw new ResourceNotFoundException(TIMETBL_PD_NOT_FOUND_MSG);
 
-        if(!teacherService.existsById(timetable.getAssignedTeacher().getId()))
-            throw new ResourceNotFoundException(TIMETBL_TEACHER_NOT_FOUND_MSG);
+        if(!instructorService.existsById(timetable.getAssignedInstructor().getId()))
+            throw new ResourceNotFoundException(TIMETBL_INSTRUCTOR_NOT_FOUND_MSG);
 
         // TODO - enable when real data is in db
 //        if(timetable.getProgramDiscipline().getDiscipline().getLeadingTeacher() != timetable.getAssignedTeacher()
@@ -166,8 +166,8 @@ public class AcademicTimetableService {
         if(!programDisciplineService.existsById(timetable.getProgramDiscipline().getId()))
             throw new ResourceNotFoundException(TIMETBL_PD_NOT_FOUND_MSG);
 
-        if(!teacherService.existsById(timetable.getAssignedTeacher().getId()))
-            throw new ResourceNotFoundException(TIMETBL_TEACHER_NOT_FOUND_MSG);
+        if(!instructorService.existsById(timetable.getAssignedInstructor().getId()))
+            throw new ResourceNotFoundException(TIMETBL_INSTRUCTOR_NOT_FOUND_MSG);
 
         // TODO - enable when real data is in db
 //        if(timetable.getProgramDiscipline().getDiscipline().getLeadingTeacher() != timetable.getAssignedTeacher()

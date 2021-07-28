@@ -7,8 +7,6 @@ import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
-import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @JsonFilter("TimetableFilter")
@@ -28,11 +26,11 @@ public class AcademicTimetable {
 
     @ManyToOne
     @JoinColumn(
-            name = "teacher_id",
+            name = "instructor_id",
             nullable = false,
             referencedColumnName = "id"
     )
-    private Teacher assignedTeacher;
+    private Instructor assignedInstructor;
 
     @Column(
             name = "day",
@@ -80,7 +78,7 @@ public class AcademicTimetable {
     public AcademicTimetable() {
     }
 
-    public AcademicTimetable(Teacher assignedTeacher,
+    public AcademicTimetable(Instructor assignedInstructor,
                              DayOfWeek dayOfWeek,
                              LocalTime startTime,
                              LocalTime endTime,
@@ -88,7 +86,7 @@ public class AcademicTimetable {
                              ProgramDiscipline programDiscipline,
                              AcademicClassType classType,
                              Integer studentGroup) {
-        this.assignedTeacher = assignedTeacher;
+        this.assignedInstructor = assignedInstructor;
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -106,12 +104,12 @@ public class AcademicTimetable {
         this.id = id;
     }
 
-    public Teacher getAssignedTeacher() {
-        return assignedTeacher;
+    public Instructor getAssignedInstructor() {
+        return assignedInstructor;
     }
 
-    public void setAssignedTeacher(Teacher assignedTeacher) {
-        this.assignedTeacher = assignedTeacher;
+    public void setAssignedInstructor(Instructor assignedInstructor) {
+        this.assignedInstructor = assignedInstructor;
     }
 
     public DayOfWeek getDayOfWeek() {

@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.controller.v2;
+package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDiscipline;
@@ -29,7 +29,9 @@ public class ProgramController {
     private final StudentService studentService;
 
     @Autowired
-    public ProgramController(AcademicProgramService programService, ProgramDisciplineService programDisciplineService, StudentService studentService) {
+    public ProgramController(AcademicProgramService programService,
+                             ProgramDisciplineService programDisciplineService,
+                             StudentService studentService) {
         this.programService = programService;
         this.programDisciplineService = programDisciplineService;
         this.studentService = studentService;
@@ -107,10 +109,10 @@ public class ProgramController {
                                                                             "name",
                                                                             "abbreviation",
                                                                             "department",
-                                                                            "leadingTeacher"))
+                                                                            "leadingInstructor"))
                     .addFilter("DepartmentFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
-                    .addFilter("TeacherFilter",
+                    .addFilter("InstructorFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("firstName",
                                                                             "lastName",
                                                                             "title",
@@ -147,14 +149,14 @@ public class ProgramController {
 
             FilterProvider filters = new SimpleFilterProvider()
                     .addFilter("StudentFilter",
-                            SimpleBeanPropertyFilter.filterOutAllExcept("id",
-                                    "facultyNumber",
-                                    "firstName",
-                                    "middleName",
-                                    "lastName",
-                                    "academicYear",
-                                    "studentGroup",
-                                    "activeStatus"));
+                                SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                            "facultyNumber",
+                                                                            "firstName",
+                                                                            "middleName",
+                                                                            "lastName",
+                                                                            "academicYear",
+                                                                            "studentGroup",
+                                                                            "activeStatus"));
 
             wrapper.setFilters(filters);
 
