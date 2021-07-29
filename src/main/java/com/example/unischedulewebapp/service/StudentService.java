@@ -3,6 +3,7 @@ package com.example.unischedulewebapp.service;
 import com.example.unischedulewebapp.auth.AppUser;
 import com.example.unischedulewebapp.auth.AppUserService;
 import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
+import com.example.unischedulewebapp.exception.BadResourceException;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicProgram;
@@ -25,6 +26,10 @@ public class StudentService {
             "Student %s already exists!";
     private final static String STUDENT_PROGRAM_NOT_FOUND_MSG =
             "Student is part of a non-existent program!";
+    private final static String STUDENT_INVALID_YEAR_MSG =
+            "Student's academic year is outside of their program's education period!";
+    private static final String STUDENT_FAC_NUMBER_OVERWRITE_MSG =
+            "Student's faculty number can't be overwritten!";
 
     private final StudentRepository studentRepository;
     private final AppUserService userService;
@@ -126,9 +131,7 @@ public class StudentService {
             return findByAcademicProgramAndAcademicYearAndStudentGroup(program, year, group);
     }
 
-    // TODO - check if student year is valid for his program
-
-    public Student addStudent(Student student) throws ResourceAlreadyExistsException, UserAlreadyExistsException, ResourceNotFoundException {
+    public Student addStudent(Student student) throws ResourceAlreadyExistsException, UserAlreadyExistsException, ResourceNotFoundException, BadResourceException {
         if(student.getId() != null && existsById(student.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(STUDENT_EXISTS_MSG, "with id=" + student.getId())
@@ -142,22 +145,27 @@ public class StudentService {
         if(!programService.existsById(student.getAcademicProgram().getId()))
             throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
 
+        if(student.getAcademicYear() > student.getAcademicProgram().getEducationPeriod())
+            throw new BadResourceException(STUDENT_INVALID_YEAR_MSG);
+
         userService.registerUser(student.getUserDetails());
 
         return studentRepository.save(student);
     }
 
-    public Student updateStudent(Long id, Student student) throws ResourceNotFoundException {
-        if(!existsById(id))
-            throw new ResourceNotFoundException(
-                    String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
-            );
+    public Student updateStudent(Long id, Student student) throws ResourceNotFoundException, BadResourceException {
+        Student oldStudent = findById(id);
 
-        // TODO - check if updated data overwrites faculty number
+        if(!oldStudent.getFacultyNumber().equals(student.getFacultyNumber()))
+            throw new BadResourceException(STUDENT_FAC_NUMBER_OVERWRITE_MSG);
 
         if(!programService.existsById(student.getAcademicProgram().getId()))
             throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
 
+        if(student.getAcademicYear() > student.getAcademicProgram().getEducationPeriod())
+            throw new BadResourceException(STUDENT_INVALID_YEAR_MSG);
+
+        student.setId(id);
         return studentRepository.save(student);
     }
 

@@ -1,5 +1,6 @@
 package com.example.unischedulewebapp.service;
 
+import com.example.unischedulewebapp.exception.BadResourceException;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDiscipline;
@@ -26,6 +27,8 @@ public class ProgramDisciplineService {
             "Non-existent program!";
     private final static String DSCPL_NOT_FOUND_MSG =
             "Non-existent discipline!";
+    private final static String PROGRAM_DSCPL_INVALID_YEAR_MSG =
+            "Discipline's year is outside of program's education period!";
 
     private final ProgramDisciplineRepository programDisciplineRepository;
     private final AcademicProgramService programService;
@@ -103,9 +106,7 @@ public class ProgramDisciplineService {
                     .collect(Collectors.toList());
     }
 
-    // TODO - check if year value is valid for the given program
-
-    public ProgramDiscipline addProgramDiscipline(ProgramDiscipline programDiscipline) throws ResourceAlreadyExistsException, ResourceNotFoundException {
+    public ProgramDiscipline addProgramDiscipline(ProgramDiscipline programDiscipline) throws ResourceAlreadyExistsException, ResourceNotFoundException, BadResourceException {
         if(programDiscipline.getId() != null && existsById(programDiscipline.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(PROGRAM_DSCPL_EXISTS_MSG, programDiscipline.getId())
@@ -117,33 +118,31 @@ public class ProgramDisciplineService {
             );
 
         if(!programService.existsById(programDiscipline.getProgram().getId()))
-            throw new ResourceNotFoundException(
-                    PROGRAM_NOT_FOUND_MSG
-            );
+            throw new ResourceNotFoundException(PROGRAM_NOT_FOUND_MSG);
 
         if(!disciplineService.existsById(programDiscipline.getDiscipline().getId()))
-            throw new ResourceNotFoundException(
-                    DSCPL_NOT_FOUND_MSG
-            );
+            throw new ResourceNotFoundException(DSCPL_NOT_FOUND_MSG);
+
+        if(programDiscipline.getAcademicYear() > programDiscipline.getProgram().getEducationPeriod())
+            throw new BadResourceException(PROGRAM_DSCPL_INVALID_YEAR_MSG);
 
         return programDisciplineRepository.save(programDiscipline);
     }
 
-    public ProgramDiscipline updateProgramDiscipline(Long id, ProgramDiscipline programDiscipline) throws ResourceNotFoundException {
+    public ProgramDiscipline updateProgramDiscipline(Long id, ProgramDiscipline programDiscipline) throws ResourceNotFoundException, BadResourceException {
         if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(PROGRAM_DSCPL_NOT_FOUND_MSG, id)
             );
 
         if(!programService.existsById(programDiscipline.getProgram().getId()))
-            throw new ResourceNotFoundException(
-                    PROGRAM_NOT_FOUND_MSG
-            );
+            throw new ResourceNotFoundException(PROGRAM_NOT_FOUND_MSG);
 
         if(!disciplineService.existsById(programDiscipline.getDiscipline().getId()))
-            throw new ResourceNotFoundException(
-                    DSCPL_NOT_FOUND_MSG
-            );
+            throw new ResourceNotFoundException(DSCPL_NOT_FOUND_MSG);
+
+        if(programDiscipline.getAcademicYear() > programDiscipline.getProgram().getEducationPeriod())
+            throw new BadResourceException(PROGRAM_DSCPL_INVALID_YEAR_MSG);
 
         programDiscipline.setId(id);
         return programDisciplineRepository.save(programDiscipline);

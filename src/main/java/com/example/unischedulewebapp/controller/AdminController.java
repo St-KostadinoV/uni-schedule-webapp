@@ -282,6 +282,12 @@ public class AdminController {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
+
+        } catch (BadResourceException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
         }
     }
 
@@ -297,6 +303,11 @@ public class AdminController {
             // TODO - log stack trace
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        } catch (BadResourceException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());
         }
     }
@@ -337,6 +348,11 @@ public class AdminController {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
+        } catch (BadResourceException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
         }
     }
 
@@ -352,6 +368,11 @@ public class AdminController {
             // TODO - log stack trace
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        } catch (BadResourceException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());
         }
     }

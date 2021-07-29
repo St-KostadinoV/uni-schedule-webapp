@@ -14,15 +14,15 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // TODO - finish app security config
-        //      TODO - secure all endpoints
         //      TODO - change default login/logout pages
         http
-                .csrf().disable()   //  TODO - enable CSRF protection and implement logic to verify CSRF tokens
+                .csrf().disable()
                 .authorizeRequests()
-//                .mvcMatchers("/api/v1/teacher/daily-schedule","/api/v1/teacher/weekly-schedule","/api/v1/teacher/email-change","/api/v1/teacher/pass-change").hasRole(TEACHER.name())
-//                .mvcMatchers("/api/v1/student/daily-schedule","/api/v1/student/weekly-schedule","/api/v1/student/pass-change").hasRole(STUDENT.name())
-//                .mvcMatchers("/api/v1/management/**").hasRole(FRONT_DESK.name())
-//                .mvcMatchers("/api/v1/**").permitAll()
+                .mvcMatchers("/profile/email-change").hasRole(INSTRUCTOR.name())
+                .mvcMatchers("/profile/**").hasAnyRole(STUDENT.name(), INSTRUCTOR.name())
+                .mvcMatchers("/students/*").hasAnyRole(INSTRUCTOR.name(), FRONT_DESK.name(), EDUCATION_DEPT.name())
+                .mvcMatchers("/admin/timetable/**").hasRole(EDUCATION_DEPT.name())
+                .mvcMatchers("/admin/**").hasRole(FRONT_DESK.name())
                 .mvcMatchers("/**").permitAll()
                 .anyRequest()
                 .authenticated()
