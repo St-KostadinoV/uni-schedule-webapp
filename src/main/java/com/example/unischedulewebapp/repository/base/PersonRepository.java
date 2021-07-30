@@ -5,6 +5,7 @@ import com.example.unischedulewebapp.model.base.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @NoRepositoryBean
@@ -12,4 +13,11 @@ public interface PersonRepository<T extends Person>
         extends JpaRepository<T, Long> {
 
     Optional<T> findByUserDetails(AppUser userDetails);
+
+    Collection<T> findByFirstNameContainingOrLastNameContaining(String firstName,
+                                                                String lastName);
+
+    Collection<T> findByFirstNameContainingOrMiddleNameContainingOrLastNameContaining(String firstName,
+                                                                                      String middleName,
+                                                                                      String lastName);
 }

@@ -43,8 +43,7 @@ public abstract class Person {
     private String lastName;
 
     @Column(
-            name = "email",
-            nullable = false
+            name = "email"
     )
     private String email;
 

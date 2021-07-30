@@ -48,6 +48,16 @@ public class AcademicProgramService {
                         ));
     }
 
+    public List<AcademicProgram> findByName(String name) {
+        return new ArrayList<>(programRepository
+                .findByName(name));
+    }
+
+    public List<AcademicProgram> findByAbbreviation(String abbreviation) {
+        return new ArrayList<>(programRepository
+                .findByAbbreviation(abbreviation));
+    }
+
     public List<AcademicProgram> findByDepartment(AcademicDepartment department) {
         return new ArrayList<>(programRepository
                 .findByDepartment(department));

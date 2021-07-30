@@ -48,6 +48,16 @@ public class AcademicDisciplineService {
                         ));
     }
 
+    public List<AcademicDiscipline> findByName(String name) {
+        return new ArrayList<>(disciplineRepository
+                .findByName(name));
+    }
+
+    public List<AcademicDiscipline> findByAbbreviation(String abbreviation) {
+        return new ArrayList<>(disciplineRepository
+                .findByAbbreviation(abbreviation));
+    }
+
     public List<AcademicDiscipline> findByDepartment(AcademicDepartment department) {
         return new ArrayList<>(disciplineRepository
                 .findByDepartment(department));

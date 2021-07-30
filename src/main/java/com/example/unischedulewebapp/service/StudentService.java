@@ -72,6 +72,16 @@ public class StudentService {
                         ));
     }
 
+    public List<Student> findByFirstAndLastName(String firstName, String lastName) {
+        return new ArrayList<>(studentRepository
+                .findByFirstNameContainingOrLastNameContaining(firstName, lastName));
+    }
+
+    public List<Student> findByFullName(String firstName, String middleName, String lastName) {
+        return new ArrayList<>(studentRepository
+                .findByFirstNameContainingOrMiddleNameContainingOrLastNameContaining(firstName, middleName, lastName));
+    }
+
     public Student findByFacultyNumber(String facultyNumber) throws ResourceNotFoundException{
         return studentRepository
                 .findByFacultyNumber(facultyNumber)

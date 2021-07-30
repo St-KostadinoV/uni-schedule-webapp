@@ -13,8 +13,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // TODO - finish app security config
-        //      TODO - change default login/logout pages
         http
                 .csrf().disable()
                 .authorizeRequests()

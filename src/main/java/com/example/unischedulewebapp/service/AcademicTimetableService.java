@@ -149,10 +149,9 @@ public class AcademicTimetableService {
         if(!instructorService.existsById(timetable.getAssignedInstructor().getId()))
             throw new ResourceNotFoundException(TIMETBL_INSTRUCTOR_NOT_FOUND_MSG);
 
-        // TODO - enable when real data is in db
-//        if(timetable.getProgramDiscipline().getDiscipline().getLeadingTeacher() != timetable.getAssignedTeacher()
-//                && !timetable.getProgramDiscipline().getDiscipline().getAssistingTeachers().contains(timetable.getAssignedTeacher()))
-//            throw new BadResourceException(TIMETBL_UNAFFILIATED_TEACHER_MSG);
+        if(timetable.getProgramDiscipline().getDiscipline().getLeadingInstructor() != timetable.getAssignedInstructor()
+                && !timetable.getProgramDiscipline().getDiscipline().getAssistingInstructors().contains(timetable.getAssignedInstructor()))
+            throw new BadResourceException(TIMETBL_UNAFFILIATED_INSTRUCTOR_MSG);
 
         return timetableRepository.save(timetable);
     }
@@ -169,10 +168,9 @@ public class AcademicTimetableService {
         if(!instructorService.existsById(timetable.getAssignedInstructor().getId()))
             throw new ResourceNotFoundException(TIMETBL_INSTRUCTOR_NOT_FOUND_MSG);
 
-        // TODO - enable when real data is in db
-//        if(timetable.getProgramDiscipline().getDiscipline().getLeadingTeacher() != timetable.getAssignedTeacher()
-//                && !timetable.getProgramDiscipline().getDiscipline().getAssistingTeachers().contains(timetable.getAssignedTeacher()))
-//            throw new BadResourceException(TIMETBL_UNAFFILIATED_TEACHER_MSG);
+        if(timetable.getProgramDiscipline().getDiscipline().getLeadingInstructor() != timetable.getAssignedInstructor()
+                && !timetable.getProgramDiscipline().getDiscipline().getAssistingInstructors().contains(timetable.getAssignedInstructor()))
+            throw new BadResourceException(TIMETBL_UNAFFILIATED_INSTRUCTOR_MSG);
 
         timetable.setId(id);
         return timetableRepository.save(timetable);

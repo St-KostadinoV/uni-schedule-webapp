@@ -2,6 +2,7 @@ package com.example.unischedulewebapp.service;
 
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
+import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.AcademicFaculty;
 import com.example.unischedulewebapp.repository.AcademicFacultyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,6 +40,16 @@ public class AcademicFacultyService {
                         new ResourceNotFoundException(
                                 String.format(FACULTY_NOT_FOUND_MSG, "with id=" + id)
                         ));
+    }
+
+    public List<AcademicFaculty> findByName(String name) {
+        return new ArrayList<>(facultyRepository
+                .findByName(name));
+    }
+
+    public List<AcademicFaculty> findByAbbreviation(String abbreviation) {
+        return new ArrayList<>(facultyRepository
+                .findByAbbreviation(abbreviation));
     }
 
     public List<AcademicFaculty> findAll() {

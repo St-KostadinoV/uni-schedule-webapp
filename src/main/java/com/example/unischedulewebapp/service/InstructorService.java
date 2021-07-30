@@ -63,6 +63,16 @@ public class InstructorService {
                         ));
     }
 
+    public List<Instructor> findByFirstAndLastName(String firstName, String lastName) {
+        return new ArrayList<>(instructorRepository
+                .findByFirstNameContainingOrLastNameContaining(firstName, lastName));
+    }
+
+    public List<Instructor> findByFullName(String firstName, String middleName, String lastName) {
+        return new ArrayList<>(instructorRepository
+                .findByFirstNameContainingOrMiddleNameContainingOrLastNameContaining(firstName, middleName, lastName));
+    }
+
     public List<Instructor> findByTitle(AcademicTitle title) {
         return new ArrayList<>(instructorRepository
                 .findByTitle(title));
