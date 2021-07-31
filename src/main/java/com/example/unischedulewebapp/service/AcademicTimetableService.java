@@ -3,6 +3,7 @@ package com.example.unischedulewebapp.service;
 import com.example.unischedulewebapp.exception.BadResourceException;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
+import com.example.unischedulewebapp.exception.TimetableCollisionException;
 import com.example.unischedulewebapp.model.AcademicTimetable;
 import com.example.unischedulewebapp.model.ProgramDiscipline;
 import com.example.unischedulewebapp.model.Student;
@@ -47,7 +48,7 @@ public class AcademicTimetableService {
         this.instructorService = instructorService;
     }
 
-    public boolean existsById(Long id){
+    public boolean existsById(Long id) {
         return timetableRepository
                 .existsById(id);
     }
@@ -136,9 +137,8 @@ public class AcademicTimetableService {
                 ));
     }
 
-    // TODO - rework method, implement collision algorithm
-    public AcademicTimetable addTimetable(AcademicTimetable timetable) throws ResourceAlreadyExistsException, ResourceNotFoundException, BadResourceException {
-        if(timetable.getId()!=null && existsById(timetable.getId()))
+    public AcademicTimetable addTimetable(AcademicTimetable timetable) throws ResourceAlreadyExistsException, ResourceNotFoundException, BadResourceException, TimetableCollisionException {
+        if(timetable.getId() != null && existsById(timetable.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(TIMETBL_EXISTS_MSG, "with id=" + timetable.getId())
             );
@@ -153,10 +153,12 @@ public class AcademicTimetableService {
                 && !timetable.getProgramDiscipline().getDiscipline().getAssistingInstructors().contains(timetable.getAssignedInstructor()))
             throw new BadResourceException(TIMETBL_UNAFFILIATED_INSTRUCTOR_MSG);
 
+        isTimetableValid(timetable);
+
         return timetableRepository.save(timetable);
     }
 
-    public AcademicTimetable updateTimetable(Long id, AcademicTimetable timetable) throws ResourceNotFoundException, BadResourceException {
+    public AcademicTimetable updateTimetable(Long id, AcademicTimetable timetable) throws ResourceNotFoundException, BadResourceException, TimetableCollisionException {
         if(!existsById(id))
             throw new ResourceNotFoundException(
                     String.format(TIMETBL_NOT_FOUND_MSG, "with id=" + id)
@@ -172,6 +174,8 @@ public class AcademicTimetableService {
                 && !timetable.getProgramDiscipline().getDiscipline().getAssistingInstructors().contains(timetable.getAssignedInstructor()))
             throw new BadResourceException(TIMETBL_UNAFFILIATED_INSTRUCTOR_MSG);
 
+        isTimetableValid(timetable);
+
         timetable.setId(id);
         return timetableRepository.save(timetable);
     }
@@ -185,7 +189,42 @@ public class AcademicTimetableService {
         timetableRepository.deleteById(id);
     }
 
-    public void isTimetableValid(AcademicTimetable timetable) {
+    private void isTimetableValid(AcademicTimetable timetable) throws TimetableCollisionException {
+        if (!timetableRepository
+                .findInstructorAvailability(
+                        timetable.getAssignedInstructor(),
+                        timetable.getDayOfWeek(),
+                        timetable.getStartTime(),
+                        timetable.getEndTime())
+                .isEmpty())
+            throw new TimetableCollisionException("Instructor is not available during this time period of the day!");
 
+        if (timetableRepository
+                .findStudentsAvailability(
+                        timetable.getProgramDiscipline().getProgram(),
+                        timetable.getProgramDiscipline().getAcademicYear(),
+                        timetable.getStudentGroup(),
+                        timetable.getDayOfWeek(),
+                        timetable.getStartTime(),
+                        timetable.getEndTime())
+                .isEmpty())
+            throw new TimetableCollisionException("Students are not available during this time period of the day!");
+
+        if (timetableRepository
+                .findRoomAvailability(
+                        timetable.getDesignatedRoom(),
+                        timetable.getDayOfWeek(),
+                        timetable.getStartTime(),
+                        timetable.getEndTime())
+                .isEmpty())
+            throw new TimetableCollisionException("Room is not available during this time period of the day!");
+
+        if (timetableRepository
+                .findClassDuplicates(
+                        timetable.getProgramDiscipline(),
+                        timetable.getStudentGroup(),
+                        timetable.getClassType())
+                .isEmpty())
+            throw new TimetableCollisionException("Students already have this class during the week!");
     }
 }

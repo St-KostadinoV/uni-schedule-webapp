@@ -10,6 +10,8 @@ import java.util.Collection;
 public interface AcademicStructureRepository<T extends AcademicStructure>
         extends JpaRepository<T, Long> {
 
+    // TODO - edit queries to ignore case
+
     Collection<T> findByName(String name);
 
     Collection<T> findByAbbreviation(String abbreviation);

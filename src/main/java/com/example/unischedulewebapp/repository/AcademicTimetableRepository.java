@@ -20,7 +20,8 @@ public interface AcademicTimetableRepository
 
     Collection<AcademicTimetable> findByAssignedInstructor(Instructor instructor);
 
-    Collection<AcademicTimetable> findByAssignedInstructorAndDayOfWeek(Instructor instructor, DayOfWeek dayOfWeek);
+    Collection<AcademicTimetable> findByAssignedInstructorAndDayOfWeek(Instructor instructor,
+                                                                       DayOfWeek dayOfWeek);
 
     Collection<AcademicTimetable> findByDayOfWeek(DayOfWeek dayOfWeek);
 
@@ -39,8 +40,8 @@ public interface AcademicTimetableRepository
             "select tt from AcademicTimetable tt " +
             "join tt.programDiscipline pd " +
             "where pd.program = :program " +
-                    "and pd.academicYear = :year " +
-                    "and tt.studentGroup = :group"
+            "and pd.academicYear = :year " +
+            "and tt.studentGroup = :group"
     )
     Collection<AcademicTimetable> findStudentWeeklySchedule(@Param("program") AcademicProgram program,
                                                             @Param("year") Integer year,
@@ -50,12 +51,71 @@ public interface AcademicTimetableRepository
             "select tt from AcademicTimetable tt " +
             "join tt.programDiscipline pd " +
             "where pd.program = :program " +
-                    "and pd.academicYear = :year " +
-                    "and tt.studentGroup = :group " +
-                    "and tt.dayOfWeek = :day"
+            "and pd.academicYear = :year " +
+            "and tt.studentGroup = :group " +
+            "and tt.dayOfWeek = :day"
     )
     Collection<AcademicTimetable> findStudentDailySchedule(@Param("program") AcademicProgram program,
                                                            @Param("year") Integer year,
                                                            @Param("group") Integer group,
                                                            @Param("day") DayOfWeek day);
+
+    // TODO - convert return data type to Optional<>
+
+    @Query(
+            "select tt from AcademicTimetable tt " +
+            "where tt.assignedInstructor = :instructor " +
+            "and tt.dayOfWeek = :dayOfWeek " +
+            "and ( " +
+            "(tt.startTime between :startTime and :endTime) " +
+            "or (tt.endTime between :startTime and :endTime) " +
+            ")"
+    )
+    Collection<AcademicTimetable> findInstructorAvailability(@Param("instructor") Instructor instructor,
+                                                             @Param("dayOfWeek") DayOfWeek dayOfWeek,
+                                                             @Param("startTime") LocalTime startTime,
+                                                             @Param("endTime") LocalTime endTime);
+
+    @Query(
+            "select tt from AcademicTimetable tt " +
+            "join tt.programDiscipline pd " +
+            "where pd.program = :program " +
+            "and pd.academicYear = :year " +
+            "and tt.studentGroup = :group " +
+            "and tt.dayOfWeek = :day " +
+            "and ( " +
+            "(tt.startTime between :startTime and :endTime) " +
+            "or (tt.endTime between :startTime and :endTime) " +
+            ")"
+    )
+    Collection<AcademicTimetable> findStudentsAvailability(@Param("program") AcademicProgram program,
+                                                           @Param("year") Integer year,
+                                                           @Param("group") Integer group,
+                                                           @Param("day") DayOfWeek day,
+                                                           @Param("startTime") LocalTime startTime,
+                                                           @Param("endTime") LocalTime endTime);
+
+    @Query(
+            "select tt from AcademicTimetable tt " +
+            "where tt.designatedRoom = :room " +
+            "and tt.dayOfWeek = :dayOfWeek " +
+            "and ( " +
+            "(tt.startTime between :startTime and :endTime) " +
+            "or (tt.endTime between :startTime and :endTime) " +
+            ")"
+    )
+    Collection<AcademicTimetable> findRoomAvailability(@Param("room") String room,
+                                                       @Param("dayOfWeek") DayOfWeek dayOfWeek,
+                                                       @Param("startTime") LocalTime startTime,
+                                                       @Param("endTime") LocalTime endTime);
+
+    @Query(
+            "select tt from AcademicTimetable tt " +
+            "where tt.programDiscipline = :programDiscipline " +
+            "and tt.studentGroup = :group " +
+            "and tt.classType = :classType"
+    )
+    Collection<AcademicTimetable> findClassDuplicates(@Param("programDiscipline") ProgramDiscipline programDiscipline,
+                                                      @Param("group") Integer group,
+                                                      @Param("classType") AcademicClassType classType);
 }

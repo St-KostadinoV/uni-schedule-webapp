@@ -4,6 +4,7 @@ import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
 import com.example.unischedulewebapp.exception.BadResourceException;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
+import com.example.unischedulewebapp.exception.TimetableCollisionException;
 import com.example.unischedulewebapp.model.*;
 import com.example.unischedulewebapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -469,7 +470,7 @@ public class AdminController {
                     .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
 
-        } catch (BadResourceException e) {
+        } catch (BadResourceException | TimetableCollisionException e) {
             // TODO - log stack trace
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
@@ -491,7 +492,7 @@ public class AdminController {
                     .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
 
-        } catch (BadResourceException e) {
+        } catch (BadResourceException | TimetableCollisionException e) {
             // TODO - log stack trace
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)

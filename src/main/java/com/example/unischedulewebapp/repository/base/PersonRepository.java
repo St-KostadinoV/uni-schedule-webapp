@@ -14,6 +14,8 @@ public interface PersonRepository<T extends Person>
 
     Optional<T> findByUserDetails(AppUser userDetails);
 
+    // TODO - edit queries to ignore case
+
     Collection<T> findByFirstNameContainingOrLastNameContaining(String firstName,
                                                                 String lastName);
 
