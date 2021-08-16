@@ -214,7 +214,7 @@ public class ProfileController {
                         .addFilter("ProgramDisciplineFilter",
                                     SimpleBeanPropertyFilter.filterOutAllExcept("discipline"))
                         .addFilter("DisciplineFilter",
-                                    SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("name"))
                         .addFilter("InstructorFilter",
                                     SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
                                                                                 "title",
@@ -293,7 +293,7 @@ public class ProfileController {
                         .addFilter("ProgramDisciplineFilter",
                                     SimpleBeanPropertyFilter.filterOutAllExcept("discipline"))
                         .addFilter("DisciplineFilter",
-                                    SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("name"))
                         .addFilter("InstructorFilter",
                                     SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
                                                                                 "title",

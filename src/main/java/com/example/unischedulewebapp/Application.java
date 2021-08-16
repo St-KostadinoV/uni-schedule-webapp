@@ -596,6 +596,829 @@ public class Application {
 					)
 			);
 
+			List<Instructor> instructorsETM = List.of(
+					new Instructor(
+							new AppUser("INSTR_ETM_1", "1234", INSTRUCTOR),
+							"Емилиян",
+							"Боянов",
+							"Беков",
+							"emilian.bekov@tu-varna.bg",
+							"+359 52 383 437",
+							ASSOCIATE_PROFESSOR,
+							departments.get(4),
+							"305Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETM_2", "1234", INSTRUCTOR),
+							"Венцислав",
+							"Цеков",
+							"Вълчев",
+							"venci.valchev@tu-varna.bg",
+							"+359 52 383 266",
+							PROFESSOR,
+							departments.get(4),
+							"609Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETM_3", "1234", INSTRUCTOR),
+							"Ангел",
+							"Станимиров",
+							"Маринов",
+							"a.marinov@tu-varna.bg",
+							"+359 52 383 266",
+							ASSOCIATE_PROFESSOR,
+							departments.get(4),
+							"609Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETM_4", "1234", INSTRUCTOR),
+							"Димитър",
+							"Михайлов",
+							"Ковачев",
+							"dmk@tu-varna.bg",
+							"+359 52 383 437",
+							ASSOCIATE_PROFESSOR,
+							departments.get(4),
+							"501Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETM_5", "1234", INSTRUCTOR),
+							"Екатерина",
+							"Николова",
+							"Димитрова",
+							"ekaterinad@tu-varna.bg",
+							"+359 52 383 624",
+							ASSOCIATE_PROFESSOR,
+							departments.get(4),
+							"501Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETM_6", "1234", INSTRUCTOR),
+							"Тончо",
+							"Христов",
+							"Папанчев",
+							"t.papanchev@tu-varna.bg",
+							"+359 52 383 619",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(4),
+							"305аЕ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETM_7", "1234", INSTRUCTOR),
+							"Фирган",
+							"Нихатов",
+							"Ферадов",
+							"firgan.feradov@tu-varna.bg",
+							"+359 52 383 693",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(4),
+							"208РСС",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETM_8", "1234", INSTRUCTOR),
+							"Георги",
+							"Евтимов",
+							"Тодоринов",
+							"gtodorinov@tu-varna.bg",
+							"+359 52 383 237",
+							ASSISTANT_PROFESSOR,
+							departments.get(4),
+							"114Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETM_9", "1234", INSTRUCTOR),
+							"Антим",
+							"Христов",
+							"Йорданов",
+							"a.yordanov@gmail.com",
+							"+359 52 383 659",
+							ASSISTANT_PROFESSOR,
+							departments.get(4),
+							"212РСС",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETM_10", "1234", INSTRUCTOR),
+							"Юлия",
+							"Георгиева",
+							"Гарипова",
+							"juliq.garipova@tu-varna.bg",
+							"+359 52 383 619",
+							ASSISTANT_PROFESSOR,
+							departments.get(4),
+							"305аЕ",
+							false
+					)
+			);
+
+			List<Instructor> instructorsESEO = List.of(
+					new Instructor(
+							new AppUser("INSTR_ESEO_1", "1234", INSTRUCTOR),
+							"Валентин",
+							"Николов",
+							"Гюров",
+							"valentin.giurov@tu-varna.bg",
+							"+359 52 383515",
+							ASSOCIATE_PROFESSOR,
+							departments.get(5),
+							"",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ESEO_2", "1234", INSTRUCTOR),
+							"Владимир",
+							"Чиков",
+							"Чиков",
+							"chikov@tu-varna.bg",
+							"+359 52 383570",
+							ASSOCIATE_PROFESSOR,
+							departments.get(5),
+							"",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ESEO_3", "1234", INSTRUCTOR),
+							"Пламен",
+							"Великов",
+							"Парушев",
+							"plamenparushev@tu-varna.bg",
+							"+359 52 383573",
+							ASSOCIATE_PROFESSOR,
+							departments.get(5),
+							"108aЕФ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ESEO_4", "1234", INSTRUCTOR),
+							"Никола",
+							"Иванов",
+							"Македонски",
+							"n.makedonski@tu-varna.bg",
+							"+359 52 383515",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(5),
+							"",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ESEO_5", "1234", INSTRUCTOR),
+							"Гинка",
+							"Христова",
+							"Иванова",
+							"ginkahivanova@tu-varna.bg",
+							"+359 52 383402",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(5),
+							"",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ESEO_6", "1234", INSTRUCTOR),
+							"Николай",
+							"Иванов",
+							"Бежанов",
+							"n.bezhanov@tu-varna.bg",
+							"+359 52 383345",
+							ASSISTANT_PROFESSOR,
+							departments.get(5),
+							"",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ESEO_7", "1234", INSTRUCTOR),
+							"Христиан",
+							"Ивайлов",
+							"Панчев",
+							"hr_panchev@abv.bg",
+							"",
+							ASSISTANT_PROFESSOR,
+							departments.get(5),
+							"104ЕФ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ESEO_8", "1234", INSTRUCTOR),
+							"Георги",
+							"Добромиров",
+							"Милев",
+							"g.milev@tu-varna.bg",
+							"+359 52 383345",
+							ASSISTANT_PROFESSOR,
+							departments.get(5),
+							"",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ESEO_9", "1234", INSTRUCTOR),
+							"Румен",
+							"Михайлов",
+							"Киров",
+							"roumen.kirov@tu-varna.bg",
+							"+359 52 383623",
+							ASSOCIATE_PROFESSOR,
+							departments.get(5),
+							"",
+							true
+					)
+			);
+
+			List<Instructor> instructorsETET = List.of(
+					new Instructor(
+							new AppUser("INSTR_ETET_1", "1234", INSTRUCTOR),
+							"Майк",
+							"Юрген",
+							"Щреблау",
+							"streblau@tu-varna.bg",
+							"+359 52-383-540",
+							ASSOCIATE_PROFESSOR,
+							departments.get(6),
+							"702Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETET_2", "1234", INSTRUCTOR),
+							"Бохос",
+							"Рупен",
+							"Апрахамян",
+							"bohos@tu-varna.bg",
+							"+359 52 383 578",
+							PROFESSOR,
+							departments.get(6),
+							"206Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETET_3", "1234", INSTRUCTOR),
+							"Мария",
+							"Иванова",
+							"Маринова",
+							"m_i_marinova@tu-varna.bg",
+							"+359 52 383 523",
+							ASSOCIATE_PROFESSOR,
+							departments.get(6),
+							"room",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETET_4", "1234", INSTRUCTOR),
+							"Татяна",
+							"Маринова",
+							"Димова",
+							"t.dimova@tu-varna.bg",
+							"+359 52 383 319",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(6),
+							"834Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETET_5", "1234", INSTRUCTOR),
+							"Янита",
+							"Стоянова",
+							"Славова",
+							"slavova_yanita@tu-varna.bg",
+							"+359 52 383 328",
+							ASSISTANT_PROFESSOR,
+							departments.get(6),
+							"835Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETET_6", "1234", INSTRUCTOR),
+							"Надежда",
+							"Димитрова",
+							"Цветкова",
+							"nadea@tu-varna.bg",
+							"+359 52 383 323",
+							ASSISTANT_PROFESSOR,
+							departments.get(6),
+							"836Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ETET_7", "1234", INSTRUCTOR),
+							"Георги",
+							"Димитров",
+							"Желев",
+							"zhelev@tu-varna.bg",
+							"+359 899 108 279",
+							ASSISTANT_PROFESSOR,
+							departments.get(6),
+							"833Е",
+							false
+					)
+			);
+
+			List<Instructor> instructorsID = List.of(
+					new Instructor(
+							new AppUser("INSTR_ID_1", "1234", INSTRUCTOR),
+							"Пламен",
+							"Василев",
+							"Братанов",
+							"bratanov@tu-varna.bg",
+							"052 383-301",
+							PROFESSOR,
+							departments.get(7),
+							"502МТФ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ID_2", "1234", INSTRUCTOR),
+							"Момчил",
+							"Тодоров",
+							"Тачев",
+							"m_tachev@tu-varna.bg",
+							"052 383-309",
+							ASSOCIATE_PROFESSOR,
+							departments.get(7),
+							"515аМТФ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ID_3", "1234", INSTRUCTOR),
+							"Цена",
+							"Радкова",
+							"Мурзова",
+							"murzova@tu-varna.bg",
+							"052 383-309",
+							ASSOCIATE_PROFESSOR,
+							departments.get(7),
+							"14НУК",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ID_4", "1234", INSTRUCTOR),
+							"Тихомир",
+							"Атанасов",
+							"Доврамаджиев",
+							"tihomir.dovramadjiev@tu-varna.bg",
+							"052 383-300",
+							ASSOCIATE_PROFESSOR,
+							departments.get(7),
+							"516МТФ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ID_5", "1234", INSTRUCTOR),
+							"Гинка",
+							"Великова",
+							"Жечева",
+							"ginkaa@tu-varna.bg",
+							"052 383-300",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(7),
+							"516МТФ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ID_6", "1234", INSTRUCTOR),
+							"Кремена",
+							"Цанкова",
+							"Цанкова",
+							"kremenacankova@tu-varna.bg",
+							"052 383-300",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(7),
+							"516МТФ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ID_7", "1234", INSTRUCTOR),
+							"Илия",
+							"Наумов",
+							"Илиев",
+							"i.iliev@tu-varna.bg",
+							"052 383-300",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(7),
+							"516МТФ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ID_8", "1234", INSTRUCTOR),
+							"Галина",
+							"Димитрова",
+							"Станева",
+							"g.staneva@tu-varna.bg",
+							"052 383-307",
+							ASSISTANT_PROFESSOR,
+							departments.get(7),
+							"505МТФ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ID_9", "1234", INSTRUCTOR),
+							"Дарина",
+							"Недкова",
+							"Добрева",
+							"darina.dobreva@tu-varna.bg",
+							"052 383-307",
+							ASSISTANT_PROFESSOR,
+							departments.get(7),
+							"505МТФ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_ID_10", "1234", INSTRUCTOR),
+							"Венцислав",
+							"Георгиев",
+							"Марков",
+							"ventsi_markov@tu-varna.bg",
+							"",
+							ASSISTANT_PROFESSOR,
+							departments.get(7),
+							"room",
+							false
+					)
+			);
+
+			List<Instructor> instructorsIM = List.of(
+					new Instructor(
+							new AppUser("INSTR_IM_1", "1234", INSTRUCTOR),
+							"Сийка",
+							"Димитрова",
+							"Демирова",
+							"s_demirova@tu-varna.bg",
+							"052/383 612",
+							ASSOCIATE_PROFESSOR,
+							departments.get(8),
+							"501НУК",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_IM_2", "1234", INSTRUCTOR),
+							"Светлана",
+							"Райчева",
+							"Димитракиева",
+							"s_dimitrakieva@tu-varna.bg",
+							"052/383 613",
+							PROFESSOR,
+							departments.get(8),
+							"503НУК",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_IM_3", "1234", INSTRUCTOR),
+							"Светлана",
+							"Костова",
+							"Лесидренска",
+							"sv_lesidrenska@tu-varna.bg",
+							"052/383 263",
+							ASSOCIATE_PROFESSOR,
+							departments.get(8),
+							"510НУК",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_IM_4", "1234", INSTRUCTOR),
+							"Таня",
+							"Пенчева",
+							"Панайотова",
+							"t_panayotova@tu-varna.bg",
+							"052/383 682",
+							ASSOCIATE_PROFESSOR,
+							departments.get(8),
+							"508НУК",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_IM_5", "1234", INSTRUCTOR),
+							"Красимира",
+							"Атанасова",
+							"Димитрова",
+							"krasimira.dimitrova@tu-varna.bg",
+							"052/383 682",
+							ASSOCIATE_PROFESSOR,
+							departments.get(8),
+							"508НУК",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_IM_6", "1234", INSTRUCTOR),
+							"Беанета",
+							"Василева",
+							"Янева",
+							"b.vasileva@tu-varna.bg",
+							"052/383 254",
+							ASSOCIATE_PROFESSOR,
+							departments.get(8),
+							"517бНУК",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_IM_7", "1234", INSTRUCTOR),
+							"Мариана",
+							"Радкова",
+							"Мурзова",
+							"m.murzova@tu-varna.bg",
+							"052/383 336",
+							ASSISTANT_PROFESSOR,
+							departments.get(8),
+							"509НУК",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_IM_8", "1234", INSTRUCTOR),
+							"Сибел",
+							"Илханова",
+							"Ахмедова",
+							"sibel_ahmet@tu-varna.bg",
+							"052/383 602",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(8),
+							"504НУК",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_IM_9", "1234", INSTRUCTOR),
+							"Весела",
+							"Борисова",
+							"Дичева",
+							"vdicheva@tu-varna.bg",
+							"052/383 336",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(8),
+							"509НУК",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_IM_10", "1234", INSTRUCTOR),
+							"Марина",
+							"Петрова",
+							"Маринова",
+							"",
+							"",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(8),
+							"",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_IM_11", "1234", INSTRUCTOR),
+							"Дарина",
+							"Маринова",
+							"Павлова",
+							"pavlovad@tu-varna.bg",
+							"052/383 602",
+							ASSOCIATE_PROFESSOR,
+							departments.get(8),
+							"504НУК",
+							false
+					)
+			);
+
+
+			List<Instructor> instructorsKNT = List.of(
+					new Instructor(
+							new AppUser("INSTR_KNT_1", "1234", INSTRUCTOR),
+							"Христо",
+							"Георгиев",
+							"Вълчанов",
+							"hristo@tu-varna.bg",
+							"052 383 439",
+							ASSOCIATE_PROFESSOR,
+							departments.get(9),
+							"207-4Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_2", "1234", INSTRUCTOR),
+							"Тодор",
+							"Димитров",
+							"Ганчев",
+							"tganchev@tu-varna.bg",
+							"052 383 621",
+							PROFESSOR,
+							departments.get(9),
+							"104ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_3", "1234", INSTRUCTOR),
+							"Слава",
+							"Миланова",
+							"Йорданова",
+							"slava_y@tu-varna.bg",
+							"052 383 638",
+							ASSOCIATE_PROFESSOR,
+							departments.get(9),
+							"406ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_4", "1234", INSTRUCTOR),
+							"Владимир",
+							"Николов",
+							"Николов",
+							"nikolov_vn@tu-varna.bg",
+							"052 383 621",
+							ASSOCIATE_PROFESSOR,
+							departments.get(9),
+							"513аЕ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_5", "1234", INSTRUCTOR),
+							"Милена",
+							"Николова",
+							"Карова",
+							"mkarova@tu-varna.bg",
+							"052 383 409",
+							ASSOCIATE_PROFESSOR,
+							departments.get(9),
+							"205ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_6", "1234", INSTRUCTOR),
+							"Юлка",
+							"Петкова",
+							"Петкова",
+							"yulka.petkova@tu-varna.bg",
+							"052 383 403",
+							ASSOCIATE_PROFESSOR,
+							departments.get(9),
+							"207-3Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_7", "1234", INSTRUCTOR),
+							"Венета",
+							"Панайотова",
+							"Алексиева",
+							"valeksieva@tu-varna.bg",
+							"052 383 439",
+							ASSOCIATE_PROFESSOR,
+							departments.get(9),
+							"207-4Е",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_8", "1234", INSTRUCTOR),
+							"Ивайло",
+							"Пламенов",
+							"Пенев",
+							"ivailo.penev@tu-varna.bg",
+							"052 383 409",
+							ASSOCIATE_PROFESSOR,
+							departments.get(9),
+							"205ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_9", "1234", INSTRUCTOR),
+							"Жейно",
+							"Иванов",
+							"Жейнов",
+							"zh_viv@tu-varna.bg",
+							"052 383 260",
+							ASSOCIATE_PROFESSOR,
+							departments.get(9),
+							"407ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_10", "1234", INSTRUCTOR),
+							"Венцислав",
+							"Георгиев",
+							"Николов",
+							"v.nikolov@tu-varna.bg",
+							"052 383 433",
+							ASSOCIATE_PROFESSOR,
+							departments.get(9),
+							"101ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_11", "1234", INSTRUCTOR),
+							"Лъчезар",
+							"Илиев",
+							"Георгиев",
+							"lig@tu-varna.bg",
+							"052 383 628",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(9),
+							"405ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_12", "1234", INSTRUCTOR),
+							"Милен",
+							"Георгиев",
+							"Ангелов",
+							"angelovmg@tu-varna.bg",
+							"052 383 628",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(9),
+							"405ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_13", "1234", INSTRUCTOR),
+							"Гергана",
+							"Василева",
+							"Спасова",
+							"g.spasova@tu-varna.bg",
+							"052 383 679",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(9),
+							"210ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_14", "1234", INSTRUCTOR),
+							"Айдън",
+							"Мехмед",
+							"Хъкъ",
+							"aydin.mehmed@tu-varna.bg",
+							"052 383 424",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(9),
+							"102ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_15", "1234", INSTRUCTOR),
+							"Илиян",
+							"Живков",
+							"Бойчев",
+							"i.boychev@tu-varna.bg",
+							"052 383 679",
+							SENIOR_ASSISTANT_PROFESSOR,
+							departments.get(9),
+							"210ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_16", "1234", INSTRUCTOR),
+							"Гинка",
+							"Калева",
+							"Маринова",
+							"gmarinova@tu-varna.bg",
+							"052 383 407",
+							ASSISTANT_PROFESSOR,
+							departments.get(9),
+							"410ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_17", "1234", INSTRUCTOR),
+							"Галина",
+							"Тодорова",
+							"Найденова",
+							"galina.naydenova@tu-varna.bg",
+							"052 383 621",
+							ASSISTANT_PROFESSOR,
+							departments.get(9),
+							"104ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_18", "1234", INSTRUCTOR),
+							"Пламена",
+							"Живкова",
+							"Едрева",
+							"plamena.edreva@tu-varna.bg",
+							"052 383 424",
+							ASSISTANT_PROFESSOR,
+							departments.get(9),
+							"102ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_19", "1234", INSTRUCTOR),
+							"Петко",
+							"Генчев",
+							"Генчев",
+							"p.genchev@tu-varna.bg",
+							"052 383 675",
+							ASSISTANT_PROFESSOR,
+							departments.get(9),
+							"406ТВ",
+							false
+					),
+					new Instructor(
+							new AppUser("INSTR_KNT_20", "1234", INSTRUCTOR),
+							"Пролет",
+							"Стойчева",
+							"Денева",
+							"prolet_deneva@tu-varna.bg",
+							"053 383 433",
+							ASSISTANT_PROFESSOR,
+							departments.get(9),
+							"101ТВ",
+							false
+					)
+			);
+
 			for (Instructor instructor : instructorsAP)
 				instructorService.addInstructor(instructor);
 			for (Instructor instructor : instructorsDTK)
@@ -604,289 +1427,32 @@ public class Application {
 				instructorService.addInstructor(instructor);
 			for (Instructor instructor : instructorsEE)
 				instructorService.addInstructor(instructor);
-//
-//			Faker faker = new Faker();
-//			Random random = new Random();
-//			AppUser user;String fName;String mName;String lName;String email;String phone;
-//
-//			List<Teacher> teachers = new ArrayList<>();
-//			Teacher teacher;
-//			for (int i = 0; i < 20; i++){
-//				fName = faker.name().firstName();
-//				mName = faker.name().lastName();
-//				lName = faker.name().lastName();
-//				email = String.format("%s.%s@tu-varna.bg", fName, lName);
-//				phone = faker.phoneNumber().phoneNumber();
-//				user = new AppUser("TEACHER_" + (i + 1), "1234", AppUserRole.TEACHER);
-//				teacher = new Teacher(
-//						user,
-//						fName,
-//						mName,
-//						lName,
-//						email,
-//						phone,
-//						AcademicTitle.PROFESSOR,
-//						departments.get(random.nextInt(10)),
-//						(random.nextInt(500-100)+100) + faculties.get(random.nextInt(4)).getAbbreviation(),
-//						false
-//				);
-//				teachers.add(teacher);
-//				teacherService.addTeacher(teacher);
-//			}
-//
-//			List<AcademicDiscipline> disciplines = new ArrayList<>();
-//			AcademicDiscipline discipline;
-//			for(int i = 0; i<30; i++) {
-//				discipline = new AcademicDiscipline("Discipline#" + (100 + i), "D#" + (100 + i), departments.get(random.nextInt(10)), teachers.get(random.nextInt(20)));
-//				disciplines.add(discipline);
-//				disciplineService.addDiscipline(discipline);
-//			}
-//
-//			AcademicDiscipline test = new AcademicDiscipline("Discipline#999", "D#999", departments.get(0), teachers.get(0));
-//			test.addAssistingTeachers(teachers.get(1));
-//			disciplineService.addDiscipline(test);
-//
-//			List<Student> students = new ArrayList<>();
-//			Student student;
-//			String facNum;
-//			for(int i = 0; i<10; i++){
-//				fName = faker.name().firstName();
-//				mName = faker.name().lastName();
-//				lName = faker.name().lastName();
-//				email = String.format("%s.%s@tu-varna.bg", fName, lName);
-//				phone = faker.phoneNumber().phoneNumber();
-//				facNum = "FN3" + (100+i);
-//				user = new AppUser("STUDENT_1_1_" + (i+1), "1234", AppUserRole.STUDENT);
-//				student = new Student(
-//						user,
-//						fName,
-//						mName,
-//						lName,
-//						email,
-//						phone,
-//						facNum,
-//						programs.get(random.nextInt(15)),
-//						1,
-//						1,
-//						true
-//				);
-//				students.add(student);
-//				studentService.addStudent(student);
-//			}
-//			for(int i = 0; i<10; i++){
-//				fName = faker.name().firstName();
-//				mName = faker.name().lastName();
-//				lName = faker.name().lastName();
-//				email = String.format("%s.%s@tu-varna.bg", fName, lName);
-//				phone = faker.phoneNumber().phoneNumber();
-//				facNum = "FN4" + (100+i);
-//				user = new AppUser("STUDENT_1_2_" + (i+1), "1234", AppUserRole.STUDENT);
-//				student = new Student(
-//						user,
-//						fName,
-//						mName,
-//						lName,
-//						email,
-//						phone,
-//						facNum,
-//						programs.get(random.nextInt(15)),
-//						1,
-//						2,
-//						true
-//				);
-//				students.add(student);
-//				studentService.addStudent(student);
-//			}
-//			for(int i = 0; i<10; i++){
-//				fName = faker.name().firstName();
-//				mName = faker.name().lastName();
-//				lName = faker.name().lastName();
-//				email = String.format("%s.%s@tu-varna.bg", fName, lName);
-//				phone = faker.phoneNumber().phoneNumber();
-//				facNum = "FN1" + (100+i);
-//				user = new AppUser("STUDENT_2_1_" + (i+1), "1234", AppUserRole.STUDENT);
-//				student = new Student(
-//						user,
-//						fName,
-//						mName,
-//						lName,
-//						email,
-//						phone,
-//						facNum,
-//						programs.get(random.nextInt(15)),
-//						2,
-//						1,
-//						true
-//				);
-//				students.add(student);
-//				studentService.addStudent(student);
-//			}
-//			for(int i = 0; i<10; i++){
-//				fName = faker.name().firstName();
-//				mName = faker.name().lastName();
-//				lName = faker.name().lastName();
-//				email = String.format("%s.%s@tu-varna.bg", fName, lName);
-//				phone = faker.phoneNumber().phoneNumber();
-//				facNum = "FN2" + (100+i);
-//				user = new AppUser("STUDENT_2_2_" + (i+1), "1234", AppUserRole.STUDENT);
-//				student = new Student(
-//						user,
-//						fName,
-//						mName,
-//						lName,
-//						email,
-//						phone,
-//						facNum,
-//						programs.get(random.nextInt(15)),
-//						2,
-//						2,
-//						true
-//				);
-//				students.add(student);
-//				studentService.addStudent(student);
-//			}
-//
-//			List<ProgramDiscipline> programDisciplines = List.of(
-//					new ProgramDiscipline(programs.get(0), disciplines.get(0),1),
-//					new ProgramDiscipline(programs.get(0), disciplines.get(2),1),
-//					new ProgramDiscipline(programs.get(1), disciplines.get(2),1),
-//					new ProgramDiscipline(programs.get(1), disciplines.get(4),1),
-//					new ProgramDiscipline(programs.get(2), disciplines.get(4),1),
-//					new ProgramDiscipline(programs.get(2), disciplines.get(6),1),
-//					new ProgramDiscipline(programs.get(3), disciplines.get(6),1),
-//					new ProgramDiscipline(programs.get(3), disciplines.get(8),1),
-//					new ProgramDiscipline(programs.get(4), disciplines.get(8),1),
-//					new ProgramDiscipline(programs.get(4), disciplines.get(10),1),
-//					new ProgramDiscipline(programs.get(5), disciplines.get(10),1),
-//					new ProgramDiscipline(programs.get(5), disciplines.get(12),1),
-//					new ProgramDiscipline(programs.get(6), disciplines.get(12),1),
-//					new ProgramDiscipline(programs.get(6), disciplines.get(14),1),
-//					new ProgramDiscipline(programs.get(7), disciplines.get(14),1),
-//					new ProgramDiscipline(programs.get(7), disciplines.get(16),1),
-//					new ProgramDiscipline(programs.get(8), disciplines.get(16),1),
-//					new ProgramDiscipline(programs.get(8), disciplines.get(18),1),
-//					new ProgramDiscipline(programs.get(9), disciplines.get(18),1),
-//					new ProgramDiscipline(programs.get(9), disciplines.get(20),1),
-//					new ProgramDiscipline(programs.get(10), disciplines.get(20),1),
-//					new ProgramDiscipline(programs.get(10), disciplines.get(22),1),
-//					new ProgramDiscipline(programs.get(11), disciplines.get(22),1),
-//					new ProgramDiscipline(programs.get(11), disciplines.get(24),1),
-//					new ProgramDiscipline(programs.get(12), disciplines.get(24),1),
-//					new ProgramDiscipline(programs.get(12), disciplines.get(26),1),
-//					new ProgramDiscipline(programs.get(13), disciplines.get(26),1),
-//					new ProgramDiscipline(programs.get(13), disciplines.get(28),1),
-//					new ProgramDiscipline(programs.get(14), disciplines.get(28),1),
-//					new ProgramDiscipline(programs.get(14), disciplines.get(0),1),
-//					new ProgramDiscipline(programs.get(0), disciplines.get(1),2),
-//					new ProgramDiscipline(programs.get(0), disciplines.get(3),2),
-//					new ProgramDiscipline(programs.get(1), disciplines.get(3),2),
-//					new ProgramDiscipline(programs.get(1), disciplines.get(5),2),
-//					new ProgramDiscipline(programs.get(2), disciplines.get(5),2),
-//					new ProgramDiscipline(programs.get(2), disciplines.get(7),2),
-//					new ProgramDiscipline(programs.get(3), disciplines.get(7),2),
-//					new ProgramDiscipline(programs.get(3), disciplines.get(9),2),
-//					new ProgramDiscipline(programs.get(4), disciplines.get(9),2),
-//					new ProgramDiscipline(programs.get(4), disciplines.get(11),2),
-//					new ProgramDiscipline(programs.get(5), disciplines.get(11),2),
-//					new ProgramDiscipline(programs.get(5), disciplines.get(13),2),
-//					new ProgramDiscipline(programs.get(6), disciplines.get(13),2),
-//					new ProgramDiscipline(programs.get(6), disciplines.get(15),2),
-//					new ProgramDiscipline(programs.get(7), disciplines.get(15),2),
-//					new ProgramDiscipline(programs.get(7), disciplines.get(17),2),
-//					new ProgramDiscipline(programs.get(8), disciplines.get(17),2),
-//					new ProgramDiscipline(programs.get(8), disciplines.get(19),2),
-//					new ProgramDiscipline(programs.get(9), disciplines.get(19),2),
-//					new ProgramDiscipline(programs.get(9), disciplines.get(21),2),
-//					new ProgramDiscipline(programs.get(10), disciplines.get(21),2),
-//					new ProgramDiscipline(programs.get(10), disciplines.get(23),2),
-//					new ProgramDiscipline(programs.get(11), disciplines.get(23),2),
-//					new ProgramDiscipline(programs.get(11), disciplines.get(25),2),
-//					new ProgramDiscipline(programs.get(12), disciplines.get(25),2),
-//					new ProgramDiscipline(programs.get(12), disciplines.get(27),2),
-//					new ProgramDiscipline(programs.get(13), disciplines.get(27),2),
-//					new ProgramDiscipline(programs.get(13), disciplines.get(29),2),
-//					new ProgramDiscipline(programs.get(14), disciplines.get(29),2),
-//					new ProgramDiscipline(programs.get(14), disciplines.get(1),2)
-//			);
-//			for (ProgramDiscipline programDiscipline : programDisciplines)
-//				programDisciplineService.addProgramDiscipline(programDiscipline);
-//
-//			LocalTime start;
-//			AcademicTimetable timetable;
-//			for(int i = 0; i<3; i++) {
-//				start = LocalTime.of((i*2)+9,15);
-//				timetable = new AcademicTimetable(
-//						teachers.get(random.nextInt(20)),
-//						DayOfWeek.MONDAY,
-//						start,
-//						LocalTime.of(start.getHour() + 2,0),
-//						"114NF",
-//						programDisciplines.get(random.nextInt(programDisciplines.size())),
-//						AcademicClassType.LECTURE,
-//						random.nextInt(2) + 1
-//				);
-//				timetableService.addTimetable(timetable);
-//			}
-//			for(int i = 0; i<3; i++) {
-//				start = LocalTime.of((i*2)+9,15);
-//				timetable = new AcademicTimetable(
-//						teachers.get(random.nextInt(20)),
-//						DayOfWeek.TUESDAY,
-//						start,
-//						LocalTime.of(start.getHour() + 2,0),
-//						"114NF",
-//						programDisciplines.get(random.nextInt(programDisciplines.size())),
-//						AcademicClassType.LECTURE,
-//						random.nextInt(2) + 1
-//				);
-//				timetableService.addTimetable(timetable);
-//			}
-//			for(int i = 0; i<3; i++) {
-//				start = LocalTime.of((i*2)+9,15);
-//				timetable = new AcademicTimetable(
-//						teachers.get(random.nextInt(20)),
-//						DayOfWeek.WEDNESDAY,
-//						start,
-//						LocalTime.of(start.getHour() + 2,0),
-//						"114NF",
-//						programDisciplines.get(random.nextInt(programDisciplines.size())),
-//						AcademicClassType.LECTURE,
-//						random.nextInt(2) + 1
-//				);
-//				timetableService.addTimetable(timetable);
-//			}
-//			for(int i = 0; i<3; i++) {
-//				start = LocalTime.of((i*2)+9,15);
-//				timetable = new AcademicTimetable(
-//						teachers.get(random.nextInt(20)),
-//						DayOfWeek.THURSDAY,
-//						start,
-//						LocalTime.of(start.getHour() + 2,0),
-//						"114NF",
-//						programDisciplines.get(random.nextInt(programDisciplines.size())),
-//						AcademicClassType.LECTURE,
-//						random.nextInt(2) + 1
-//				);
-//				timetableService.addTimetable(timetable);
-//			}
-//			for(int i = 0; i<3; i++) {
-//				start = LocalTime.of((i*2)+9,15);
-//				timetable = new AcademicTimetable(
-//						teachers.get(random.nextInt(20)),
-//						DayOfWeek.FRIDAY,
-//						start,
-//						LocalTime.of(start.getHour() + 2,0),
-//						"114NF",
-//						programDisciplines.get(random.nextInt(programDisciplines.size())),
-//						AcademicClassType.LECTURE,
-//						random.nextInt(2) + 1
-//				);
-//				timetableService.addTimetable(timetable);
-//			}
-//
-//			user = new AppUser("FRONT","1234",AppUserRole.FRONT_DESK);
-//			userService.registerUser(user);
-//			System.out.println(LocalDateTime.now() + "\ttesting input data inserted");
+			for (Instructor instructor : instructorsETM)
+				instructorService.addInstructor(instructor);
+			for (Instructor instructor : instructorsESEO)
+				instructorService.addInstructor(instructor);
+			for (Instructor instructor : instructorsETET)
+				instructorService.addInstructor(instructor);
+			for (Instructor instructor : instructorsID)
+				instructorService.addInstructor(instructor);
+			for (Instructor instructor : instructorsIM)
+				instructorService.addInstructor(instructor);
+			for (Instructor instructor : instructorsKNT)
+				instructorService.addInstructor(instructor);
+
+//			List<Instructor> instructors = List.of
+//			new Instructor(
+//					new AppUser("INSTR__", "1234", INSTRUCTOR),
+//					"",
+//					"",
+//					"",
+//					"mail",
+//					"tel",
+//					ASSOCIATE_PROFESSOR,
+//					departments.get(),
+//					"room",
+//					false
+//			)
 		};
 	}
 }

@@ -118,18 +118,27 @@ public class InstructorController {
 
             MappingJacksonValue wrapper = new MappingJacksonValue(teacherDisciplines);
 
+//            FilterProvider filters = new SimpleFilterProvider()
+//                    .addFilter("DisciplineFilter",
+//                            SimpleBeanPropertyFilter.filterOutAllExcept("id",
+//                                    "name",
+//                                    "abbreviation",
+//                                    "leadingInstructor"))
+//                    .addFilter("InstructorFilter",
+//                            SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
+//                                    "title",
+//                                    "firstName",
+//                                    "middleName",
+//                                    "lastName"));
+
             FilterProvider filters = new SimpleFilterProvider()
                     .addFilter("DisciplineFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                             "name",
                                                                             "abbreviation",
-                                                                            "leadingInstructor"))
-                    .addFilter("InstructorFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
-                                                                            "title",
-                                                                            "firstName",
-                                                                            "middleName",
-                                                                            "lastName"));
+                                                                            "department"))
+                    .addFilter("DepartmentFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"));
 
             wrapper.setFilters(filters);
 

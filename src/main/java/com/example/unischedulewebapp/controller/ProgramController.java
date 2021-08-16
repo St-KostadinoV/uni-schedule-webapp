@@ -49,7 +49,10 @@ public class ProgramController {
                             SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                         "name",
                                                                         "abbreviation",
-                                                                        "academicStream"));
+                                                                        "department",
+                                                                        "academicStream"))
+                .addFilter("DepartmentFilter",
+                            SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"));
 
         wrapper.setFilters(filters);
 
@@ -73,7 +76,12 @@ public class ProgramController {
                                 SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                             "name",
                                                                             "abbreviation",
-                                                                            "academicStream"));
+                                                                            "department",
+                                                                            "academicStream",
+                                                                            "degree",
+                                                                            "educationPeriod"))
+                    .addFilter("DepartmentFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("name"));
 
             wrapper.setFilters(filters);
 
