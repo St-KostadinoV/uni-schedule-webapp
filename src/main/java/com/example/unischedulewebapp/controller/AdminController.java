@@ -16,6 +16,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @RestController
+@CrossOrigin(
+        origins = "http://localhost:3000"
+)
 @RequestMapping(
         path = "admin"
 )
