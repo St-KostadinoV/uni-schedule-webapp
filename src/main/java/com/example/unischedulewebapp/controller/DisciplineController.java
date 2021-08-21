@@ -43,7 +43,16 @@ public class DisciplineController {
                 .addFilter("DisciplineFilter",
                             SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                         "name",
-                                                                        "abbreviation"));
+                                                                        "abbreviation",
+                                                                        "department",
+                                                                        "leadingInstructor"))
+                .addFilter("DepartmentFilter",
+                            SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
+                .addFilter("InstructorFilter",
+                            SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
+                                                                        "title",
+                                                                        "firstName",
+                                                                        "lastName"));
 
         wrapper.setFilters(filters);
 

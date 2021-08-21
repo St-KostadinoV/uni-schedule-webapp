@@ -35,13 +35,13 @@ public class AdminController {
 
     @Autowired
     public AdminController(AcademicDepartmentService departmentService,
-                                AcademicDisciplineService disciplineService,
-                                AcademicFacultyService facultyService,
-                                AcademicProgramService programService,
-                                AcademicTimetableService timetableService,
-                                ProgramDisciplineService programDisciplineService,
-                                InstructorService instructorService,
-                                StudentService studentService) {
+                           AcademicDisciplineService disciplineService,
+                           AcademicFacultyService facultyService,
+                           AcademicProgramService programService,
+                           AcademicTimetableService timetableService,
+                           ProgramDisciplineService programDisciplineService,
+                           InstructorService instructorService,
+                           StudentService studentService) {
         this.departmentService = departmentService;
         this.disciplineService = disciplineService;
         this.facultyService = facultyService;

@@ -3,6 +3,7 @@ package com.example.unischedulewebapp.controller;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDiscipline;
 import com.example.unischedulewebapp.model.AcademicProgram;
+import com.example.unischedulewebapp.model.ProgramDiscipline;
 import com.example.unischedulewebapp.model.Student;
 import com.example.unischedulewebapp.service.AcademicProgramService;
 import com.example.unischedulewebapp.service.ProgramDisciplineService;
@@ -109,12 +110,18 @@ public class ProgramController {
             AcademicProgram program = programService
                     .findById(id);
 
-            List<AcademicDiscipline> programDisciplines = programDisciplineService
-                    .findProgramDisciplines(program, year);
+            List<ProgramDiscipline> programDisciplines = (year == null)
+                    ? programDisciplineService
+                        .findByProgram(program)
+                    : programDisciplineService
+                        .findByProgramAndAcademicYear(program, year);
 
             MappingJacksonValue wrapper = new MappingJacksonValue(programDisciplines);
 
             FilterProvider filters = new SimpleFilterProvider()
+                    .addFilter("ProgramDisciplineFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("discipline",
+                                                                            "academicYear"))
                     .addFilter("DisciplineFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                             "name",

@@ -50,10 +50,11 @@ public class ProfileController {
 
     @GetMapping
     public ResponseEntity<Object> getAuthenticatedUserProfile() {
-        AppUser currentUser = (AppUser) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
+        AppUser currentUser = (AppUser) userService
+                .loadUserByUsername((String) SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getPrincipal());
 
         try {
             MappingJacksonValue wrapper;
@@ -112,10 +113,11 @@ public class ProfileController {
             path = "email-change"
     )
     public ResponseEntity<Object> updateAuthenticatedUserEmail(@RequestParam("email") String email) {
-        AppUser currentUser = (AppUser) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
+        AppUser currentUser = (AppUser) userService
+                .loadUserByUsername((String) SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getPrincipal());
 
         try {
             Instructor instructor = instructorService
@@ -141,10 +143,11 @@ public class ProfileController {
     )
     public ResponseEntity<Object> updateAuthenticatedUserPassword(@RequestParam("newPassword") String newPassword,
                                                                   @RequestParam("oldPassword") String oldPassword) {
-        AppUser currentUser = (AppUser) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
+        AppUser currentUser = (AppUser) userService
+                .loadUserByUsername((String) SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getPrincipal());
 
         try {
             userService.updatePassword(currentUser, newPassword, oldPassword);
@@ -165,10 +168,11 @@ public class ProfileController {
             path = "timetable/daily"
     )
     public ResponseEntity<Object> getAuthenticatedUserDailyTimetable() {
-        AppUser currentUser = (AppUser) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
+        AppUser currentUser = (AppUser) userService
+                .loadUserByUsername((String) SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getPrincipal());
 
         try {
             List<AcademicTimetable> timetable;
@@ -244,10 +248,11 @@ public class ProfileController {
             path = "timetable/weekly"
     )
     public ResponseEntity<Object> getAuthenticatedUserWeeklyTimetable() {
-        AppUser currentUser = (AppUser) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
+        AppUser currentUser = (AppUser) userService
+                .loadUserByUsername((String) SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getPrincipal());
 
         try {
             List<AcademicTimetable> timetable;

@@ -8,13 +8,16 @@ import com.example.unischedulewebapp.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import static com.example.unischedulewebapp.model.enums.AcademicDegree.*;
 import static com.example.unischedulewebapp.model.enums.AcademicTitle.*;
 
+@ConfigurationPropertiesScan
 @SpringBootApplication
 public class Application {
 
@@ -2588,6 +2591,377 @@ public class Application {
 							instructorsKNT.get(4)
 					)
 			);
+
+			disciplines.get(21).addAssistingInstructors(instructorsSIT.get(16));
+			disciplines.get(0).addAssistingInstructors(instructorsSIT.get(10));
+			disciplines.get(0).addAssistingInstructors(instructorsSIT.get(13));
+			disciplines.get(0).addAssistingInstructors(instructorsSIT.get(14));
+
+			for(AcademicDiscipline discipline : disciplines)
+				disciplineService.addDiscipline(discipline);
+
+			List<ProgramDiscipline> uchebenPlanSIT = List.of(
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(3),
+							1
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(35),
+							1
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(37),
+							1
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(17),
+							1
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(28),
+							1
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(49),
+							1
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(40),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(2),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(52),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(55),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(29),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(53),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(1),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(50),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(22),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(5),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(57),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(31),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(30),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(14),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(33),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(60),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(6),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(62),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(59),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(70),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(7),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(18),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(41),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(71),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(21),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(43),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(20),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(19),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(10),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(42),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(24),
+							disciplines.get(16),
+							4
+					)
+			);
+
+			List<ProgramDiscipline> uchebenPlanKST = List.of(
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(3),
+							1
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(37),
+							1
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(17),
+							1
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(28),
+							1
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(49),
+							1
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(40),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(52),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(35),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(55),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(53),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(29),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(50),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(22),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(63),
+							2
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(12),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(32),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(2),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(47),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(56),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(71),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(51),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(48),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(54),
+							3
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(45),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(36),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(61),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(1),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(38),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(24),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(16),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(19),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(42),
+							4
+					),
+					new ProgramDiscipline(
+							bachelorPrograms.get(16),
+							disciplines.get(46),
+							4
+					)
+			);
+
+			for(ProgramDiscipline pd : uchebenPlanSIT)
+				programDisciplineService.addProgramDiscipline(pd);
+			for(ProgramDiscipline pd : uchebenPlanKST)
+				programDisciplineService.addProgramDiscipline(pd);
+
+			System.out.println(LocalTime.now() + "\t\tfinished inserting data");
 		};
 	}
 }
