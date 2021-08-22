@@ -1,16 +1,19 @@
-package com.example.unischedulewebapp.auth;
+package com.example.unischedulewebapp.service;
 
 import com.example.unischedulewebapp.auth.exception.PasswordsMatchException;
 import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
+import com.example.unischedulewebapp.exception.ResourceNotFoundException;
+import com.example.unischedulewebapp.model.User;
+import com.example.unischedulewebapp.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-public class AppUserService implements UserDetailsService {
+public class UserService {
 
     private final static String USER_NOT_FOUND_MSG =
             "User '%s' not found!";
@@ -19,49 +22,40 @@ public class AppUserService implements UserDetailsService {
     private final static String INVALID_PASSWORD_MSG =
             "The password you entered is incorrect!";
 
+    private final UserRepo userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final AppUserRepository appUserRepository;
 
     @Autowired
-    public AppUserService(PasswordEncoder passwordEncoder,
-                          AppUserRepository appUserRepository) {
+    public UserService(UserRepo userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.appUserRepository = appUserRepository;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return appUserRepository
+    public User findByUsername(String username) throws ResourceNotFoundException {
+        return userRepository
                 .findByUsername(username)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException(
-                                String.format(USER_NOT_FOUND_MSG,username)
+                        new ResourceNotFoundException(
+                                String.format(USER_NOT_FOUND_MSG, username)
                         ));
     }
 
-    public void registerUser(AppUser user) throws UserAlreadyExistsException {
-        boolean userExists = appUserRepository
-                .findByUsername(user.getUsername())
-                .isPresent();
-
-        if(userExists)
+    public User registerUser(User user) throws UserAlreadyExistsException {
+        if(userRepository.existsByUsername(user.getUsername())) {
             throw new UserAlreadyExistsException(
                     String.format(USER_EXISTS_MSG, user.getUsername())
             );
+        }
 
         String encodedPassword = passwordEncoder
                 .encode(user.getPassword());
 
         user.setPassword(encodedPassword);
-        appUserRepository.save(user);
+        return userRepository.save(user);
     }
 
-    public void updatePassword(AppUser user, String newPassword, String oldPassword) throws PasswordsMatchException {
-        boolean userExists = appUserRepository
-                .findByUsername(user.getUsername())
-                .isPresent();
-
-        if(!userExists)
+    public void updatePassword(User user, String newPassword, String oldPassword) throws PasswordsMatchException {
+        if(!userRepository.existsByUsername(user.getUsername()))
             throw new UsernameNotFoundException(
                     String.format(USER_NOT_FOUND_MSG, user.getUsername())
             );
@@ -73,6 +67,6 @@ public class AppUserService implements UserDetailsService {
                 .encode(newPassword);
 
         user.setPassword(encodedPassword);
-        appUserRepository.save(user);
+        userRepository.save(user);
     }
 }

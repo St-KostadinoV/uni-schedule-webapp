@@ -1,12 +1,10 @@
-package com.example.unischedulewebapp.auth.jwt;
+package com.example.unischedulewebapp.auth.payload;
 
-public class UsernameAndPasswordAuthRequest {
+public class LoginRequest {
 
     private String username;
-    private String password;
 
-    public UsernameAndPasswordAuthRequest() {
-    }
+    private String password;
 
     public String getUsername() {
         return username;

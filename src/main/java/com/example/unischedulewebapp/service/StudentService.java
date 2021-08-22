@@ -1,14 +1,15 @@
 package com.example.unischedulewebapp.service;
 
-import com.example.unischedulewebapp.auth.AppUser;
-import com.example.unischedulewebapp.auth.AppUserService;
+import com.example.unischedulewebapp.auth.UserDetailsImpl;
+import com.example.unischedulewebapp.auth.UserDetailsServiceImpl;
 import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
 import com.example.unischedulewebapp.exception.BadResourceException;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicProgram;
 import com.example.unischedulewebapp.model.Student;
-import com.example.unischedulewebapp.repository.StudentRepository;
+import com.example.unischedulewebapp.model.User;
+import com.example.unischedulewebapp.repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -31,31 +32,31 @@ public class StudentService {
     private static final String STUDENT_FAC_NUMBER_OVERWRITE_MSG =
             "Student's faculty number can't be overwritten!";
 
-    private final StudentRepository studentRepository;
-    private final AppUserService userService;
+    private final StudentRepo studentRepo;
+    private final UserService userService;
     private final AcademicProgramService programService;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository,
-                          AppUserService userService,
+    public StudentService(StudentRepo studentRepo,
+                          UserService userService,
                           AcademicProgramService programService) {
-        this.studentRepository = studentRepository;
+        this.studentRepo = studentRepo;
         this.userService = userService;
         this.programService = programService;
     }
 
     public boolean existsById(Long id) {
-        return studentRepository
+        return studentRepo
                 .existsById(id);
     }
 
     public boolean existsByFacultyNumber(String facultyNumber) {
-        return studentRepository
+        return studentRepo
                 .existsByFacultyNumber(facultyNumber);
     }
 
     public Student findById(Long id) throws ResourceNotFoundException {
-        return studentRepository
+        return studentRepo
                 .findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
@@ -63,27 +64,27 @@ public class StudentService {
                         ));
     }
 
-    public Student findByUserDetails(AppUser userDetails) throws ResourceNotFoundException {
-        return studentRepository
-                .findByUserDetails(userDetails)
+    public Student findByUser(User user) throws ResourceNotFoundException {
+        return studentRepo
+                .findByUser(user)
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
-                                String.format(STUDENT_NOT_FOUND_MSG, "with userId=" + userDetails.getId())
+                                String.format(STUDENT_NOT_FOUND_MSG, "with userId=" + user.getId())
                         ));
     }
 
     public List<Student> findByFirstAndLastName(String firstName, String lastName) {
-        return new ArrayList<>(studentRepository
+        return new ArrayList<>(studentRepo
                 .findByFirstNameContainingOrLastNameContaining(firstName, lastName));
     }
 
     public List<Student> findByFullName(String firstName, String middleName, String lastName) {
-        return new ArrayList<>(studentRepository
+        return new ArrayList<>(studentRepo
                 .findByFirstNameContainingOrMiddleNameContainingOrLastNameContaining(firstName, middleName, lastName));
     }
 
     public Student findByFacultyNumber(String facultyNumber) throws ResourceNotFoundException{
-        return studentRepository
+        return studentRepo
                 .findByFacultyNumber(facultyNumber)
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
@@ -92,42 +93,42 @@ public class StudentService {
     }
 
     public List<Student> findByAcademicProgram(AcademicProgram program) {
-        return new ArrayList<>(studentRepository
+        return new ArrayList<>(studentRepo
                 .findByAcademicProgram(program));
     }
 
     public List<Student> findByAcademicYear(Integer year) {
-        return new ArrayList<>(studentRepository
+        return new ArrayList<>(studentRepo
                 .findByAcademicYear(year));
     }
 
     public List<Student> findByAcademicProgramAndAcademicYear(AcademicProgram program, Integer year) {
-        return new ArrayList<>(studentRepository
+        return new ArrayList<>(studentRepo
                 .findByAcademicProgramAndAcademicYear(program, year));
     }
 
     public List<Student> findByAcademicProgramAndAcademicYearAndStudentGroup(AcademicProgram program, Integer year, Integer group) {
-        return new ArrayList<>(studentRepository
+        return new ArrayList<>(studentRepo
                 .findByAcademicProgramAndAcademicYearAndStudentGroup(program, year, group));
     }
 
     public List<Student> findByActiveStatus(Boolean activeStatus) {
-        return new ArrayList<>(studentRepository
+        return new ArrayList<>(studentRepo
                 .findByActiveStatus(activeStatus));
     }
 
     public List<Student> findAll() {
-        return studentRepository
+        return studentRepo
                 .findAll();
     }
 
     public List<Student> findAll(Sort sort) {
-        return studentRepository
+        return studentRepo
                 .findAll(sort);
     }
 
     public List<Student> findAll(int pageNumber, int rowsPerPage) {
-        return studentRepository
+        return studentRepo
                 .findAll(PageRequest.of(pageNumber - 1, rowsPerPage))
                 .toList();
     }
@@ -158,9 +159,9 @@ public class StudentService {
         if(student.getAcademicYear() > student.getAcademicProgram().getEducationPeriod())
             throw new BadResourceException(STUDENT_INVALID_YEAR_MSG);
 
-        userService.registerUser(student.getUserDetails());
+        userService.registerUser(student.getUser());
 
-        return studentRepository.save(student);
+        return studentRepo.save(student);
     }
 
     public Student updateStudent(Long id, Student student) throws ResourceNotFoundException, BadResourceException {
@@ -176,7 +177,7 @@ public class StudentService {
             throw new BadResourceException(STUDENT_INVALID_YEAR_MSG);
 
         student.setId(id);
-        return studentRepository.save(student);
+        return studentRepo.save(student);
     }
 
     public void deleteStudent(Long id) throws ResourceNotFoundException {
@@ -185,6 +186,6 @@ public class StudentService {
                     String.format(STUDENT_NOT_FOUND_MSG, "with id=" + id)
             );
 
-        studentRepository.deleteById(id);
+        studentRepo.deleteById(id);
     }
 }

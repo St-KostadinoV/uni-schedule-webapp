@@ -5,7 +5,7 @@ import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.AcademicDiscipline;
 import com.example.unischedulewebapp.model.Instructor;
-import com.example.unischedulewebapp.repository.AcademicDisciplineRepository;
+import com.example.unischedulewebapp.repository.AcademicDisciplineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,11 +24,11 @@ public class AcademicDisciplineService {
     private final static String DSCPL_INSTRUCTOR_NOT_FOUND_MSG =
             "Discipline is taught by non-existent instructor!";
 
-    private final AcademicDisciplineRepository disciplineRepository;
+    private final AcademicDisciplineRepo disciplineRepository;
     private final InstructorService instructorService;
 
     @Autowired
-    public AcademicDisciplineService(AcademicDisciplineRepository disciplineRepository,
+    public AcademicDisciplineService(AcademicDisciplineRepo disciplineRepository,
                                      InstructorService instructorService) {
         this.disciplineRepository = disciplineRepository;
         this.instructorService = instructorService;

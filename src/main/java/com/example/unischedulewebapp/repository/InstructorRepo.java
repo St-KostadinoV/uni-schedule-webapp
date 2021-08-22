@@ -3,14 +3,14 @@ package com.example.unischedulewebapp.repository;
 import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.enums.AcademicTitle;
 import com.example.unischedulewebapp.model.Instructor;
-import com.example.unischedulewebapp.repository.base.PersonRepository;
+import com.example.unischedulewebapp.repository.base.PersonRepo;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 
 @Repository
-public interface InstructorRepository
-        extends PersonRepository<Instructor> {
+public interface InstructorRepo
+        extends PersonRepo<Instructor> {
 
     Collection<Instructor> findByTitle(AcademicTitle title);
 

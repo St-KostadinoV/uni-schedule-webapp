@@ -7,7 +7,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import java.util.Collection;
 
 @NoRepositoryBean
-public interface AcademicStructureRepository<T extends AcademicStructure>
+public interface AcademicStructureRepo<T extends AcademicStructure>
         extends JpaRepository<T, Long> {
 
     // TODO - edit queries to ignore case

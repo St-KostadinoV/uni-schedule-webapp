@@ -2,9 +2,8 @@ package com.example.unischedulewebapp.service;
 
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
-import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.AcademicFaculty;
-import com.example.unischedulewebapp.repository.AcademicFacultyRepository;
+import com.example.unischedulewebapp.repository.AcademicFacultyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -21,10 +20,10 @@ public class AcademicFacultyService {
     private final static String FACULTY_EXISTS_MSG =
             "Faculty %s already exists!";
 
-    private final AcademicFacultyRepository facultyRepository;
+    private final AcademicFacultyRepo facultyRepository;
 
     @Autowired
-    public AcademicFacultyService(AcademicFacultyRepository facultyRepository) {
+    public AcademicFacultyService(AcademicFacultyRepo facultyRepository) {
         this.facultyRepository = facultyRepository;
     }
 

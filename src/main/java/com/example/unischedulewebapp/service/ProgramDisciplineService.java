@@ -6,7 +6,7 @@ import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDiscipline;
 import com.example.unischedulewebapp.model.AcademicProgram;
 import com.example.unischedulewebapp.model.ProgramDiscipline;
-import com.example.unischedulewebapp.repository.ProgramDisciplineRepository;
+import com.example.unischedulewebapp.repository.ProgramDisciplineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -30,26 +30,26 @@ public class ProgramDisciplineService {
     private final static String PROGRAM_DSCPL_INVALID_YEAR_MSG =
             "Discipline's year is outside of program's education period!";
 
-    private final ProgramDisciplineRepository programDisciplineRepository;
+    private final ProgramDisciplineRepo programDisciplineRepo;
     private final AcademicProgramService programService;
     private final AcademicDisciplineService disciplineService;
 
     @Autowired
-    public ProgramDisciplineService(ProgramDisciplineRepository programDisciplineRepository,
+    public ProgramDisciplineService(ProgramDisciplineRepo programDisciplineRepo,
                                     AcademicProgramService programService,
                                     AcademicDisciplineService disciplineService) {
-        this.programDisciplineRepository = programDisciplineRepository;
+        this.programDisciplineRepo = programDisciplineRepo;
         this.programService = programService;
         this.disciplineService = disciplineService;
     }
 
     public boolean existsById(Long id){
-        return programDisciplineRepository
+        return programDisciplineRepo
                 .existsById(id);
     }
 
     public ProgramDiscipline findById(Long id) throws ResourceNotFoundException {
-        return programDisciplineRepository
+        return programDisciplineRepo
                 .findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
@@ -58,37 +58,37 @@ public class ProgramDisciplineService {
     }
 
     public List<ProgramDiscipline> findByProgram(AcademicProgram program) {
-        return new ArrayList<>(programDisciplineRepository
+        return new ArrayList<>(programDisciplineRepo
                 .findByProgram(program));
     }
 
     public List<ProgramDiscipline> findByDiscipline(AcademicDiscipline discipline) {
-        return new ArrayList<>(programDisciplineRepository
+        return new ArrayList<>(programDisciplineRepo
                 .findByDiscipline(discipline));
     }
 
     public List<ProgramDiscipline> findByProgramAndDiscipline(AcademicProgram program, AcademicDiscipline discipline) {
-        return new ArrayList<>(programDisciplineRepository
+        return new ArrayList<>(programDisciplineRepo
                 .findByProgramAndDiscipline(program, discipline));
     }
 
     public List<ProgramDiscipline> findByProgramAndAcademicYear(AcademicProgram program, Integer year) {
-        return new ArrayList<>(programDisciplineRepository
+        return new ArrayList<>(programDisciplineRepo
                 .findByProgramAndAcademicYear(program, year));
     }
 
     public List<ProgramDiscipline> findAll() {
-        return programDisciplineRepository
+        return programDisciplineRepo
                 .findAll();
     }
 
     public List<ProgramDiscipline> findAll(Sort sort) {
-        return programDisciplineRepository
+        return programDisciplineRepo
                 .findAll(sort);
     }
 
     public List<ProgramDiscipline> findAll(int pageNumber, int rowsPerPage) {
-        return programDisciplineRepository
+        return programDisciplineRepo
                 .findAll(PageRequest.of(pageNumber - 1, rowsPerPage))
                 .toList();
     }
@@ -126,7 +126,7 @@ public class ProgramDisciplineService {
         if(programDiscipline.getAcademicYear() > programDiscipline.getProgram().getEducationPeriod())
             throw new BadResourceException(PROGRAM_DSCPL_INVALID_YEAR_MSG);
 
-        return programDisciplineRepository.save(programDiscipline);
+        return programDisciplineRepo.save(programDiscipline);
     }
 
     public ProgramDiscipline updateProgramDiscipline(Long id, ProgramDiscipline programDiscipline) throws ResourceNotFoundException, BadResourceException {
@@ -145,7 +145,7 @@ public class ProgramDisciplineService {
             throw new BadResourceException(PROGRAM_DSCPL_INVALID_YEAR_MSG);
 
         programDiscipline.setId(id);
-        return programDisciplineRepository.save(programDiscipline);
+        return programDisciplineRepo.save(programDiscipline);
     }
 
     public void deleteProgramDiscipline(Long id) throws ResourceNotFoundException {
@@ -154,6 +154,6 @@ public class ProgramDisciplineService {
                     String.format(PROGRAM_DSCPL_NOT_FOUND_MSG, id)
             );
 
-        programDisciplineRepository.deleteById(id);
+        programDisciplineRepo.deleteById(id);
     }
 }

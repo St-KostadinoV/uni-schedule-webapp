@@ -1,14 +1,15 @@
 package com.example.unischedulewebapp.service;
 
-import com.example.unischedulewebapp.auth.AppUser;
-import com.example.unischedulewebapp.auth.AppUserService;
+import com.example.unischedulewebapp.auth.UserDetailsImpl;
+import com.example.unischedulewebapp.auth.UserDetailsServiceImpl;
 import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDepartment;
+import com.example.unischedulewebapp.model.User;
 import com.example.unischedulewebapp.model.enums.AcademicTitle;
 import com.example.unischedulewebapp.model.Instructor;
-import com.example.unischedulewebapp.repository.InstructorRepository;
+import com.example.unischedulewebapp.repository.InstructorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -27,26 +28,26 @@ public class InstructorService {
     private final static String INSTRUCTOR_DEPT_NOT_FOUND_MSG =
             "Instructor is part of a non-existent department!";
 
-    private final InstructorRepository instructorRepository;
-    private final AppUserService userService;
+    private final InstructorRepo instructorRepo;
+    private final UserService userService;
     private final AcademicDepartmentService departmentService;
 
     @Autowired
-    public InstructorService(InstructorRepository instructorRepository,
-                             AppUserService userService,
+    public InstructorService(InstructorRepo instructorRepo,
+                             UserService userService,
                              AcademicDepartmentService departmentService) {
-        this.instructorRepository = instructorRepository;
+        this.instructorRepo = instructorRepo;
         this.userService = userService;
         this.departmentService = departmentService;
     }
 
     public boolean existsById(Long id) {
-        return instructorRepository
+        return instructorRepo
                 .existsById(id);
     }
 
     public Instructor findById(Long id) throws ResourceNotFoundException {
-        return instructorRepository
+        return instructorRepo
                 .findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
@@ -54,47 +55,47 @@ public class InstructorService {
                         ));
     }
 
-    public Instructor findByUserDetails(AppUser userDetails) throws ResourceNotFoundException {
-        return instructorRepository
-                .findByUserDetails(userDetails)
+    public Instructor findByUser(User user) throws ResourceNotFoundException {
+        return instructorRepo
+                .findByUser(user)
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
-                                String.format(INSTRUCTOR_NOT_FOUND_MSG, "with userId=" + userDetails.getId())
+                                String.format(INSTRUCTOR_NOT_FOUND_MSG, "with userId=" + user.getId())
                         ));
     }
 
     public List<Instructor> findByFirstAndLastName(String firstName, String lastName) {
-        return new ArrayList<>(instructorRepository
+        return new ArrayList<>(instructorRepo
                 .findByFirstNameContainingOrLastNameContaining(firstName, lastName));
     }
 
     public List<Instructor> findByFullName(String firstName, String middleName, String lastName) {
-        return new ArrayList<>(instructorRepository
+        return new ArrayList<>(instructorRepo
                 .findByFirstNameContainingOrMiddleNameContainingOrLastNameContaining(firstName, middleName, lastName));
     }
 
     public List<Instructor> findByTitle(AcademicTitle title) {
-        return new ArrayList<>(instructorRepository
+        return new ArrayList<>(instructorRepo
                 .findByTitle(title));
     }
 
     public List<Instructor> findByDepartment(AcademicDepartment department) {
-        return new ArrayList<>(instructorRepository
+        return new ArrayList<>(instructorRepo
                 .findByDepartment(department));
     }
 
     public List<Instructor> findAll() {
-        return instructorRepository
+        return instructorRepo
                 .findAll();
     }
 
     public List<Instructor> findAll(Sort sort) {
-        return instructorRepository
+        return instructorRepo
                 .findAll(sort);
     }
 
     public List<Instructor> findAll(int pageNumber, int rowsPerPage) {
-        return instructorRepository
+        return instructorRepo
                 .findAll(PageRequest.of(pageNumber - 1, rowsPerPage))
                 .toList();
     }
@@ -108,9 +109,9 @@ public class InstructorService {
         if(!departmentService.existsById(instructor.getDepartment().getId()))
             throw new ResourceNotFoundException(INSTRUCTOR_DEPT_NOT_FOUND_MSG);
 
-        userService.registerUser(instructor.getUserDetails());
+        userService.registerUser(instructor.getUser());
 
-        return instructorRepository.save(instructor);
+        return instructorRepo.save(instructor);
     }
 
     public Instructor updateInstructor(Long id, Instructor instructor) throws ResourceNotFoundException {
@@ -123,7 +124,7 @@ public class InstructorService {
             throw new ResourceNotFoundException(INSTRUCTOR_DEPT_NOT_FOUND_MSG);
 
         instructor.setId(id);
-        return instructorRepository.save(instructor);
+        return instructorRepo.save(instructor);
     }
 
     public Instructor updateInstructorEmail(Instructor instructor, String email) throws ResourceNotFoundException {
@@ -136,7 +137,7 @@ public class InstructorService {
             throw new ResourceNotFoundException(INSTRUCTOR_DEPT_NOT_FOUND_MSG);
 
         instructor.setEmail(email);
-        return instructorRepository.save(instructor);
+        return instructorRepo.save(instructor);
     }
 
     public void deleteInstructor(Long id) throws ResourceNotFoundException {
@@ -145,6 +146,6 @@ public class InstructorService {
                     String.format(INSTRUCTOR_NOT_FOUND_MSG, "with id=" + id)
             );
 
-        instructorRepository.deleteById(id);
+        instructorRepo.deleteById(id);
     }
 }

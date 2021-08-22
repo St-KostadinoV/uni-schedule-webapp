@@ -1,6 +1,7 @@
 package com.example.unischedulewebapp.model.base;
 
-import com.example.unischedulewebapp.auth.AppUser;
+import com.example.unischedulewebapp.auth.UserDetailsImpl;
+import com.example.unischedulewebapp.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public abstract class Person {
     @JoinColumn(
             name = "user_details_id"
     )
-    private AppUser userDetails;
+    private User user;
 
     @Column(
             name = "first_name",
@@ -56,41 +57,13 @@ public abstract class Person {
     public Person() {
     }
 
-    public Person(Long id,
-                  AppUser userDetails,
+    public Person(User user,
                   String firstName,
                   String middleName,
                   String lastName,
                   String email,
                   String phone) {
-        this.id = id;
-        this.userDetails = userDetails;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-    }
-
-    public Person(AppUser userDetails,
-                  String firstName,
-                  String middleName,
-                  String lastName,
-                  String email,
-                  String phone) {
-        this.userDetails = userDetails;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-    }
-
-    public Person(String firstName,
-                  String middleName,
-                  String lastName,
-                  String email,
-                  String phone) {
+        this.user = user;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -106,12 +79,12 @@ public abstract class Person {
         this.id = id;
     }
 
-    public AppUser getUserDetails() {
-        return userDetails;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserDetails(AppUser userDetails) {
-        this.userDetails = userDetails;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getFirstName() {

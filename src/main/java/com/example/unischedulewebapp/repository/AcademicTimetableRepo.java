@@ -15,7 +15,7 @@ import java.time.LocalTime;
 import java.util.Collection;
 
 @Repository
-public interface AcademicTimetableRepository
+public interface AcademicTimetableRepo
         extends JpaRepository<AcademicTimetable, Long> {
 
     Collection<AcademicTimetable> findByAssignedInstructor(Instructor instructor);
@@ -67,8 +67,8 @@ public interface AcademicTimetableRepository
             "where tt.assignedInstructor = :instructor " +
             "and tt.dayOfWeek = :dayOfWeek " +
             "and ( " +
-            "(tt.startTime between :startTime and :endTime) " +
-            "or (tt.endTime between :startTime and :endTime) " +
+            "(:startTime <= tt.startTime and tt.startTime <= :endTime) " +
+            "or (:startTime <= tt.endTime and tt.endTime <= :endTime) " +
             ")"
     )
     Collection<AcademicTimetable> findInstructorAvailability(@Param("instructor") Instructor instructor,
@@ -84,8 +84,8 @@ public interface AcademicTimetableRepository
             "and tt.studentGroup = :group " +
             "and tt.dayOfWeek = :day " +
             "and ( " +
-            "(tt.startTime between :startTime and :endTime) " +
-            "or (tt.endTime between :startTime and :endTime) " +
+            "(:startTime <= tt.startTime and tt.startTime <= :endTime) " +
+            "or (:startTime <= tt.endTime and tt.endTime <= :endTime) " +
             ")"
     )
     Collection<AcademicTimetable> findStudentsAvailability(@Param("program") AcademicProgram program,
@@ -100,8 +100,8 @@ public interface AcademicTimetableRepository
             "where tt.designatedRoom = :room " +
             "and tt.dayOfWeek = :dayOfWeek " +
             "and ( " +
-            "(tt.startTime between :startTime and :endTime) " +
-            "or (tt.endTime between :startTime and :endTime) " +
+            "(:startTime <= tt.startTime and tt.startTime <= :endTime) " +
+            "or (:startTime <= tt.endTime and tt.endTime <= :endTime) " +
             ")"
     )
     Collection<AcademicTimetable> findRoomAvailability(@Param("room") String room,

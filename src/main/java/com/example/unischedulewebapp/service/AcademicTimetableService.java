@@ -9,7 +9,7 @@ import com.example.unischedulewebapp.model.ProgramDiscipline;
 import com.example.unischedulewebapp.model.Student;
 import com.example.unischedulewebapp.model.Instructor;
 import com.example.unischedulewebapp.model.enums.AcademicClassType;
-import com.example.unischedulewebapp.repository.AcademicTimetableRepository;
+import com.example.unischedulewebapp.repository.AcademicTimetableRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -35,12 +35,12 @@ public class AcademicTimetableService {
     private final static String TIMETBL_UNAFFILIATED_INSTRUCTOR_MSG =
             "Timetable's assigned instructor is not affiliated with the discipline!";
 
-    private final AcademicTimetableRepository timetableRepository;
+    private final AcademicTimetableRepo timetableRepository;
     private final ProgramDisciplineService programDisciplineService;
     private final InstructorService instructorService;
 
     @Autowired
-    public AcademicTimetableService(AcademicTimetableRepository timetableRepository,
+    public AcademicTimetableService(AcademicTimetableRepo timetableRepository,
                                     ProgramDisciplineService programDisciplineService,
                                     InstructorService instructorService) {
         this.timetableRepository = timetableRepository;

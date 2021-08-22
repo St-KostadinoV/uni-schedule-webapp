@@ -4,7 +4,7 @@ import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.AcademicFaculty;
-import com.example.unischedulewebapp.repository.AcademicDepartmentRepository;
+import com.example.unischedulewebapp.repository.AcademicDepartmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -23,11 +23,11 @@ public class AcademicDepartmentService {
     private final static String DEPT_FACULTY_NOT_FOUND_MSG =
             "Department is part of a non-existent faculty!";
 
-    private final AcademicDepartmentRepository departmentRepository;
+    private final AcademicDepartmentRepo departmentRepository;
     private final AcademicFacultyService facultyService;
 
     @Autowired
-    public AcademicDepartmentService(AcademicDepartmentRepository departmentRepository,
+    public AcademicDepartmentService(AcademicDepartmentRepo departmentRepository,
                                      AcademicFacultyService facultyService) {
         this.departmentRepository = departmentRepository;
         this.facultyService = facultyService;

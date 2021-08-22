@@ -1,6 +1,6 @@
 package com.example.unischedulewebapp.model;
 
-import com.example.unischedulewebapp.auth.AppUser;
+import com.example.unischedulewebapp.auth.UserDetailsImpl;
 import com.example.unischedulewebapp.model.base.Person;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
@@ -50,7 +50,7 @@ public class Student extends Person implements Serializable {
     public Student() {
     }
 
-    public Student(AppUser userDetails,
+    public Student(User user,
                    String firstName,
                    String middleName,
                    String lastName,
@@ -61,7 +61,7 @@ public class Student extends Person implements Serializable {
                    Integer academicYear,
                    Integer studentGroup,
                    Boolean activeStatus) {
-        super(userDetails, firstName, middleName, lastName, email, phone);
+        super(user, firstName, middleName, lastName, email, phone);
         this.facultyNumber = facultyNumber;
         this.academicProgram = academicProgram;
         this.academicYear = academicYear;

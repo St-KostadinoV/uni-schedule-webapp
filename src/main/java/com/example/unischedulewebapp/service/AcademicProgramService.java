@@ -5,7 +5,7 @@ import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.AcademicProgram;
 import com.example.unischedulewebapp.model.enums.AcademicDegree;
-import com.example.unischedulewebapp.repository.AcademicProgramRepository;
+import com.example.unischedulewebapp.repository.AcademicProgramRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,11 +24,11 @@ public class AcademicProgramService {
     private final static String PROGRAM_DEPT_NOT_FOUND =
             "Program is part of a non-existent department!";
 
-    private final AcademicProgramRepository programRepository;
+    private final AcademicProgramRepo programRepository;
     private final AcademicDepartmentService departmentService;
 
     @Autowired
-    public AcademicProgramService(AcademicProgramRepository programRepository,
+    public AcademicProgramService(AcademicProgramRepo programRepository,
                                   AcademicDepartmentService departmentService) {
         this.programRepository = programRepository;
         this.departmentService = departmentService;

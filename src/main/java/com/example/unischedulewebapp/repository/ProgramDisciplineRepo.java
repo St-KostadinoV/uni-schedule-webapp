@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 
 @Repository
-public interface ProgramDisciplineRepository
+public interface ProgramDisciplineRepo
         extends JpaRepository<ProgramDiscipline, Long> {
 
     Collection<ProgramDiscipline> findByProgram(AcademicProgram program);

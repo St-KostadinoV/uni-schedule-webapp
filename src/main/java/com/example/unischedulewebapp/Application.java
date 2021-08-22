@@ -1,8 +1,7 @@
 package com.example.unischedulewebapp;
 
-import com.example.unischedulewebapp.auth.AppUser;
-import com.example.unischedulewebapp.auth.AppUserRole;
-import com.example.unischedulewebapp.auth.AppUserService;
+import com.example.unischedulewebapp.auth.UserDetailsImpl;
+import com.example.unischedulewebapp.model.enums.UserRole;
 import com.example.unischedulewebapp.model.*;
 import com.example.unischedulewebapp.service.*;
 import org.springframework.boot.CommandLineRunner;
@@ -118,7 +117,7 @@ public class Application {
 
 			List<Instructor> instructorsAP = List.of(
 					new Instructor(
-							new AppUser("INSTR_AP_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_1", "1234", UserRole.INSTRUCTOR),
 							"Никола",
 							"Николаев",
 							"Николов",
@@ -130,7 +129,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_2", "1234", UserRole.INSTRUCTOR),
 							"Марияна",
 							"Георгиева",
 							"Тодорова",
@@ -142,7 +141,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_3", "1234", UserRole.INSTRUCTOR),
 							"Наско",
 							"Райчев",
 							"Атанасов",
@@ -154,7 +153,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_4", "1234", UserRole.INSTRUCTOR),
 							"Мариела",
 							"Иванова",
 							"Александрова",
@@ -166,7 +165,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_5", "1234", UserRole.INSTRUCTOR),
 							"Веско",
 							"Христов",
 							"Узунов",
@@ -178,7 +177,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_6", "1234", UserRole.INSTRUCTOR),
 							"Живко",
 							"Стефков",
 							"Жеков",
@@ -190,7 +189,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_7", "1234", UserRole.INSTRUCTOR),
 							"Диан",
 							"Богданов",
 							"Джибаров",
@@ -202,7 +201,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_8", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_8", "1234", UserRole.INSTRUCTOR),
 							"Елена",
 							"Драгомирова",
 							"Драганова",
@@ -214,7 +213,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_9", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_9", "1234", UserRole.INSTRUCTOR),
 							"Ренета",
 							"Данчева",
 							"Първанова",
@@ -226,7 +225,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_10", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_10", "1234", UserRole.INSTRUCTOR),
 							"Иван",
 							"Веселинов",
 							"Григоров",
@@ -238,7 +237,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_11", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_11", "1234", UserRole.INSTRUCTOR),
 							"Емил",
 							"Йорданов",
 							"Маринов",
@@ -250,7 +249,7 @@ public class Application {
 							true
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_12", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_12", "1234", UserRole.INSTRUCTOR),
 							"Велко",
 							"Георгиев",
 							"Наумов",
@@ -262,7 +261,7 @@ public class Application {
 							true
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_13", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_13", "1234", UserRole.INSTRUCTOR),
 							"Янко",
 							"Стоянов",
 							"Янев",
@@ -274,7 +273,7 @@ public class Application {
 							true
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_14", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_14", "1234", UserRole.INSTRUCTOR),
 							"Пламен",
 							"Антонов",
 							"Манасиев",
@@ -286,7 +285,7 @@ public class Application {
 							true
 					),
 					new Instructor(
-							new AppUser("INSTR_AP_15", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_AP_15", "1234", UserRole.INSTRUCTOR),
 							"Светлана",
 							"Георгиева",
 							"Герганова-Спасова",
@@ -301,7 +300,7 @@ public class Application {
 
 			List<Instructor> instructorsDTK = List.of(
 					new Instructor(
-							new AppUser("INSTR_DTK_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_DTK_1", "1234", UserRole.INSTRUCTOR),
 							"Свилен",
 							"Христов",
 							"Стоянов",
@@ -313,7 +312,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_DTK_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_DTK_2", "1234", UserRole.INSTRUCTOR),
 							"Радко",
 							"Петров",
 							"Михайлов",
@@ -325,7 +324,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_DTK_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_DTK_3", "1234", UserRole.INSTRUCTOR),
 							"Владимир",
 							"Георгиев",
 							"Демирев",
@@ -337,7 +336,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_DTK_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_DTK_4", "1234", UserRole.INSTRUCTOR),
 							"Светлозар",
 							"Кирилов",
 							"Захариев",
@@ -349,7 +348,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_DTK_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_DTK_5", "1234", UserRole.INSTRUCTOR),
 							"Светлана",
 							"Михайлова",
 							"Паскалева",
@@ -361,7 +360,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_DTK_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_DTK_6", "1234", UserRole.INSTRUCTOR),
 							"Красимира",
 							"Петкова",
 							"Загорова",
@@ -373,7 +372,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_DTK_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_DTK_7", "1234", UserRole.INSTRUCTOR),
 							"Десислава",
 							"Палчева",
 							"Михайлова",
@@ -385,7 +384,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_DTK_8", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_DTK_8", "1234", UserRole.INSTRUCTOR),
 							"Аспарух",
 							"Иванов",
 							"Атанасов",
@@ -400,7 +399,7 @@ public class Application {
 
 			List<Instructor> instructorsEOOS = List.of(
 					new Instructor(
-							new AppUser("INSTR_EOOS_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EOOS_1", "1234", UserRole.INSTRUCTOR),
 							"Даниела",
 							"Симеонова",
 							"Тонева",
@@ -412,7 +411,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EOOS_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EOOS_2", "1234", UserRole.INSTRUCTOR),
 							"Николай",
 							"Николаев",
 							"Минчев",
@@ -424,7 +423,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EOOS_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EOOS_3", "1234", UserRole.INSTRUCTOR),
 							"Анна",
 							"Костадинова",
 							"Симеонова",
@@ -436,7 +435,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EOOS_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EOOS_4", "1234", UserRole.INSTRUCTOR),
 							"Стоян",
 							"Иванов",
 							"Вергиев",
@@ -448,7 +447,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EOOS_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EOOS_5", "1234", UserRole.INSTRUCTOR),
 							"Татяна",
 							"Любенова",
 							"Жекова",
@@ -460,7 +459,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EOOS_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EOOS_6", "1234", UserRole.INSTRUCTOR),
 							"Стефан",
 							"Колев",
 							"Колев",
@@ -472,7 +471,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EOOS_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EOOS_7", "1234", UserRole.INSTRUCTOR),
 							"Елена",
 							"Михайлова",
 							"Вълкова",
@@ -484,7 +483,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EOOS_8", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EOOS_8", "1234", UserRole.INSTRUCTOR),
 							"Радостина",
 							"Атанасова",
 							"Христова-Минчева",
@@ -496,7 +495,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EOOS_9", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EOOS_9", "1234", UserRole.INSTRUCTOR),
 							"Тодорка",
 							"Денчева",
 							"Станчева",
@@ -511,7 +510,7 @@ public class Application {
 
 			List<Instructor> instructorsEE = List.of(
 					new Instructor(
-							new AppUser("INSTR_EE_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EE_1", "1234", UserRole.INSTRUCTOR),
 							"Йончо",
 							"Любенов",
 							"Каменов",
@@ -523,7 +522,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EE_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EE_2", "1234", UserRole.INSTRUCTOR),
 							"Юлиян",
 							"Емилов",
 							"Рангелов",
@@ -535,7 +534,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EE_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EE_3", "1234", UserRole.INSTRUCTOR),
 							"Николай",
 							"Деянов",
 							"Николаев",
@@ -547,7 +546,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EE_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EE_4", "1234", UserRole.INSTRUCTOR),
 							"Милена",
 							"Димитрова",
 							"Иванова",
@@ -559,7 +558,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EE_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EE_5", "1234", UserRole.INSTRUCTOR),
 							"Росица",
 							"Филчева",
 							"Димитрова",
@@ -571,7 +570,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EE_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EE_6", "1234", UserRole.INSTRUCTOR),
 							"Антон",
 							"Борисов",
 							"Филипов",
@@ -583,7 +582,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_EE_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_EE_7", "1234", UserRole.INSTRUCTOR),
 							"Пламен",
 							"Антонов",
 							"Станчев",
@@ -598,7 +597,7 @@ public class Application {
 
 			List<Instructor> instructorsETM = List.of(
 					new Instructor(
-							new AppUser("INSTR_ETM_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETM_1", "1234", UserRole.INSTRUCTOR),
 							"Емилиян",
 							"Боянов",
 							"Беков",
@@ -610,7 +609,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETM_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETM_2", "1234", UserRole.INSTRUCTOR),
 							"Венцислав",
 							"Цеков",
 							"Вълчев",
@@ -622,7 +621,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETM_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETM_3", "1234", UserRole.INSTRUCTOR),
 							"Ангел",
 							"Станимиров",
 							"Маринов",
@@ -634,7 +633,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETM_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETM_4", "1234", UserRole.INSTRUCTOR),
 							"Димитър",
 							"Михайлов",
 							"Ковачев",
@@ -646,7 +645,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETM_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETM_5", "1234", UserRole.INSTRUCTOR),
 							"Екатерина",
 							"Николова",
 							"Димитрова",
@@ -658,7 +657,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETM_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETM_6", "1234", UserRole.INSTRUCTOR),
 							"Тончо",
 							"Христов",
 							"Папанчев",
@@ -670,7 +669,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETM_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETM_7", "1234", UserRole.INSTRUCTOR),
 							"Фирган",
 							"Нихатов",
 							"Ферадов",
@@ -682,7 +681,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETM_8", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETM_8", "1234", UserRole.INSTRUCTOR),
 							"Георги",
 							"Евтимов",
 							"Тодоринов",
@@ -694,7 +693,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETM_9", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETM_9", "1234", UserRole.INSTRUCTOR),
 							"Антим",
 							"Христов",
 							"Йорданов",
@@ -706,7 +705,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETM_10", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETM_10", "1234", UserRole.INSTRUCTOR),
 							"Юлия",
 							"Георгиева",
 							"Гарипова",
@@ -721,7 +720,7 @@ public class Application {
 
 			List<Instructor> instructorsESEO = List.of(
 					new Instructor(
-							new AppUser("INSTR_ESEO_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ESEO_1", "1234", UserRole.INSTRUCTOR),
 							"Валентин",
 							"Николов",
 							"Гюров",
@@ -733,7 +732,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ESEO_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ESEO_2", "1234", UserRole.INSTRUCTOR),
 							"Владимир",
 							"Чиков",
 							"Чиков",
@@ -745,7 +744,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ESEO_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ESEO_3", "1234", UserRole.INSTRUCTOR),
 							"Пламен",
 							"Великов",
 							"Парушев",
@@ -757,7 +756,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ESEO_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ESEO_4", "1234", UserRole.INSTRUCTOR),
 							"Никола",
 							"Иванов",
 							"Македонски",
@@ -769,7 +768,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ESEO_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ESEO_5", "1234", UserRole.INSTRUCTOR),
 							"Гинка",
 							"Христова",
 							"Иванова",
@@ -781,7 +780,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ESEO_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ESEO_6", "1234", UserRole.INSTRUCTOR),
 							"Николай",
 							"Иванов",
 							"Бежанов",
@@ -793,7 +792,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ESEO_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ESEO_7", "1234", UserRole.INSTRUCTOR),
 							"Христиан",
 							"Ивайлов",
 							"Панчев",
@@ -805,7 +804,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ESEO_8", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ESEO_8", "1234", UserRole.INSTRUCTOR),
 							"Георги",
 							"Добромиров",
 							"Милев",
@@ -817,7 +816,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ESEO_9", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ESEO_9", "1234", UserRole.INSTRUCTOR),
 							"Румен",
 							"Михайлов",
 							"Киров",
@@ -832,7 +831,7 @@ public class Application {
 
 			List<Instructor> instructorsETET = List.of(
 					new Instructor(
-							new AppUser("INSTR_ETET_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETET_1", "1234", UserRole.INSTRUCTOR),
 							"Майк",
 							"Юрген",
 							"Щреблау",
@@ -844,7 +843,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETET_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETET_2", "1234", UserRole.INSTRUCTOR),
 							"Бохос",
 							"Рупен",
 							"Апрахамян",
@@ -856,7 +855,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETET_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETET_3", "1234", UserRole.INSTRUCTOR),
 							"Мария",
 							"Иванова",
 							"Маринова",
@@ -868,7 +867,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETET_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETET_4", "1234", UserRole.INSTRUCTOR),
 							"Татяна",
 							"Маринова",
 							"Димова",
@@ -880,7 +879,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETET_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETET_5", "1234", UserRole.INSTRUCTOR),
 							"Янита",
 							"Стоянова",
 							"Славова",
@@ -892,7 +891,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETET_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETET_6", "1234", UserRole.INSTRUCTOR),
 							"Надежда",
 							"Димитрова",
 							"Цветкова",
@@ -904,7 +903,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ETET_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ETET_7", "1234", UserRole.INSTRUCTOR),
 							"Георги",
 							"Димитров",
 							"Желев",
@@ -919,7 +918,7 @@ public class Application {
 
 			List<Instructor> instructorsID = List.of(
 					new Instructor(
-							new AppUser("INSTR_ID_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ID_1", "1234", UserRole.INSTRUCTOR),
 							"Пламен",
 							"Василев",
 							"Братанов",
@@ -931,7 +930,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ID_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ID_2", "1234", UserRole.INSTRUCTOR),
 							"Момчил",
 							"Тодоров",
 							"Тачев",
@@ -943,7 +942,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ID_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ID_3", "1234", UserRole.INSTRUCTOR),
 							"Цена",
 							"Радкова",
 							"Мурзова",
@@ -955,7 +954,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ID_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ID_4", "1234", UserRole.INSTRUCTOR),
 							"Тихомир",
 							"Атанасов",
 							"Доврамаджиев",
@@ -967,7 +966,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ID_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ID_5", "1234", UserRole.INSTRUCTOR),
 							"Гинка",
 							"Великова",
 							"Жечева",
@@ -979,7 +978,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ID_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ID_6", "1234", UserRole.INSTRUCTOR),
 							"Кремена",
 							"Цанкова",
 							"Цанкова",
@@ -991,7 +990,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ID_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ID_7", "1234", UserRole.INSTRUCTOR),
 							"Илия",
 							"Наумов",
 							"Илиев",
@@ -1003,7 +1002,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ID_8", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ID_8", "1234", UserRole.INSTRUCTOR),
 							"Галина",
 							"Димитрова",
 							"Станева",
@@ -1015,7 +1014,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ID_9", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ID_9", "1234", UserRole.INSTRUCTOR),
 							"Дарина",
 							"Недкова",
 							"Добрева",
@@ -1027,7 +1026,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_ID_10", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_ID_10", "1234", UserRole.INSTRUCTOR),
 							"Венцислав",
 							"Георгиев",
 							"Марков",
@@ -1042,7 +1041,7 @@ public class Application {
 
 			List<Instructor> instructorsIM = List.of(
 					new Instructor(
-							new AppUser("INSTR_IM_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_IM_1", "1234", UserRole.INSTRUCTOR),
 							"Сийка",
 							"Димитрова",
 							"Демирова",
@@ -1054,7 +1053,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_IM_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_IM_2", "1234", UserRole.INSTRUCTOR),
 							"Светлана",
 							"Райчева",
 							"Димитракиева",
@@ -1066,7 +1065,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_IM_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_IM_3", "1234", UserRole.INSTRUCTOR),
 							"Светлана",
 							"Костова",
 							"Лесидренска",
@@ -1078,7 +1077,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_IM_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_IM_4", "1234", UserRole.INSTRUCTOR),
 							"Таня",
 							"Пенчева",
 							"Панайотова",
@@ -1090,7 +1089,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_IM_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_IM_5", "1234", UserRole.INSTRUCTOR),
 							"Красимира",
 							"Атанасова",
 							"Димитрова",
@@ -1102,7 +1101,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_IM_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_IM_6", "1234", UserRole.INSTRUCTOR),
 							"Беанета",
 							"Василева",
 							"Янева",
@@ -1114,7 +1113,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_IM_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_IM_7", "1234", UserRole.INSTRUCTOR),
 							"Мариана",
 							"Радкова",
 							"Мурзова",
@@ -1126,7 +1125,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_IM_8", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_IM_8", "1234", UserRole.INSTRUCTOR),
 							"Сибел",
 							"Илханова",
 							"Ахмедова",
@@ -1138,7 +1137,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_IM_9", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_IM_9", "1234", UserRole.INSTRUCTOR),
 							"Весела",
 							"Борисова",
 							"Дичева",
@@ -1150,7 +1149,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_IM_10", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_IM_10", "1234", UserRole.INSTRUCTOR),
 							"Марина",
 							"Петрова",
 							"Маринова",
@@ -1162,7 +1161,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_IM_11", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_IM_11", "1234", UserRole.INSTRUCTOR),
 							"Дарина",
 							"Маринова",
 							"Павлова",
@@ -1178,7 +1177,7 @@ public class Application {
 
 			List<Instructor> instructorsKNT = List.of(
 					new Instructor(
-							new AppUser("INSTR_KNT_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_1", "1234", UserRole.INSTRUCTOR),
 							"Христо",
 							"Георгиев",
 							"Вълчанов",
@@ -1190,7 +1189,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_2", "1234", UserRole.INSTRUCTOR),
 							"Тодор",
 							"Димитров",
 							"Ганчев",
@@ -1202,7 +1201,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_3", "1234", UserRole.INSTRUCTOR),
 							"Слава",
 							"Миланова",
 							"Йорданова",
@@ -1214,7 +1213,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_4", "1234", UserRole.INSTRUCTOR),
 							"Владимир",
 							"Николов",
 							"Николов",
@@ -1226,7 +1225,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_5", "1234", UserRole.INSTRUCTOR),
 							"Милена",
 							"Николова",
 							"Карова",
@@ -1238,7 +1237,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_6", "1234", UserRole.INSTRUCTOR),
 							"Юлка",
 							"Петкова",
 							"Петкова",
@@ -1250,7 +1249,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_7", "1234", UserRole.INSTRUCTOR),
 							"Венета",
 							"Панайотова",
 							"Алексиева",
@@ -1262,7 +1261,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_8", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_8", "1234", UserRole.INSTRUCTOR),
 							"Ивайло",
 							"Пламенов",
 							"Пенев",
@@ -1274,7 +1273,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_9", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_9", "1234", UserRole.INSTRUCTOR),
 							"Жейно",
 							"Иванов",
 							"Жейнов",
@@ -1286,7 +1285,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_10", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_10", "1234", UserRole.INSTRUCTOR),
 							"Венцислав",
 							"Георгиев",
 							"Николов",
@@ -1298,7 +1297,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_11", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_11", "1234", UserRole.INSTRUCTOR),
 							"Лъчезар",
 							"Илиев",
 							"Георгиев",
@@ -1310,7 +1309,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_12", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_12", "1234", UserRole.INSTRUCTOR),
 							"Милен",
 							"Георгиев",
 							"Ангелов",
@@ -1322,7 +1321,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_13", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_13", "1234", UserRole.INSTRUCTOR),
 							"Гергана",
 							"Василева",
 							"Спасова",
@@ -1334,7 +1333,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_14", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_14", "1234", UserRole.INSTRUCTOR),
 							"Айдън",
 							"Мехмед",
 							"Хъкъ",
@@ -1346,7 +1345,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_15", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_15", "1234", UserRole.INSTRUCTOR),
 							"Илиян",
 							"Живков",
 							"Бойчев",
@@ -1358,7 +1357,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_16", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_16", "1234", UserRole.INSTRUCTOR),
 							"Гинка",
 							"Калева",
 							"Маринова",
@@ -1370,7 +1369,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_17", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_17", "1234", UserRole.INSTRUCTOR),
 							"Галина",
 							"Тодорова",
 							"Найденова",
@@ -1382,7 +1381,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_18", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_18", "1234", UserRole.INSTRUCTOR),
 							"Пламена",
 							"Живкова",
 							"Едрева",
@@ -1394,7 +1393,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_19", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_19", "1234", UserRole.INSTRUCTOR),
 							"Петко",
 							"Генчев",
 							"Генчев",
@@ -1406,7 +1405,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KNT_20", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KNT_20", "1234", UserRole.INSTRUCTOR),
 							"Пролет",
 							"Стойчева",
 							"Денева",
@@ -1421,7 +1420,7 @@ public class Application {
 
 			List<Instructor> instructorsKTT = List.of(
 					new Instructor(
-							new AppUser("INSTR_KTT_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_1", "1234", UserRole.INSTRUCTOR),
 							"Николай",
 							"Тодоров",
 							"Костов",
@@ -1433,7 +1432,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KTT_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_2", "1234", UserRole.INSTRUCTOR),
 							"Розалина",
 							"Стефанова",
 							"Димова",
@@ -1445,7 +1444,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KTT_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_3", "1234", UserRole.INSTRUCTOR),
 							"Борислав",
 							"Георгиев",
 							"Найденов",
@@ -1457,7 +1456,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KTT_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_4", "1234", UserRole.INSTRUCTOR),
 							"Валентина",
 							"Илиева",
 							"Маркова",
@@ -1469,7 +1468,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KTT_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_5", "1234", UserRole.INSTRUCTOR),
 							"Тодорка",
 							"Николова",
 							"Георгиева",
@@ -1481,7 +1480,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KTT_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_6", "1234", UserRole.INSTRUCTOR),
 							"Любомир",
 							"Петров",
 							"Камбуров",
@@ -1493,7 +1492,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KTT_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_7", "1234", UserRole.INSTRUCTOR),
 							"Пламен",
 							"Йоргов",
 							"Стоянов",
@@ -1505,7 +1504,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KTT_8", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_8", "1234", UserRole.INSTRUCTOR),
 							"Стела",
 							"Савова",
 							"Костадинова",
@@ -1517,7 +1516,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KTT_9", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_9", "1234", UserRole.INSTRUCTOR),
 							"Борис",
 							"Николаев",
 							"Николов",
@@ -1529,7 +1528,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KTT_10", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_10", "1234", UserRole.INSTRUCTOR),
 							"Георги",
 							"Цанев",
 							"Червенков",
@@ -1541,7 +1540,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KTT_11", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_11", "1234", UserRole.INSTRUCTOR),
 							"Мартин",
 							"Владимиров",
 							"Иванов",
@@ -1553,7 +1552,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KTT_12", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_12", "1234", UserRole.INSTRUCTOR),
 							"Георги",
 							"Петров",
 							"Бебров",
@@ -1565,7 +1564,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KTT_13", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KTT_13", "1234", UserRole.INSTRUCTOR),
 							"Калин",
 							"Боянов",
 							"Калинков",
@@ -1581,7 +1580,7 @@ public class Application {
 
 			List<Instructor> instructorsKUTOCHVP = List.of(
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_1", "1234", UserRole.INSTRUCTOR),
 							"Чавдар",
 							"Илиев",
 							"Александрова",
@@ -1593,7 +1592,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_2", "1234", UserRole.INSTRUCTOR),
 							"Анастас",
 							"Стефанов",
 							"Крушев",
@@ -1605,7 +1604,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_3", "1234", UserRole.INSTRUCTOR),
 							"Анета",
 							"Димитрова",
 							"Върбанова",
@@ -1617,7 +1616,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_4", "1234", UserRole.INSTRUCTOR),
 							"Божидар",
 							"Николов",
 							"Дяков",
@@ -1629,7 +1628,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_5", "1234", UserRole.INSTRUCTOR),
 							"Иван",
 							"Иванчев",
 							"Грозев",
@@ -1641,7 +1640,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_6", "1234", UserRole.INSTRUCTOR),
 							"Милен",
 							"Живков",
 							"Тодоров",
@@ -1653,7 +1652,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_7", "1234", UserRole.INSTRUCTOR),
 							"Николай",
 							"Маринов",
 							"Беджев",
@@ -1665,7 +1664,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_8", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_8", "1234", UserRole.INSTRUCTOR),
 							"Божидар",
 							"Петров",
 							"Събев",
@@ -1677,7 +1676,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_9", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_9", "1234", UserRole.INSTRUCTOR),
 							"Веселин",
 							"Атанасов",
 							"Митев",
@@ -1689,7 +1688,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_10", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_10", "1234", UserRole.INSTRUCTOR),
 							"Боряна",
 							"Генчева",
 							"Генова",
@@ -1701,7 +1700,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_11", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_11", "1234", UserRole.INSTRUCTOR),
 							"Анна",
 							"Георгиева",
 							"Миткова",
@@ -1713,7 +1712,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_12", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_12", "1234", UserRole.INSTRUCTOR),
 							"Детелина",
 							"Костадинова",
 							"Кокърчина",
@@ -1725,7 +1724,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KUTOCHVP_13", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KUTOCHVP_13", "1234", UserRole.INSTRUCTOR),
 							"Есин",
 							"Махмуд",
 							"Халид",
@@ -1740,7 +1739,7 @@ public class Application {
 
 			List<Instructor> instructorsKKMM = List.of(
 					new Instructor(
-							new AppUser("INSTR_KKMM_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KKMM_1", "1234", UserRole.INSTRUCTOR),
 							"Галина",
 							"Илиева",
 							"Илиева",
@@ -1752,7 +1751,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KKMM_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KKMM_2", "1234", UserRole.INSTRUCTOR),
 							"Ирина",
 							"Добрева",
 							"Костова",
@@ -1764,7 +1763,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KKMM_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KKMM_3", "1234", UserRole.INSTRUCTOR),
 							"Петър",
 							"Георгиев",
 							"Георгиев",
@@ -1776,7 +1775,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KKMM_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KKMM_4", "1234", UserRole.INSTRUCTOR),
 							"Христо",
 							"Атанасов",
 							"Пировски",
@@ -1788,7 +1787,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KKMM_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KKMM_5", "1234", UserRole.INSTRUCTOR),
 							"Йорданка",
 							"Георгиева",
 							"Съчкова",
@@ -1800,7 +1799,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KKMM_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KKMM_6", "1234", UserRole.INSTRUCTOR),
 							"Йордан",
 							"Стефанов",
 							"Денев",
@@ -1812,7 +1811,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KKMM_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KKMM_7", "1234", UserRole.INSTRUCTOR),
 							"Стефан",
 							"Николов",
 							"Кюлевчелиев",
@@ -1824,7 +1823,7 @@ public class Application {
 							true
 					),
 					new Instructor(
-							new AppUser("INSTR_KKMM_8", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KKMM_8", "1234", UserRole.INSTRUCTOR),
 							"Владимир",
 							"Атанасов",
 							"Йорданов",
@@ -1836,7 +1835,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KKMM_9", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KKMM_9", "1234", UserRole.INSTRUCTOR),
 							"Севдалин",
 							"Здравков",
 							"Вълчев",
@@ -1848,7 +1847,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_KKMM_10", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_KKMM_10", "1234", UserRole.INSTRUCTOR),
 							"Христо",
 							"Антонов",
 							"Маринов",
@@ -1863,7 +1862,7 @@ public class Application {
 
 			List<Instructor> instructorsSIT = List.of(
 					new Instructor(
-							new AppUser("INSTR_SIT_1", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_1", "1234", UserRole.INSTRUCTOR),
 							"Виолета",
 							"Тодорова",
 							"Божикова",
@@ -1875,7 +1874,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_2", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_2", "1234", UserRole.INSTRUCTOR),
 							"Недялко",
 							"Николаев",
 							"Николов",
@@ -1887,7 +1886,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_3", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_3", "1234", UserRole.INSTRUCTOR),
 							"Марияна",
 							"Цветанова",
 							"Стоева",
@@ -1899,7 +1898,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_4", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_4", "1234", UserRole.INSTRUCTOR),
 							"Гео",
 							"Василев",
 							"Кунев",
@@ -1911,7 +1910,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_5", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_5", "1234", UserRole.INSTRUCTOR),
 							"Златка",
 							"Тенева",
 							"Матева",
@@ -1923,7 +1922,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_6", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_6", "1234", UserRole.INSTRUCTOR),
 							"Христо",
 							"Божидаров",
 							"Ненов",
@@ -1935,7 +1934,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_7", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_7", "1234", UserRole.INSTRUCTOR),
 							"Росен",
 							"Стефанов",
 							"Радков",
@@ -1947,7 +1946,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_8", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_8", "1234", UserRole.INSTRUCTOR),
 							"Ивелин",
 							"Методиев",
 							"Иванов",
@@ -1959,7 +1958,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_9", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_9", "1234", UserRole.INSTRUCTOR),
 							"Нели",
 							"Ананиева",
 							"Арабаджиева-Калчева",
@@ -1971,7 +1970,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_10", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_10", "1234", UserRole.INSTRUCTOR),
 							"Павлина",
 							"Стоянова",
 							"Владимирова",
@@ -1983,7 +1982,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_11", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_11", "1234", UserRole.INSTRUCTOR),
 							"Мая",
 							"Петрова",
 							"Тодорова",
@@ -1995,7 +1994,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_12", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_12", "1234", UserRole.INSTRUCTOR),
 							"Антоанета",
 							"Иванова",
 							"Иванова",
@@ -2007,7 +2006,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_13", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_13", "1234", UserRole.INSTRUCTOR),
 							"Стефка",
 							"Иванова",
 							"Попова",
@@ -2019,7 +2018,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_14", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_14", "1234", UserRole.INSTRUCTOR),
 							"Димитричка",
 							"Желева",
 							"Николаева",
@@ -2031,7 +2030,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_15", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_15", "1234", UserRole.INSTRUCTOR),
 							"Диян",
 							"Желев",
 							"Динев",
@@ -2043,7 +2042,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_16", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_16", "1234", UserRole.INSTRUCTOR),
 							"Павлина",
 							"Стоянова",
 							"Линова",
@@ -2055,7 +2054,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_17", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_17", "1234", UserRole.INSTRUCTOR),
 							"Велислав",
 							"Василев",
 							"Колесниченко",
@@ -2067,7 +2066,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_18", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_18", "1234", UserRole.INSTRUCTOR),
 							"Галя",
 							"Димитрова",
 							"Господинова",
@@ -2079,7 +2078,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_19", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_19", "1234", UserRole.INSTRUCTOR),
 							"Мирослав",
 							"Весков",
 							"Марков",
@@ -2091,7 +2090,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_20", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_20", "1234", UserRole.INSTRUCTOR),
 							"Доника",
 							"Георгиева",
 							"Стоянова",
@@ -2103,7 +2102,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_21", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_21", "1234", UserRole.INSTRUCTOR),
 							"Елена",
 							"Викторовна",
 							"Рачева",
@@ -2115,7 +2114,7 @@ public class Application {
 							false
 					),
 					new Instructor(
-							new AppUser("INSTR_SIT_22", "1234", AppUserRole.INSTRUCTOR),
+							new User("INSTR_SIT_22", "1234", UserRole.INSTRUCTOR),
 							"Ганка",
 							"Петкова",
 							"Калчева",
