@@ -40,13 +40,15 @@ public class AcademicTimetable {
 
     @Column(
             name = "start_time",
-            nullable = false
+            nullable = false,
+            columnDefinition = "TIME"
     )
     private LocalTime startTime;
 
     @Column(
             name = "end_time",
-            nullable = false
+            nullable = false,
+            columnDefinition = "TIME"
     )
     private LocalTime endTime;
 
