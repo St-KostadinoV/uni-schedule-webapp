@@ -62,7 +62,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .mvcMatchers("/profile/email-change").hasRole(INSTRUCTOR.name())
                 .mvcMatchers("/profile/**").hasAnyRole(INSTRUCTOR.name(), STUDENT.name())
-                .mvcMatchers("/students/*").hasAnyRole(INSTRUCTOR.name(), FRONT_DESK.name(), EDUCATION_DEPT.name())
+                //.mvcMatchers("/students/*").hasAnyRole(INSTRUCTOR.name(), FRONT_DESK.name(), EDUCATION_DEPT.name())
                 .mvcMatchers("/admin/timetable/**").hasRole(EDUCATION_DEPT.name())
                 .mvcMatchers("/admin/**").hasRole(FRONT_DESK.name())
                 .mvcMatchers("/**").permitAll()

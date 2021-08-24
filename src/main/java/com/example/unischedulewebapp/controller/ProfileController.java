@@ -89,9 +89,10 @@ public class ProfileController {
                                                                                 "lastName",
                                                                                 "academicYear",
                                                                                 "academicProgram",
-                                                                                "admissionStream",
                                                                                 "studentGroup",
-                                                                                "activeStatus"))
+                                                                                "activeStatus",
+                                                                                "email",
+                                                                                "phone"))
                         .addFilter("ProgramFilter",
                                     SimpleBeanPropertyFilter.filterOutAllExcept("name"));
             }

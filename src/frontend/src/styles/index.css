@@ -1,0 +1,108 @@
+body {
+    margin: 0px;
+}
+
+h1 {
+    font-family: Arial;
+    font-size: 49px;
+    font-weight: bold;
+    margin: 0px;
+}
+
+h2 {
+    font-family: Arial;
+    font-size: 42px;
+    font-weight: normal;
+    margin: 0px;
+}
+
+h2.alt {
+    margin: 32px 16px 0px 16px;
+    font-weight: bold;
+}
+
+h3 {
+    font-family: Arial;
+    font-size: 35px;
+    font-weight: normal;
+    margin: 0px;
+}
+
+h3.alt {
+    margin: 32px 16px 0px 16px;
+}
+
+h4 {
+    font-family: Arial;
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0px;
+}
+
+h4.alt {
+    margin: 32px 16px 0px 16px;
+}
+
+p {
+    font-family: Arial;
+    font-size: 21px;
+    font-weight: normal;
+    margin: 0px;
+}
+
+p.alt {
+    margin: 8px 16px 0px 16px;
+}
+
+p.link {
+    color: #F1F1F1;
+    margin-left: 8px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+#root {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: auto;
+    grid-template-rows: 128px 40px 1fr 80px;
+    grid-gap: 0px;
+    gap: 0px;
+    grid-auto-flow: row;
+}
+
+.centered-content {
+    margin: 0 auto;
+    display: table;
+    width: 928px;
+    margin-bottom: 16px;
+}
+
+.page-with-menu {
+    display: grid;
+    grid-template-columns: 232px auto;
+    grid-template-rows: 1fr;
+    gap: 0px 16px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "menu content";
+    height: 100%;
+}
+
+.side-menu {
+    grid-area: menu;
+    width: 200px;
+    background-color: #C9D3E1;
+    padding: 16px;
+}
+
+.menu-option {
+    margin-top: 24px;
+}
+
+.side-content {
+    grid-area: content;
+}

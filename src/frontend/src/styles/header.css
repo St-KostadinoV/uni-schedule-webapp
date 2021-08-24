@@ -1,0 +1,36 @@
+
+.header {
+    background: linear-gradient(90deg, rgba(4,67,139,1) 0%, rgba(24,76,148,1) 50%);
+    min-width: 928px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    grid-template-rows: 64px 64px;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "logo title"
+      "logo login-logout";
+}
+  
+.logo { 
+    grid-area: logo; 
+    margin: 16px;
+    margin-right: 8px;
+}
+  
+.title { 
+    grid-area: title; 
+    color: white; 
+    margin-top: 16px; 
+}
+
+.login-logout { 
+    grid-area: login-logout;
+    text-align: end;
+    margin-right: 16px;
+    align-self: center;
+}
+  

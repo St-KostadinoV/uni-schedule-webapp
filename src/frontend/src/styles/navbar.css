@@ -1,0 +1,17 @@
+.navbar {
+    background-color: #14649C;
+    display: flex;
+    padding-left: 8px;
+    min-width: 920px;
+}
+
+.navlink {
+    padding: 8px;
+    color: white;
+    text-decoration: none;
+}
+
+.selected {
+    padding: 8px;
+    background-color: white;
+}

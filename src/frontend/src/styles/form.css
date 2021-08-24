@@ -1,0 +1,48 @@
+.form {
+    border-radius: 10px;
+    background-color: #C9D3E1;
+    padding: 32px 32px 16px;
+    margin: 16px auto 32px auto;
+    max-width: 864px;
+    text-align: center;
+}
+
+.login-logo {
+    margin-bottom: 16px;
+}
+
+.login-label {
+    text-align: left;
+}
+
+.form-fields {
+    text-align: right;
+}
+
+input[type=text], input[type=password] {
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-family: Arial;
+    width: 280px;
+    height: 21px;
+}
+
+input[type=checkbox] {
+    width: 16px;
+    height: 16px;
+    margin: 0px;
+}
+
+input[type=submit] {
+    margin-top: 16px;
+    background-color: #14649C;
+    color: white;
+    font-family: Arial;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    height: 40px;
+    width: 200px;
+    border-radius: 7px;
+}

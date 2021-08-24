@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import static javax.persistence.EnumType.STRING;
 
@@ -100,6 +101,19 @@ public class Instructor extends Person implements Serializable {
     @JsonIgnore
     public String getFullNameWithTitle(){
         return title.getName() + " " + super.getFullName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Instructor that = (Instructor) o;
+        return Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 
 }

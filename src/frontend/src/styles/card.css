@@ -1,0 +1,63 @@
+.card {
+    border-radius: 10px;
+    background-color: #F1F1F1;
+    margin: 16px;
+    padding:16px;
+    width: 864px;
+}
+
+.card-content-variant-1 {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr 25px;
+    gap: 8px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "title title"
+      "sub-1 sub-3";
+}
+
+.card-content-variant-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.85fr;
+  grid-template-rows: 1fr 25px;
+  gap: 8px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "title title title"
+    "sub-1 sub-2 sub-3";
+}
+
+.card-content-variant-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 25px 25px;
+  gap: 8px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "title title title"
+    "sub-1 sub-3 sub-3"
+    "sub-2 sub-2 sub-2";
+}
+
+.card-content-variant-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 25px 25px;
+  gap: 8px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "title title title"
+    "sub-1 sub-4 sub-3"
+    "sub-2 sub-2 sub-2";
+}
+
+.card-title { grid-area: title; }
+
+.card-sub-1 { grid-area: sub-1; }
+
+.card-sub-2 { grid-area: sub-2; }
+
+.card-sub-3 { grid-area: sub-3; text-align: right; }
+
+.card-sub-4 { grid-area: sub-4; text-align: center; }

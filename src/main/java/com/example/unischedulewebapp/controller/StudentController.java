@@ -76,7 +76,8 @@ public class StudentController {
                                                                             "academicYear",
                                                                             "academicProgram",
                                                                             "studentGroup",
-                                                                            "activeStatus"))
+                                                                            "email",
+                                                                            "phone"))
                     .addFilter("ProgramFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("name"));
 

@@ -32,7 +32,7 @@ public class AcademicDiscipline extends AcademicStructure {
     )
     private Instructor leadingInstructor;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "discipline_instructor",
             joinColumns = @JoinColumn(name = "discipline_id"),
@@ -88,11 +88,12 @@ public class AcademicDiscipline extends AcademicStructure {
         this.assistingInstructors = assistingInstructors;
     }
 
-    public void addAssistingInstructors(Instructor instructor) {
-        assistingInstructors.add(instructor);
+    public void addAssistingInstructor(Instructor instructor) {
+        if(!leadingInstructor.equals(instructor))
+            assistingInstructors.add(instructor);
     }
 
-    public void removeAssistingInstructors(Instructor instructor) {
+    public void removeAssistingInstructor(Instructor instructor) {
         assistingInstructors.remove(instructor);
     }
 
