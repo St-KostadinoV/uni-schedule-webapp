@@ -41,7 +41,7 @@ public interface AcademicTimetableRepo
             "join tt.programDiscipline pd " +
             "where pd.program = :program " +
             "and pd.academicYear = :year " +
-            "and tt.studentGroup = :group"
+            "and (tt.studentGroup = :group or (tt.studentGroup is null and tt.classType = 0))"
     )
     Collection<AcademicTimetable> findStudentWeeklySchedule(@Param("program") AcademicProgram program,
                                                             @Param("year") Integer year,
@@ -52,7 +52,7 @@ public interface AcademicTimetableRepo
             "join tt.programDiscipline pd " +
             "where pd.program = :program " +
             "and pd.academicYear = :year " +
-            "and tt.studentGroup = :group " +
+            "and (tt.studentGroup = :group or (tt.studentGroup is null and tt.classType = 0)) " +
             "and tt.dayOfWeek = :day"
     )
     Collection<AcademicTimetable> findStudentDailySchedule(@Param("program") AcademicProgram program,
@@ -81,7 +81,7 @@ public interface AcademicTimetableRepo
             "join tt.programDiscipline pd " +
             "where pd.program = :program " +
             "and pd.academicYear = :year " +
-            "and tt.studentGroup = :group " +
+            "and (tt.studentGroup = :group or (tt.studentGroup is null and tt.classType = 0)) " +
             "and tt.dayOfWeek = :day " +
             "and ( " +
             "(:startTime <= tt.startTime and tt.startTime <= :endTime) " +
@@ -112,7 +112,7 @@ public interface AcademicTimetableRepo
     @Query(
             "select tt from AcademicTimetable tt " +
             "where tt.programDiscipline = :programDiscipline " +
-            "and tt.studentGroup = :group " +
+            "and (tt.studentGroup = :group or (tt.studentGroup is null and tt.classType = 0)) " +
             "and tt.classType = :classType"
     )
     Collection<AcademicTimetable> findClassDuplicates(@Param("programDiscipline") ProgramDiscipline programDiscipline,

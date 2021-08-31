@@ -68,6 +68,8 @@ public class ProfileController {
                                     SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                                 "honoraryStatus",
                                                                                 "title",
+                                                                                "degree",
+                                                                                "qualification",
                                                                                 "firstName",
                                                                                 "middleName",
                                                                                 "lastName",

@@ -1,15 +1,22 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import logo from '../resources/logo-white.png';
 import '../styles/header.css';
 import authService from "../services/auth-service";
 
 const Header = () => {
-    const [currentUser, setCurrentUser] = useState([])
+    const [currentUser, setCurrentUser] = useState(authService.getCurrentUser())
 
-    useEffect(() => {
-        setCurrentUser(authService.getCurrentUser())
-    }, [])
+    const getUserLink = () => {
+        switch(currentUser.roles[0]){
+            case 'ROLE_FRONT_DESK':
+                return 'Фронт офис'
+            case 'ROLE_EDUCATION_DEPT':
+                return 'Учебен отдел'
+            default:
+                return 'Профил'
+        }
+    }
 
     return (
         <header className="header">
@@ -23,7 +30,7 @@ const Header = () => {
                 <div className="login-logout">
                     {currentUser ? (
                         <div style={{display: "inline-flex"}}>
-                            <Link to="/profile"><p className="link">Профил</p></Link>
+                            <Link to="/user"><p className="link">{getUserLink()}</p></Link>
                             <p className="link">•</p>
                             <a href="/logout" onClick={authService.logout}><p className="link">Изход</p></a>
                         </div>

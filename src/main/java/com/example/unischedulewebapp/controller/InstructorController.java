@@ -53,6 +53,8 @@ public class InstructorController {
                             SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                         "honoraryStatus",
                                                                         "title",
+                                                                        "degree",
+                                                                        "qualification",
                                                                         "firstName",
                                                                         "middleName",
                                                                         "lastName",
@@ -82,6 +84,8 @@ public class InstructorController {
                                 SimpleBeanPropertyFilter.filterOutAllExcept("id",
                                                                             "honoraryStatus",
                                                                             "title",
+                                                                            "degree",
+                                                                            "qualification",
                                                                             "firstName",
                                                                             "middleName",
                                                                             "lastName",
@@ -169,7 +173,8 @@ public class InstructorController {
 
             FilterProvider filters = new SimpleFilterProvider()
                     .addFilter("TimetableFilter",
-                                SimpleBeanPropertyFilter.filterOutAllExcept("dayOfWeek",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                            "dayOfWeek",
                                                                             "startTime",
                                                                             "endTime",
                                                                             "classType",

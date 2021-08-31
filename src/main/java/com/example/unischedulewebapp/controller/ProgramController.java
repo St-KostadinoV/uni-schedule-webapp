@@ -133,6 +133,8 @@ public class ProgramController {
                     .addFilter("InstructorFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("firstName",
                                                                             "lastName",
+                                                                            "degree",
+                                                                            "qualification",
                                                                             "title",
                                                                             "honoraryStatus"));
 

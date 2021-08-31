@@ -2,6 +2,7 @@ package com.example.unischedulewebapp.model;
 
 import com.example.unischedulewebapp.model.base.AcademicStructure;
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -97,6 +98,7 @@ public class AcademicDiscipline extends AcademicStructure {
         assistingInstructors.remove(instructor);
     }
 
+    @JsonIgnore
     public List<Instructor> getAllInstructors() {
         List<Instructor> instructors = new ArrayList<>();
         instructors.add(leadingInstructor);

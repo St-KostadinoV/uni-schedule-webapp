@@ -114,7 +114,7 @@ public class ProgramDisciplineService {
 
         if(!findByProgramAndDiscipline(programDiscipline.getProgram(), programDiscipline.getDiscipline()).isEmpty())
             throw new ResourceAlreadyExistsException(
-                    String.format(PROGRAM_DSCPL_EXISTS_MSG, programDiscipline.getId()) // TODO - id is always null, print something different
+                    String.format(PROGRAM_DSCPL_EXISTS_MSG, programDiscipline.getProgram().getAbbreviation() + "-" + programDiscipline.getDiscipline().getAbbreviation()) // TODO - id is always null, print something different
             );
 
         if(!programService.existsById(programDiscipline.getProgram().getId()))
@@ -123,6 +123,7 @@ public class ProgramDisciplineService {
         if(!disciplineService.existsById(programDiscipline.getDiscipline().getId()))
             throw new ResourceNotFoundException(DSCPL_NOT_FOUND_MSG);
 
+        programDiscipline.setProgram(programService.findById(programDiscipline.getProgram().getId()));
         if(programDiscipline.getAcademicYear() > programDiscipline.getProgram().getEducationPeriod())
             throw new BadResourceException(PROGRAM_DSCPL_INVALID_YEAR_MSG);
 
@@ -141,6 +142,7 @@ public class ProgramDisciplineService {
         if(!disciplineService.existsById(programDiscipline.getDiscipline().getId()))
             throw new ResourceNotFoundException(DSCPL_NOT_FOUND_MSG);
 
+        programDiscipline.setProgram(programService.findById(programDiscipline.getProgram().getId()));
         if(programDiscipline.getAcademicYear() > programDiscipline.getProgram().getEducationPeriod())
             throw new BadResourceException(PROGRAM_DSCPL_INVALID_YEAR_MSG);
 

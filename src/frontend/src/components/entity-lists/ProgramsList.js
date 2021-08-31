@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import ProgramCard from '../cards/ProgramCard'
+import FilterForm from "../forms/FilterForm";
 
 const ProgramsList = () => {
     const [programs, setPrograms] = useState([])
@@ -21,8 +22,8 @@ const ProgramsList = () => {
     }
 
     return (
-        <div className="centered-content">
-            <h2 className='alt'>Специалности</h2>
+        <>
+            <FilterForm><h2><b>Специалности</b></h2></FilterForm>
             {
                 programs.map( program => (
                     <ProgramCard
@@ -31,7 +32,7 @@ const ProgramsList = () => {
                     />
                 ))
             }
-        </div>
+        </>
     )
 }
 

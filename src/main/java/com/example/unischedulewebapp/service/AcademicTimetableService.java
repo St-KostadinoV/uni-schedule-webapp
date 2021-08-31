@@ -149,8 +149,17 @@ public class AcademicTimetableService {
         if(!instructorService.existsById(timetable.getAssignedInstructor().getId()))
             throw new ResourceNotFoundException(TIMETBL_INSTRUCTOR_NOT_FOUND_MSG);
 
-        if(timetable.getProgramDiscipline().getDiscipline().getLeadingInstructor() != timetable.getAssignedInstructor()
-                && !timetable.getProgramDiscipline().getDiscipline().getAssistingInstructors().contains(timetable.getAssignedInstructor()))
+        boolean isLeadingInstructorAssigned = timetable
+                .getProgramDiscipline()
+                .getDiscipline()
+                .getLeadingInstructor()
+                .equals(timetable.getAssignedInstructor());
+        boolean isAssistingInstructorAssigned = timetable
+                .getProgramDiscipline()
+                .getDiscipline()
+                .getAssistingInstructors()
+                .contains(timetable.getAssignedInstructor());
+        if(!isLeadingInstructorAssigned && !isAssistingInstructorAssigned)
             throw new BadResourceException(TIMETBL_UNAFFILIATED_INSTRUCTOR_MSG);
 
         isTimetableValid(timetable);
@@ -199,7 +208,7 @@ public class AcademicTimetableService {
                 .isEmpty())
             throw new TimetableCollisionException("Instructor is not available during this time period of the day!");
 
-        if (timetableRepository
+        if (!timetableRepository
                 .findStudentsAvailability(
                         timetable.getProgramDiscipline().getProgram(),
                         timetable.getProgramDiscipline().getAcademicYear(),
@@ -210,7 +219,7 @@ public class AcademicTimetableService {
                 .isEmpty())
             throw new TimetableCollisionException("Students are not available during this time period of the day!");
 
-        if (timetableRepository
+        if (!timetableRepository
                 .findRoomAvailability(
                         timetable.getDesignatedRoom(),
                         timetable.getDayOfWeek(),
@@ -219,7 +228,7 @@ public class AcademicTimetableService {
                 .isEmpty())
             throw new TimetableCollisionException("Room is not available during this time period of the day!");
 
-        if (timetableRepository
+        if (!timetableRepository
                 .findClassDuplicates(
                         timetable.getProgramDiscipline(),
                         timetable.getStudentGroup(),

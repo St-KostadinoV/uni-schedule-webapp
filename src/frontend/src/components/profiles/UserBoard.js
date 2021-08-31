@@ -1,10 +1,12 @@
-import InstructorProfile from "./InstructorProfile"
 import userService from "../../services/user-service.js"
 import { useState, useEffect } from "react";
 import authService from "../../services/auth-service";
 import StudentProfile from "./StudentProfile";
+import InstructorProfile from "./InstructorProfile";
+import FrontDeskProfile from "./FrontDeskProfile";
+import EduDeptProfile from "./EduDeptProfile";
 
-const Profile = () => {
+const UserBoard = () => {
     const [user, setUser] = useState([])
 
     useEffect(() => {
@@ -22,20 +24,20 @@ const Profile = () => {
         switch(currentUser.roles[0]) {
             case 'ROLE_INSTRUCTOR':
                 return <InstructorProfile instructor={user}/>
-            case 'ROLE_FRONT_END':
-            //return <InstructorProfile instructor={user}/>
+            case 'ROLE_FRONT_DESK':
+                return <FrontDeskProfile />
             case 'ROLE_EDUCATION_DEPT':
-            //return <InstructorProfile instructor={user}/>
-            default:
+                return <EduDeptProfile />
+            case 'ROLE_STUDENT':
                 return <StudentProfile student={user}/>
         }
     }
 
     return (
-        <div className='page-with-menu'>
+        <>
             {user && BuildProfile()}
-        </div>
+        </>
     )
 }
 
-export default Profile
+export default UserBoard

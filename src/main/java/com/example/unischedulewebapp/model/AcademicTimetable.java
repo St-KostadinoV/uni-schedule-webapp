@@ -98,6 +98,22 @@ public class AcademicTimetable {
         this.studentGroup = studentGroup;
     }
 
+    public AcademicTimetable(Instructor assignedInstructor,
+                             DayOfWeek dayOfWeek,
+                             LocalTime startTime,
+                             LocalTime endTime,
+                             String designatedRoom,
+                             ProgramDiscipline programDiscipline,
+                             AcademicClassType classType) {
+        this.assignedInstructor = assignedInstructor;
+        this.dayOfWeek = dayOfWeek;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.designatedRoom = designatedRoom;
+        this.programDiscipline = programDiscipline;
+        this.classType = classType;
+    }
+
     public Long getId() {
         return id;
     }

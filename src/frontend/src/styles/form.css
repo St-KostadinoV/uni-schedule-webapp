@@ -2,9 +2,20 @@
     border-radius: 10px;
     background-color: #C9D3E1;
     padding: 32px 32px 16px;
-    margin: 16px auto 32px auto;
-    max-width: 864px;
+    margin: 16px 16px 32px;
     text-align: center;
+}
+
+.filter-form {
+    border-radius: 10px;
+    background-color: #C9D3E1;
+    padding: 16px;
+    margin: 32px 16px 16px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    column-gap: 8px;
 }
 
 .login-logo {
@@ -17,12 +28,14 @@
 
 .form-fields {
     text-align: right;
+    display: table;
+    margin: 0 auto;
 }
 
 input[type=text], input[type=password] {
     margin-bottom: 16px;
     font-size: 16px;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     width: 280px;
     height: 21px;
 }
@@ -30,14 +43,14 @@ input[type=text], input[type=password] {
 input[type=checkbox] {
     width: 16px;
     height: 16px;
-    margin: 0px;
+    margin: 0;
 }
 
 input[type=submit] {
     margin-top: 16px;
     background-color: #14649C;
     color: white;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     font-size: 16px;
     font-weight: bold;
     border: none;
@@ -45,4 +58,10 @@ input[type=submit] {
     height: 40px;
     width: 200px;
     border-radius: 7px;
+}
+
+select {
+    font-size: 16px;
+    height: 27px;
+    padding: 0 2px;
 }

@@ -1,8 +1,9 @@
 package com.example.unischedulewebapp.model;
 
-import com.example.unischedulewebapp.auth.UserDetailsImpl;
+import com.example.unischedulewebapp.model.enums.AcademicDegree;
 import com.example.unischedulewebapp.model.enums.AcademicTitle;
 import com.example.unischedulewebapp.model.base.Person;
+import com.example.unischedulewebapp.model.enums.ProfessionalQualification;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,6 +27,16 @@ public class Instructor extends Person implements Serializable {
             nullable = false
     )
     private AcademicTitle title;
+
+    @Column(
+            name = "degree"
+    )
+    private AcademicDegree degree;
+
+    @Column(
+            name = "qualification"
+    )
+    private ProfessionalQualification qualification;
 
     @ManyToOne
     @JoinColumn(
@@ -66,12 +77,87 @@ public class Instructor extends Person implements Serializable {
         this.honoraryStatus = honoraryStatus;
     }
 
+    public Instructor(User user,
+                      String firstName,
+                      String middleName,
+                      String lastName,
+                      String email,
+                      String phone,
+                      AcademicTitle title,
+                      AcademicDegree degree,
+                      AcademicDepartment department,
+                      String office,
+                      Boolean honoraryStatus) {
+        super(user, firstName, middleName, lastName, email, phone);
+        this.title = title;
+        this.degree = degree;
+        this.department = department;
+        this.office = office;
+        this.honoraryStatus = honoraryStatus;
+    }
+
+    public Instructor(User user,
+                      String firstName,
+                      String middleName,
+                      String lastName,
+                      String email,
+                      String phone,
+                      AcademicTitle title,
+                      ProfessionalQualification qualification,
+                      AcademicDepartment department,
+                      String office,
+                      Boolean honoraryStatus) {
+        super(user, firstName, middleName, lastName, email, phone);
+        this.title = title;
+        this.qualification = qualification;
+        this.department = department;
+        this.office = office;
+        this.honoraryStatus = honoraryStatus;
+    }
+
+    public Instructor(User user,
+                      String firstName,
+                      String middleName,
+                      String lastName,
+                      String email,
+                      String phone,
+                      AcademicTitle title,
+                      AcademicDegree degree,
+                      ProfessionalQualification qualification,
+                      AcademicDepartment department,
+                      String office,
+                      Boolean honoraryStatus) {
+        super(user, firstName, middleName, lastName, email, phone);
+        this.title = title;
+        this.degree = degree;
+        this.qualification = qualification;
+        this.department = department;
+        this.office = office;
+        this.honoraryStatus = honoraryStatus;
+    }
+
     public AcademicTitle getTitle() {
         return title;
     }
 
     public void setTitle(AcademicTitle title) {
         this.title = title;
+    }
+
+    public AcademicDegree getDegree() {
+        return degree;
+    }
+
+    public ProfessionalQualification getQualification() {
+        return qualification;
+    }
+
+    public void setQualification(ProfessionalQualification qualification) {
+        this.qualification = qualification;
+    }
+
+    public void setDegree(AcademicDegree degree) {
+        this.degree = degree;
     }
 
     public AcademicDepartment getDepartment() {

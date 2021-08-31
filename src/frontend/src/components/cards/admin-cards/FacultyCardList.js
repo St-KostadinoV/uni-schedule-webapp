@@ -1,29 +1,29 @@
 import { useState, useEffect } from 'react'
-import FacultyCard from "../cards/FacultyCard"
-import FilterForm from "../forms/FilterForm";
+import FacultyCard from "./FacultyCard"
+import authHeader from '../../../services/auth-header';
 
-const FacultiesList = () => {
+const FacultyCardList = () => {
     const [faculties, setFaculties] = useState([])
 
     useEffect(() => {
         const getFaculties = async () => {
-          const facultiesFromServer = await fetchFaculties()
-          setFaculties(facultiesFromServer)
+            const facultiesFromServer = await fetchFaculties()
+            setFaculties(facultiesFromServer)
         }
-    
+
         getFaculties()
     }, [])
-    
+
     const fetchFaculties = async () => {
-        const res = await fetch('http://localhost:8080/faculties')
+        const res = await fetch('http://localhost:8080/admin/faculty', {headers: authHeader()})
         const data = await res.json()
-    
+
         return data
     }
 
     return (
         <>
-            <FilterForm><h2><b>Факултети и Колежи в ТУ-Варна</b></h2></FilterForm>
+            <h2 className='alt'>Факултети</h2>
             {
                 faculties.map( fac => (
                     <FacultyCard
@@ -36,4 +36,4 @@ const FacultiesList = () => {
     )
 }
 
-export default FacultiesList
+export default FacultyCardList

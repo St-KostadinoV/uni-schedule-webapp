@@ -7,8 +7,10 @@ import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicDepartment;
 import com.example.unischedulewebapp.model.User;
+import com.example.unischedulewebapp.model.enums.AcademicDegree;
 import com.example.unischedulewebapp.model.enums.AcademicTitle;
 import com.example.unischedulewebapp.model.Instructor;
+import com.example.unischedulewebapp.model.enums.ProfessionalQualification;
 import com.example.unischedulewebapp.repository.InstructorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -79,6 +81,16 @@ public class InstructorService {
                 .findByTitle(title));
     }
 
+    public List<Instructor> findByTitle(AcademicDegree degree) {
+        return new ArrayList<>(instructorRepo
+                .findByDegree(degree));
+    }
+
+    public List<Instructor> findByTitle(ProfessionalQualification qualification) {
+        return new ArrayList<>(instructorRepo
+                .findByQualification(qualification));
+    }
+
     public List<Instructor> findByDepartment(AcademicDepartment department) {
         return new ArrayList<>(instructorRepo
                 .findByDepartment(department));
@@ -147,5 +159,7 @@ public class InstructorService {
             );
 
         instructorRepo.deleteById(id);
+
+        // TODO - delete user as well
     }
 }

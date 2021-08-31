@@ -13,11 +13,8 @@ import ProgramDetails from './components/entity-details/ProgramDetails'
 import DisciplineDetails from './components/entity-details/DisciplineDetails'
 import InstructorDetails from './components/entity-details/InstructorDetails'
 import LoginForm from './components/forms/LoginForm'
-import ChangePassForm from './components/forms/ChangePassForm'
-import SidePanel from './components/SidePanel'
-import { getInstructorTitle } from './util.js'
 import { useState, useEffect } from 'react'
-import Profile from './components/profiles/Profile'
+import UserBoard from './components/profiles/UserBoard'
 import authService from './services/auth-service'
 import StudentsList from './components/entity-lists/StudentsList'
 import StudentDetails from './components/entity-details/StudentDetails'
@@ -38,11 +35,11 @@ function App() {
     <Router>
       <Header />
       <Navbar />
-      <div>
+      <div className='centered-content'>
         <Switch>
           <Route path="/login" children={<LoginForm />} />
           <Route path="/logout" children={<Logout />} />
-          <Route path="/profile" children={<Profile />} />
+          <Route path="/user" children={<UserBoard />} />
           <Route path="/faculties" children={<FacultiesList />} />
           <Route path="/faculty/:id" children={<FacultyDetails />} />
           <Route path="/departments" children={<DepartmentsList />} />

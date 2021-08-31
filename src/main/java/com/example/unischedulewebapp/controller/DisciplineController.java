@@ -51,6 +51,8 @@ public class DisciplineController {
                 .addFilter("InstructorFilter",
                             SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
                                                                         "title",
+                                                                        "degree",
+                                                                        "qualification",
                                                                         "firstName",
                                                                         "lastName"));
 
@@ -83,6 +85,8 @@ public class DisciplineController {
                     .addFilter("InstructorFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
                                                                             "title",
+                                                                            "degree",
+                                                                            "qualification",
                                                                             "firstName",
                                                                             "middleName",
                                                                             "lastName"));
@@ -121,6 +125,8 @@ public class DisciplineController {
                                                                             "middleName",
                                                                             "lastName",
                                                                             "title",
+                                                                            "degree",
+                                                                            "qualification",
                                                                             "honoraryStatus",
                                                                             "office"));
 

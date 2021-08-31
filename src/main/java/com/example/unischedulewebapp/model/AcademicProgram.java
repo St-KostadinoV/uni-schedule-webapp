@@ -5,6 +5,7 @@ import com.example.unischedulewebapp.model.enums.AcademicDegree;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @JsonFilter("ProgramFilter")
 @Entity

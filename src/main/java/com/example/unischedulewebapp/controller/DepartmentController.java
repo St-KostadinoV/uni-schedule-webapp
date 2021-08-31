@@ -121,6 +121,8 @@ public class DepartmentController {
                                 SimpleBeanPropertyFilter.filterOutAllExcept("firstName",
                                                                             "lastName",
                                                                             "title",
+                                                                            "degree",
+                                                                            "qualification",
                                                                             "honoraryStatus"));
 
             wrapper.setFilters(filters);
@@ -191,6 +193,8 @@ public class DepartmentController {
                                                                         "middleName",
                                                                         "lastName",
                                                                         "title",
+                                                                        "degree",
+                                                                        "qualification",
                                                                         "honoraryStatus",
                                                                         "office"));
 

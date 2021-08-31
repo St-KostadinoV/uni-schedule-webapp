@@ -1,14 +1,19 @@
 .navbar {
     background-color: #14649C;
     display: flex;
-    padding-left: 8px;
-    min-width: 920px;
+    padding: 0 8px;
+    align-items: center;
+    justify-content: center;
 }
 
 .navlink {
     padding: 8px;
     color: white;
     text-decoration: none;
+}
+
+.navlink:hover {
+    background-color: #04438b;
 }
 
 .selected {

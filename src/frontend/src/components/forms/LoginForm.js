@@ -16,7 +16,7 @@ const LoginForm = () => {
     AuthService
       .login(username, password)
       .then(() => {
-        history.push("/profile")
+        history.push("/user")
         window.location.reload()
       })
   }

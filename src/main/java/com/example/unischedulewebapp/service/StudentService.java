@@ -156,6 +156,7 @@ public class StudentService {
         if(!programService.existsById(student.getAcademicProgram().getId()))
             throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
 
+        student.setAcademicProgram(programService.findById(student.getAcademicProgram().getId()));
         if(student.getAcademicYear() > student.getAcademicProgram().getEducationPeriod())
             throw new BadResourceException(STUDENT_INVALID_YEAR_MSG);
 
@@ -173,6 +174,7 @@ public class StudentService {
         if(!programService.existsById(student.getAcademicProgram().getId()))
             throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
 
+        student.setAcademicProgram(programService.findById(student.getAcademicProgram().getId()));
         if(student.getAcademicYear() > student.getAcademicProgram().getEducationPeriod())
             throw new BadResourceException(STUDENT_INVALID_YEAR_MSG);
 
@@ -187,5 +189,7 @@ public class StudentService {
             );
 
         studentRepo.deleteById(id);
+
+        // TODO - delete user as well
     }
 }

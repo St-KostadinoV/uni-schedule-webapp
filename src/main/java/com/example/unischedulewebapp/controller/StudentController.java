@@ -1,7 +1,9 @@
 package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
+import com.example.unischedulewebapp.model.AcademicTimetable;
 import com.example.unischedulewebapp.model.Student;
+import com.example.unischedulewebapp.service.AcademicTimetableService;
 import com.example.unischedulewebapp.service.StudentService;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -25,10 +27,13 @@ import java.util.List;
 public class StudentController {
 
     private final StudentService studentService;
+    private final AcademicTimetableService timetableService;
 
     @Autowired
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService,
+                             AcademicTimetableService timetableService) {
         this.studentService = studentService;
+        this.timetableService = timetableService;
     }
 
     @GetMapping
@@ -80,6 +85,54 @@ public class StudentController {
                                                                             "phone"))
                     .addFilter("ProgramFilter",
                                 SimpleBeanPropertyFilter.filterOutAllExcept("name"));
+
+            wrapper.setFilters(filters);
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(wrapper);
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
+
+    @GetMapping(
+            path = "{studentId}/timetable"
+    )
+    public ResponseEntity<Object> getStudentTimetable(@PathVariable("studentId") Long id) {
+        try {
+            Student student = studentService.findById(id);
+
+            List<AcademicTimetable> studentTimetable = timetableService
+                    .findStudentWeeklySchedule(student);
+
+            MappingJacksonValue wrapper = new MappingJacksonValue(studentTimetable);
+
+            FilterProvider filters = new SimpleFilterProvider()
+                    .addFilter("TimetableFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                            "dayOfWeek",
+                                                                            "startTime",
+                                                                            "endTime",
+                                                                            "classType",
+                                                                            "programDiscipline",
+                                                                            "designatedRoom",
+                                                                            "assignedInstructor"))
+                    .addFilter("ProgramDisciplineFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("discipline"))
+                    .addFilter("DisciplineFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("name"))
+                    .addFilter("InstructorFilter",
+                                SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
+                                                                            "title",
+                                                                            "degree",
+                                                                            "qualification",
+                                                                            "firstName",
+                                                                            "lastName"));
 
             wrapper.setFilters(filters);
 

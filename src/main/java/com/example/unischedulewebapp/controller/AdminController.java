@@ -52,6 +52,29 @@ public class AdminController {
         this.studentService = studentService;
     }
 
+    //<editor-fold desc="Department methods">
+    @GetMapping("department")
+    public ResponseEntity<Object> getAllDepartments(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(departmentService.findAll());
+    }
+
+    @GetMapping("department/{departmentId}")
+    public ResponseEntity<Object> getDepartment(@PathVariable("departmentId") Long id){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(departmentService.findById(id));
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
+
     @PostMapping("department")
     public ResponseEntity<Object> addDepartment(@RequestBody AcademicDepartment department) throws URISyntaxException {
         try {
@@ -98,6 +121,30 @@ public class AdminController {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .build();
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Discipline methods">
+    @GetMapping("discipline")
+    public ResponseEntity<Object> getAllDisciplines(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(disciplineService.findAll());
+    }
+
+    @GetMapping("discipline/{disciplineId}")
+    public ResponseEntity<Object> getDiscipline(@PathVariable("disciplineId") Long id){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(disciplineService.findById(id));
 
         } catch (ResourceNotFoundException e) {
             // TODO - log stack trace
@@ -161,6 +208,30 @@ public class AdminController {
                     .body(e.getMessage());
         }
     }
+    //</editor-fold>
+
+    //<editor-fold desc="Faculty methods">
+    @GetMapping("faculty")
+    public ResponseEntity<Object> getAllFaculties(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(facultyService.findAll());
+    }
+
+    @GetMapping("faculty/{facultyId}")
+    public ResponseEntity<Object> getFaculty(@PathVariable("facultyId") Long id){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(facultyService.findById(id));
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
 
     @PostMapping("faculty")
     public ResponseEntity<Object> addFaculty(@RequestBody AcademicFaculty faculty) throws URISyntaxException {
@@ -202,6 +273,30 @@ public class AdminController {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .build();
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Program methods">
+    @GetMapping("program")
+    public ResponseEntity<Object> getAllPrograms(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(programService.findAll());
+    }
+
+    @GetMapping("program/{programId}")
+    public ResponseEntity<Object> getProgram(@PathVariable("programId") Long id){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(programService.findById(id));
 
         } catch (ResourceNotFoundException e) {
             // TODO - log stack trace
@@ -265,6 +360,30 @@ public class AdminController {
                     .body(e.getMessage());
         }
     }
+    //</editor-fold>
+
+    //<editor-fold desc="Program-Discipline methods">
+    @GetMapping("program-discipline")
+    public ResponseEntity<Object> getAllProgramDisciplines(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(programDisciplineService.findAll());
+    }
+
+    @GetMapping("program-discipline/{programDisciplineId}")
+    public ResponseEntity<Object> getProgramDiscipline(@PathVariable("programDisciplineId") Long id){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(programDisciplineService.findById(id));
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
 
     @PostMapping("program-discipline")
     public ResponseEntity<Object> addProgramDiscipline(@RequestBody ProgramDiscipline programDiscipline) throws URISyntaxException {
@@ -319,10 +438,34 @@ public class AdminController {
     @DeleteMapping("program-discipline/{programDisciplineId}")
     public ResponseEntity<Object> deleteProgramDiscipline(@PathVariable("programDisciplineId") Long id){
         try {
-            programService.deleteProgram(id);
+            programDisciplineService.deleteProgramDiscipline(id);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .build();
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Students methods">
+    @GetMapping("student")
+    public ResponseEntity<Object> getAllStudents(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(studentService.findAll());
+    }
+
+    @GetMapping("student/{studentId}")
+    public ResponseEntity<Object> getStudent(@PathVariable("studentId") Long id){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(studentService.findById(id));
 
         } catch (ResourceNotFoundException e) {
             // TODO - log stack trace
@@ -396,6 +539,30 @@ public class AdminController {
                     .body(e.getMessage());
         }
     }
+    //</editor-fold>
+
+    //<editor-fold desc="Instructor methods">
+    @GetMapping("instructor")
+    public ResponseEntity<Object> getAllInstructors(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(instructorService.findAll());
+    }
+
+    @GetMapping("instructor/{instructorId}")
+    public ResponseEntity<Object> getInstructor(@PathVariable("instructorId") Long id){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(instructorService.findById(id));
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
 
     @PostMapping("instructor")
     public ResponseEntity<Object> addInstructor(@RequestBody Instructor instructor) throws URISyntaxException {
@@ -443,6 +610,29 @@ public class AdminController {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .build();
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
+    //</editor-fold>
+
+    @GetMapping("timetable")
+    public ResponseEntity<Object> getAllTimetables(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(timetableService.findAll());
+    }
+
+    @GetMapping("timetable/{timetableId}")
+    public ResponseEntity<Object> getTimetable(@PathVariable("timetableId") Long id){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(timetableService.findById(id));
 
         } catch (ResourceNotFoundException e) {
             // TODO - log stack trace

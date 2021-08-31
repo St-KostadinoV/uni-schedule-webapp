@@ -1,9 +1,10 @@
 package com.example.unischedulewebapp.model.enums;
 
 public enum AcademicDegree {
-    BACHELORS("бакалавър"),
-    MASTERS("магистър"),
-    DOCTORS("доктор");
+    BACHELOR("бакалавър"),
+    MASTER("магистър"),
+    DOCTOR("доктор"),
+    DOCTOR_OF_SCIENCE("доктор на науките");
 
     private final String name;
 

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import InstructorCard from '../cards/InstructorCard';
 import ProgramCard from '../cards/ProgramCard';
 import DisciplineCard from '../cards/DisciplineCard';
+import FilterForm from "../forms/FilterForm";
 
 const DepartmentDetails = () => {
     let { id } = useParams();
@@ -67,11 +68,11 @@ const DepartmentDetails = () => {
     }
 
     return (
-        <div className="centered-content">
+        <>
             <h2 className='alt'>{dept.name}</h2>
             <h4 className='alt'><b>Абревиатура: </b>{dept.abbreviation}</h4>
             <h4 className='alt'><b>Част от: </b>{dept.faculty && dept.faculty.name}</h4>
-            {instructors.length > 0 && <h3 className='alt'>Академичен състав</h3>}
+            {instructors.length > 0 && <FilterForm><h3>Академичен състав</h3></FilterForm>}
             {
                 instructors.map( instructor => (
                     <InstructorCard
@@ -80,7 +81,7 @@ const DepartmentDetails = () => {
                     />
                 ))
             }
-            {programs.length > 0 && <h3 className='alt'>Водени специалности</h3>}
+            {programs.length > 0 && <FilterForm><h3>Водени специалности</h3></FilterForm>}
             {
                 programs.map( program => (
                     <ProgramCard
@@ -89,7 +90,7 @@ const DepartmentDetails = () => {
                     />
                 ))
             }
-            {disciplines.length > 0 && <h3 className='alt'>Преподавани дисциплини</h3>}
+            {disciplines.length > 0 && <FilterForm><h3>Водени дисциплини</h3></FilterForm>}
             {
                 disciplines.map( discipline => (
                     <DisciplineCard
@@ -98,7 +99,7 @@ const DepartmentDetails = () => {
                     />
                 ))
             }
-        </div>
+        </>
     )
 }
 

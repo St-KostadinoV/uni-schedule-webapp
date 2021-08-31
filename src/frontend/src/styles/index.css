@@ -1,57 +1,57 @@
 body {
-    margin: 0px;
+    margin: 0;
 }
 
 h1 {
-    font-family: Arial;
-    font-size: 49px;
+    font-family: Arial, sans-serif;
+    font-size: 46px;
     font-weight: bold;
-    margin: 0px;
+    margin: 0;
 }
 
 h2 {
-    font-family: Arial;
-    font-size: 42px;
+    font-family: Arial, sans-serif;
+    font-size: 39px;
     font-weight: normal;
-    margin: 0px;
+    margin: 0;
 }
 
 h2.alt {
-    margin: 32px 16px 0px 16px;
+    margin: 32px 16px 0 16px;
     font-weight: bold;
 }
 
 h3 {
-    font-family: Arial;
-    font-size: 35px;
+    font-family: Arial, sans-serif;
+    font-size: 32px;
     font-weight: normal;
-    margin: 0px;
+    margin: 0;
 }
 
 h3.alt {
-    margin: 32px 16px 0px 16px;
+    margin: 32px 16px 0 16px;
 }
 
 h4 {
-    font-family: Arial;
-    font-size: 28px;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
     font-weight: normal;
-    margin: 0px;
+    margin: 0;
 }
 
 h4.alt {
-    margin: 32px 16px 0px 16px;
+    margin: 32px 16px 0 16px;
 }
 
 p {
-    font-family: Arial;
-    font-size: 21px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
     font-weight: normal;
-    margin: 0px;
+    margin: 0;
 }
 
 p.alt {
-    margin: 8px 16px 0px 16px;
+    margin: 8px 16px 0 16px;
 }
 
 p.link {
@@ -68,24 +68,23 @@ a {
     display: grid;
     min-height: 100vh;
     grid-template-columns: auto;
-    grid-template-rows: 128px 40px 1fr 80px;
-    grid-gap: 0px;
-    gap: 0px;
+    grid-template-rows: 128px 38px 1fr 80px;
+    grid-gap: 0;
+    gap: 0;
     grid-auto-flow: row;
 }
 
 .centered-content {
-    margin: 0 auto;
     display: table;
-    width: 928px;
-    margin-bottom: 16px;
+    margin: 0 auto 16px;
+    width: 827px;
 }
 
 .page-with-menu {
     display: grid;
     grid-template-columns: 232px auto;
     grid-template-rows: 1fr;
-    gap: 0px 16px;
+    gap: 0 16px;
     grid-auto-flow: row;
     grid-template-areas:
       "menu content";
@@ -105,4 +104,31 @@ a {
 
 .side-content {
     grid-area: content;
+}
+
+button {
+    margin: 16px 8px;
+    background-color: #14649C;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    height: 40px;
+    border-radius: 20px;
+    flex: auto;
+}
+
+button:hover {
+    background-color: #04438b;
+}
+
+.profile-buttons {
+    margin: 16px 8px;
+    display: flex;
+}
+
+.contact-info {
+    margin-top: 32px;
 }

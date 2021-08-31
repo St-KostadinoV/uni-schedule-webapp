@@ -32,13 +32,48 @@ export function getInstructorShortTitle(title) {
     }
 }
 
+export function getShortAcademicDegree(degree) {
+    switch(degree){
+        case 'MASTER':
+            return 'маг.';
+        case 'DOCTOR':
+            return 'д-р';
+        case 'DOCTOR_OF_SCIENCE':
+            return 'дн';
+    }
+}
+
 export function getAcademicDegree(degree) {
     switch(degree){
-        case 'BACHELORS':
+        case 'BACHELOR':
             return 'бакалавър';
-        case 'MASTERS':
+        case 'MASTER':
             return 'магистър';
-        case 'DOCTORS':
+        case 'DOCTOR':
             return 'доктор';
+        case 'DOCTOR_OF_SCIENCE':
+            return 'доктор на науките';
+    }
+}
+
+export function getQualification(qualification) {
+    switch(qualification){
+        case 'ENGINEER':
+            return 'инж.';
+        default:
+            return '';
+    }
+}
+
+export function getClassType(classType) {
+    switch(classType){
+        case 'LECTURE':
+            return 'лекция';
+        case 'LAB_TUTORIAL':
+            return 'лабораторно упражнение';
+        case 'SEMINAR':
+            return 'семинарно упражнение';
+        case 'EDU_PRACTICE':
+            return 'учебна практика';
     }
 }

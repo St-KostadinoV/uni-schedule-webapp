@@ -3,14 +3,14 @@
     background-color: #F1F1F1;
     margin: 16px;
     padding:16px;
-    width: 864px;
+    width: 763px;
 }
 
 .card-content-variant-1 {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: 1fr 25px;
-    gap: 8px 0px;
+    gap: 8px 0;
     grid-auto-flow: row;
     grid-template-areas:
       "title title"
@@ -19,9 +19,9 @@
 
 .card-content-variant-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr 0.85fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 25px;
-  gap: 8px 0px;
+  gap: 8px 0;
   grid-auto-flow: row;
   grid-template-areas:
     "title title title"
@@ -32,7 +32,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 25px 25px;
-  gap: 8px 0px;
+  gap: 8px 0;
   grid-auto-flow: row;
   grid-template-areas:
     "title title title"
@@ -44,7 +44,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 25px 25px;
-  gap: 8px 0px;
+  gap: 8px 0;
   grid-auto-flow: row;
   grid-template-areas:
     "title title title"
@@ -52,12 +52,26 @@
     "sub-2 sub-2 sub-2";
 }
 
-.card-title { grid-area: title; }
+.card-content-timetable {
+    display: grid;
+    grid-template-columns: 128px 1fr;
+    grid-template-rows: 1fr;
+    gap: 0 16px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "sub-1 sub-2";
+}
 
-.card-sub-1 { grid-area: sub-1; }
+.card-title { grid-area: title;}
+
+.card-sub-1 { grid-area: sub-1; align-self: center; }
 
 .card-sub-2 { grid-area: sub-2; }
 
 .card-sub-3 { grid-area: sub-3; text-align: right; }
 
 .card-sub-4 { grid-area: sub-4; text-align: center; }
+
+.card-timetable-label {
+    margin-top: 8px;
+}

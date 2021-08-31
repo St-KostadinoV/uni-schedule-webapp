@@ -1,6 +1,7 @@
 package com.example.unischedulewebapp.model;
 
 import com.example.unischedulewebapp.model.enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 

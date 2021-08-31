@@ -1,14 +1,14 @@
 import Form from './Form'
 
-const ChangePassForm = () => {
+const ChangePassForm = ({ onSubmit }) => {
     return (
-        <Form>
+        <Form onSubmit={onSubmit}>
           <div className='form-fields'>
             <p>Текуща парола: <input type="text" /></p>
             <p>Нова парола: <input type="text" /></p>
             <p>Потвърдете паролата: <input type="text" /></p>
           </div>
-          <input type="submit"/>
+          <input type="submit" value="Потвърди"/>
         </Form>
     )
 }
