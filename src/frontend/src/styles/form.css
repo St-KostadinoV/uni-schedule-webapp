@@ -65,3 +65,8 @@ select {
     height: 27px;
     padding: 0 2px;
 }
+
+select.alt {
+    width: 288px;
+    margin-bottom: 16px;
+}

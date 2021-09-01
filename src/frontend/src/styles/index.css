@@ -120,6 +120,11 @@ button {
     flex: auto;
 }
 
+button.add {
+    width: 100px;
+    margin: 0;
+}
+
 button:hover {
     background-color: #04438b;
 }

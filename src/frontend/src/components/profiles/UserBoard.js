@@ -8,8 +8,10 @@ import EduDeptProfile from "./EduDeptProfile";
 
 const UserBoard = () => {
     const [user, setUser] = useState([])
+    const currentUser = authService.getCurrentUser()
 
     useEffect(() => {
+        if(currentUser.roles[0] === 'ROLE_INSTRUCTOR' || currentUser.roles[0] === 'ROLE_STUDENT')
         userService
             .getUserProfile()
             .then(
@@ -20,7 +22,6 @@ const UserBoard = () => {
     }, [])
 
     function BuildProfile() {
-        let currentUser = authService.getCurrentUser()
         switch(currentUser.roles[0]) {
             case 'ROLE_INSTRUCTOR':
                 return <InstructorProfile instructor={user}/>

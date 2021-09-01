@@ -17,6 +17,7 @@ const login = (username, password) => {
 
 const logout = () => {
     localStorage.removeItem("user");
+    alert("Успешно излязохте от системата!");
 };
 
 const getCurrentUser = () => {

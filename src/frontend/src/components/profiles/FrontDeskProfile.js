@@ -8,7 +8,7 @@ const FrontDeskProfile  = () => {
         <>
             <h2 className='alt'><b>Фронт офис</b></h2>
             <div className='profile-buttons' style={{marginBottom: 0}}>
-                <button onClick={() => {setShowFaculties(!showFaculties)}}>Факултети</button>
+                <button onClick={() => setShowFaculties(!showFaculties)}>Факултети</button>
                 <button >Катедри</button>
                 <button >Специалности</button>
             </div>

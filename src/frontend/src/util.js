@@ -77,3 +77,22 @@ export function getClassType(classType) {
             return 'учебна практика';
     }
 }
+
+export function getDay(day) {
+    switch (day) {
+        case 'MONDAY':
+            return 'Понеделник';
+        case 'TUESDAY':
+            return 'Вторник';
+        case 'WEDNESDAY':
+            return 'Сряда';
+        case 'THURSDAY':
+            return 'Четвъртък';
+        case 'FRIDAY':
+            return 'Петък';
+        case 'SATURDAY':
+            return 'Събота';
+        case 'SUNDAY':
+            return 'Неделя';
+    }
+}

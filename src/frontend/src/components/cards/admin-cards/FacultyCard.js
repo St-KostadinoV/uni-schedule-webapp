@@ -1,11 +1,11 @@
-import Card from '../Card'
+import EditCard from "./EditCard";
 
 const FacultyCard = ({ faculty }) => {
     return (
-        <Card>
+        <EditCard>
             <h4>{faculty.name}</h4>
             <p style={{marginTop: '8px'}}><b>Абревиатура: </b>{faculty.abbreviation}</p>
-        </Card>
+        </EditCard>
     )
 }
 

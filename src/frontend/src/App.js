@@ -18,7 +18,7 @@ import UserBoard from './components/profiles/UserBoard'
 import authService from './services/auth-service'
 import StudentsList from './components/entity-lists/StudentsList'
 import StudentDetails from './components/entity-details/StudentDetails'
-import Logout from "./components/Logout";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const [currentUser, setCurrentUser] = useState([])
@@ -37,21 +37,20 @@ function App() {
       <Navbar />
       <div className='centered-content'>
         <Switch>
-          <Route path="/login" children={<LoginForm />} />
-          <Route path="/logout" children={<Logout />} />
-          <Route path="/user" children={<UserBoard />} />
-          <Route path="/faculties" children={<FacultiesList />} />
-          <Route path="/faculty/:id" children={<FacultyDetails />} />
-          <Route path="/departments" children={<DepartmentsList />} />
-          <Route path="/department/:id" children={<DepartmentDetails />} />
-          <Route path="/programs" children={<ProgramsList />} />
-          <Route path="/program/:id" children={<ProgramDetails />} />
-          <Route path="/disciplines" children={<DisciplinesList />} />
-          <Route path="/discipline/:id" children={<DisciplineDetails />} />
-          <Route path="/instructors" children={<InstructorsList />} />
-          <Route path="/instructor/:id" children={<InstructorDetails />} />
-          <Route path="/students" children={<StudentsList />} />
-          <Route path="/student/:id" children={<StudentDetails />} />
+          <Route path="/login" component={LoginForm} />
+          <PrivateRoute path="/user" component={UserBoard} />
+          <Route path="/faculties" component={FacultiesList} />
+          <Route path="/faculty/:id" component={FacultyDetails} />
+          <Route path="/departments" component={DepartmentsList} />
+          <Route path="/department/:id" component={DepartmentDetails} />
+          <Route path="/programs" component={ProgramsList} />
+          <Route path="/program/:id" component={ProgramDetails} />
+          <Route path="/disciplines" component={DisciplinesList} />
+          <Route path="/discipline/:id" component={DisciplineDetails} />
+          <Route path="/instructors" component={InstructorsList} />
+          <Route path="/instructor/:id" component={InstructorDetails} />
+          <Route path="/students" component={StudentsList} />
+          <Route path="/student/:id" component={StudentDetails} />
         </Switch>
       </div>
       <Footer />

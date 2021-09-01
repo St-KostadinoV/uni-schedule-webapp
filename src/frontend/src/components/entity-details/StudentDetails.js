@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import TimetableCard from '../cards/TimetableCard'
 import FilterForm from "../forms/FilterForm";
+import authService from "../../services/auth-service";
 
 const StudentDetails = () => {
     let { id } = useParams();
     const [student, setStudent] = useState([])
     const [timetable, setTimetable] = useState([])
     const [day, setDay] = useState('none')
+
+    const currentUser = authService.getCurrentUser();
 
     useEffect(() => {
         const getStudent = async () => {
@@ -29,12 +32,15 @@ const StudentDetails = () => {
         
         return data
     }
-
     const fetchStudentTimetable = async (id) => {
         const res = await fetch('http://localhost:8080/students/' + id + '/timetable')
         const data = await res.json()
 
         return data
+    }
+
+    const isContactInfoVisible = () => {
+        return (!currentUser || currentUser.roles[0] === 'ROLE_STUDENT');
     }
 
     return (
@@ -43,8 +49,8 @@ const StudentDetails = () => {
             <h4 className='alt'><b>Факултетен номер: </b>{student.facultyNumber}</h4>
             <h4 className='alt'><b>Специалност: </b>{student.academicProgram && student.academicProgram.name}</h4>
             <h4 className='alt'><b>Курс: </b>{student.academicYear}&nbsp;&nbsp;&nbsp;&nbsp;<b>Група: </b>{student.studentGroup}</h4>
-            <h4 className='alt'><b>E-mail адрес: </b>{student.email}</h4>
-            <h4 className='alt'><b>Телефон за връзка: </b>{student.phone}</h4>
+            <h4 className='alt' style={{display: isContactInfoVisible() && 'none' }}><b>E-mail адрес: </b>{student.email}</h4>
+            <h4 className='alt' style={{display: isContactInfoVisible() && 'none' }}><b>Телефон за връзка: </b>{student.phone}</h4>
             {timetable.length > 0 && (
                 <FilterForm>
                     <h3>Седмичен разпис</h3>

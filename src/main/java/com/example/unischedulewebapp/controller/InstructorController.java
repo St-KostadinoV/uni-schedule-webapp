@@ -44,7 +44,7 @@ public class InstructorController {
     @GetMapping
     public ResponseEntity<Object> getAllInstructors() {
         List<Instructor> instructors = instructorService
-                .findAll(Sort.by(Sort.Direction.ASC, "lastName"));
+                .findAll(Sort.by(Sort.Direction.ASC, "title", "lastName", "firstName"));
 
         MappingJacksonValue wrapper = new MappingJacksonValue(instructors);
 

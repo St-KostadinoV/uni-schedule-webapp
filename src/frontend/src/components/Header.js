@@ -32,7 +32,7 @@ const Header = () => {
                         <div style={{display: "inline-flex"}}>
                             <Link to="/user"><p className="link">{getUserLink()}</p></Link>
                             <p className="link">•</p>
-                            <a href="/logout" onClick={authService.logout}><p className="link">Изход</p></a>
+                            <a href="/" onClick={authService.logout}><p className="link">Изход</p></a>
                         </div>
                     ) : (
                         <div style={{display: "inline-flex"}}>

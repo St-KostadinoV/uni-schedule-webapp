@@ -109,11 +109,18 @@ const ProgramDetails = () => {
                 </FilterForm>
             )}
             {
-                students.filter(s => s.academicYear == yearS && s.studentGroup == group).map(s => (
+                group === 'none' ?
+                students.filter(s => s.academicYear == yearS).map(s => (
                     <StudentCard
                         key={s.id}
                         student={s}
                     />
+                ))
+                : students.filter(s => s.academicYear == yearS && s.studentGroup == group).map(s => (
+                <StudentCard
+                key={s.id}
+                student={s}
+                />
                 ))
             }
         </>

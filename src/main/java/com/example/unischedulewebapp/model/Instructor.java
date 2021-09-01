@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import static javax.persistence.EnumType.ORDINAL;
 import static javax.persistence.EnumType.STRING;
 
 @JsonFilter("InstructorFilter")
@@ -21,7 +22,7 @@ import static javax.persistence.EnumType.STRING;
 )
 public class Instructor extends Person implements Serializable {
 
-    @Enumerated(value = STRING)
+    @Enumerated(value = ORDINAL)
     @Column(
             name = "title",
             nullable = false

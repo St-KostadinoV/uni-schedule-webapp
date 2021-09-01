@@ -6,6 +6,7 @@ import com.example.unischedulewebapp.auth.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -62,7 +63,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .mvcMatchers("/profile/email-change").hasRole(INSTRUCTOR.name())
                 .mvcMatchers("/profile/**").hasAnyRole(INSTRUCTOR.name(), STUDENT.name())
-                //.mvcMatchers("/students/*").hasAnyRole(INSTRUCTOR.name(), FRONT_DESK.name(), EDUCATION_DEPT.name())
                 .mvcMatchers("/admin/timetable/**").hasRole(EDUCATION_DEPT.name())
                 .mvcMatchers("/admin/**").hasRole(FRONT_DESK.name())
                 .mvcMatchers("/**").permitAll()
