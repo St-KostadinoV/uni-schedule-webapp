@@ -1,7 +1,5 @@
 package com.example.unischedulewebapp.service;
 
-import com.example.unischedulewebapp.auth.UserDetailsImpl;
-import com.example.unischedulewebapp.auth.UserDetailsServiceImpl;
 import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
@@ -118,7 +116,7 @@ public class InstructorService {
                     String.format(INSTRUCTOR_EXISTS_MSG, "with id=" + instructor.getId())
             );
 
-        if(!departmentService.existsById(instructor.getDepartment().getId()))
+        if (!departmentService.existsById(instructor.getDepartment().getId()))
             throw new ResourceNotFoundException(INSTRUCTOR_DEPT_NOT_FOUND_MSG);
 
         userService.registerUser(instructor.getUser());

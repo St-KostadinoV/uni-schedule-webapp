@@ -185,11 +185,6 @@ public class Instructor extends Person implements Serializable {
         this.honoraryStatus = honoraryStatus;
     }
 
-    @JsonIgnore
-    public String getFullNameWithTitle(){
-        return title.getName() + " " + super.getFullName();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

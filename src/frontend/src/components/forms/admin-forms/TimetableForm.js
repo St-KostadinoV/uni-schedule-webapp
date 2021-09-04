@@ -2,7 +2,7 @@ import Form from '../Form'
 import {useEffect, useState} from "react";
 import {getInstructorShortTitle} from "../../../util";
 
-const TimetableForm = () => {
+const TimetableForm = ({onAdd}) => {
     const [day, setDay] = useState('none')
     const [start, setStart] = useState([])
     const [end, setEnd] = useState([])
@@ -66,7 +66,24 @@ const TimetableForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        
+        // validate
+
+        let timetable = {
+            assignedInstructor: {
+                id: instructor
+            },
+            dayOfWeek: day,
+            startTime: start,
+            endTime: end,
+            designatedRoom: room,
+            programDiscipline: {
+                id: discipline
+            },
+            classType: type,
+            studentGroup: group
+        }
+
+        onAdd(timetable)
     }
 
     return (
@@ -122,11 +139,11 @@ const TimetableForm = () => {
                             name='discipline'
                             id='discipline'
                             disabled={year === 'none'}
-                            onChange={event => changeDiscipline(event.target.value)}>
+                            onChange={event => changeDiscipline(event)}>
                         <option value='none'> - Изберете дисциплина - </option>
                         {
                             disciplines.map(d => (
-                                <option key={d.discipline.id} value={d.discipline.id}>{d.discipline.abbreviation}</option>
+                                <option key={d.id} value={d.id}>{d.discipline.abbreviation}</option>
                             ))
                         }
                     </select>

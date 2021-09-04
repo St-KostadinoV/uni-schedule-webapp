@@ -1,6 +1,7 @@
 package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.auth.exception.UserAlreadyExistsException;
+import com.example.unischedulewebapp.auth.jwt.AuthEntryPointJwt;
 import com.example.unischedulewebapp.exception.BadResourceException;
 import com.example.unischedulewebapp.exception.ResourceAlreadyExistsException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
@@ -10,6 +11,8 @@ import com.example.unischedulewebapp.service.*;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +39,8 @@ public class AdminController {
     private final ProgramDisciplineService programDisciplineService;
     private final InstructorService instructorService;
     private final StudentService studentService;
+
+    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     @Autowired
     public AdminController(AcademicDepartmentService departmentService,
@@ -670,6 +675,7 @@ public class AdminController {
 
         } catch (BadResourceException | TimetableCollisionException e) {
             // TODO - log stack trace
+            logger.error("Bad Resource error: {}", e.getMessage());
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());

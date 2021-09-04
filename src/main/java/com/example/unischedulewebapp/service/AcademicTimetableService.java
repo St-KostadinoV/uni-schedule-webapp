@@ -137,7 +137,8 @@ public class AcademicTimetableService {
                 ));
     }
 
-    public AcademicTimetable addTimetable(AcademicTimetable timetable) throws ResourceAlreadyExistsException, ResourceNotFoundException, BadResourceException, TimetableCollisionException {
+    public AcademicTimetable addTimetable(AcademicTimetable timetable)
+            throws ResourceAlreadyExistsException, ResourceNotFoundException, BadResourceException, TimetableCollisionException {
         if(timetable.getId() != null && existsById(timetable.getId()))
             throw new ResourceAlreadyExistsException(
                     String.format(TIMETBL_EXISTS_MSG, "with id=" + timetable.getId())
@@ -149,6 +150,7 @@ public class AcademicTimetableService {
         if(!instructorService.existsById(timetable.getAssignedInstructor().getId()))
             throw new ResourceNotFoundException(TIMETBL_INSTRUCTOR_NOT_FOUND_MSG);
 
+        timetable.setProgramDiscipline(programDisciplineService.findById(timetable.getProgramDiscipline().getId()));
         boolean isLeadingInstructorAssigned = timetable
                 .getProgramDiscipline()
                 .getDiscipline()
@@ -179,13 +181,23 @@ public class AcademicTimetableService {
         if(!instructorService.existsById(timetable.getAssignedInstructor().getId()))
             throw new ResourceNotFoundException(TIMETBL_INSTRUCTOR_NOT_FOUND_MSG);
 
-        if(timetable.getProgramDiscipline().getDiscipline().getLeadingInstructor() != timetable.getAssignedInstructor()
-                && !timetable.getProgramDiscipline().getDiscipline().getAssistingInstructors().contains(timetable.getAssignedInstructor()))
+        timetable.setProgramDiscipline(programDisciplineService.findById(timetable.getProgramDiscipline().getId()));
+        boolean isLeadingInstructorAssigned = timetable
+                .getProgramDiscipline()
+                .getDiscipline()
+                .getLeadingInstructor()
+                .equals(timetable.getAssignedInstructor());
+        boolean isAssistingInstructorAssigned = timetable
+                .getProgramDiscipline()
+                .getDiscipline()
+                .getAssistingInstructors()
+                .contains(timetable.getAssignedInstructor());
+        if(!isLeadingInstructorAssigned && !isAssistingInstructorAssigned)
             throw new BadResourceException(TIMETBL_UNAFFILIATED_INSTRUCTOR_MSG);
 
+        timetable.setId(id);
         isTimetableValid(timetable);
 
-        timetable.setId(id);
         return timetableRepository.save(timetable);
     }
 
@@ -198,42 +210,47 @@ public class AcademicTimetableService {
         timetableRepository.deleteById(id);
     }
 
+    private final static String INSTRUCTOR_NOT_AVAILABLE = "Instructor is not available during this time period of the day!";
+    private final static String STUDENT_NOT_AVAILABLE = "Students are not available during this time period of the day!";
+    private final static String ROOM_NOT_AVAILABLE = "Room is not available during this time period of the day!";
+    private final static String CLASS_DUPLICATE = "Students already have this class during the week!";
+
     private void isTimetableValid(AcademicTimetable timetable) throws TimetableCollisionException {
-        if (!timetableRepository
-                .findInstructorAvailability(
-                        timetable.getAssignedInstructor(),
-                        timetable.getDayOfWeek(),
-                        timetable.getStartTime(),
-                        timetable.getEndTime())
-                .isEmpty())
-            throw new TimetableCollisionException("Instructor is not available during this time period of the day!");
+        List<AcademicTimetable> t = new ArrayList<>(timetableRepository.findInstructorAvailability(
+                timetable.getAssignedInstructor(),
+                timetable.getDayOfWeek(),
+                timetable.getStartTime(),
+                timetable.getEndTime()));
+        if (!t.isEmpty())
+            if(timetable.getId() == null || !timetable.getId().equals(t.get(0).getId()))
+                throw new TimetableCollisionException(INSTRUCTOR_NOT_AVAILABLE);
 
-        if (!timetableRepository
-                .findStudentsAvailability(
-                        timetable.getProgramDiscipline().getProgram(),
-                        timetable.getProgramDiscipline().getAcademicYear(),
-                        timetable.getStudentGroup(),
-                        timetable.getDayOfWeek(),
-                        timetable.getStartTime(),
-                        timetable.getEndTime())
-                .isEmpty())
-            throw new TimetableCollisionException("Students are not available during this time period of the day!");
+        t = new ArrayList<>(timetableRepository.findStudentsAvailability(
+                timetable.getProgramDiscipline().getProgram(),
+                timetable.getProgramDiscipline().getAcademicYear(),
+                timetable.getStudentGroup(),
+                timetable.getDayOfWeek(),
+                timetable.getStartTime(),
+                timetable.getEndTime()));
+        if (!t.isEmpty())
+            if(timetable.getId() == null || !timetable.getId().equals(t.get(0).getId()))
+                throw new TimetableCollisionException(STUDENT_NOT_AVAILABLE);
 
-        if (!timetableRepository
-                .findRoomAvailability(
-                        timetable.getDesignatedRoom(),
-                        timetable.getDayOfWeek(),
-                        timetable.getStartTime(),
-                        timetable.getEndTime())
-                .isEmpty())
-            throw new TimetableCollisionException("Room is not available during this time period of the day!");
+        t = new ArrayList<>(timetableRepository.findRoomAvailability(
+                timetable.getDesignatedRoom(),
+                timetable.getDayOfWeek(),
+                timetable.getStartTime(),
+                timetable.getEndTime()));
+        if (!t.isEmpty())
+            if(timetable.getId() == null || !timetable.getId().equals(t.get(0).getId()))
+                throw new TimetableCollisionException(ROOM_NOT_AVAILABLE);
 
-        if (!timetableRepository
-                .findClassDuplicates(
-                        timetable.getProgramDiscipline(),
-                        timetable.getStudentGroup(),
-                        timetable.getClassType())
-                .isEmpty())
-            throw new TimetableCollisionException("Students already have this class during the week!");
+        t = new ArrayList<>(timetableRepository.findClassDuplicates(
+                timetable.getProgramDiscipline(),
+                timetable.getStudentGroup(),
+                timetable.getClassType()));
+        if (!t.isEmpty())
+            if(timetable.getId() == null || !timetable.getId().equals(t.get(0).getId()))
+                throw new TimetableCollisionException(CLASS_DUPLICATE);
     }
 }

@@ -60,8 +60,6 @@ public interface AcademicTimetableRepo
                                                            @Param("group") Integer group,
                                                            @Param("day") DayOfWeek day);
 
-    // TODO - convert return data type to Optional<>
-
     @Query(
             "select tt from AcademicTimetable tt " +
             "where tt.assignedInstructor = :instructor " +

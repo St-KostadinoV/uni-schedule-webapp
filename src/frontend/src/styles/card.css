@@ -6,6 +6,19 @@
     width: 763px;
 }
 
+.edit-card {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 8px;
+    grid-template-columns: auto min-content;
+}
+
+.edit-card-content {
+    display: grid;
+    gap: 8px;
+    height: fit-content;
+}
+
 .card-content-variant-1 {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -72,6 +85,4 @@
 
 .card-sub-4 { grid-area: sub-4; text-align: center; }
 
-.card-label {
-    margin-top: 8px;
-}
+.card-label { margin-top: 8px; }

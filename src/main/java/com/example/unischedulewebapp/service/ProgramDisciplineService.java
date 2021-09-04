@@ -114,7 +114,7 @@ public class ProgramDisciplineService {
 
         if(!findByProgramAndDiscipline(programDiscipline.getProgram(), programDiscipline.getDiscipline()).isEmpty())
             throw new ResourceAlreadyExistsException(
-                    String.format(PROGRAM_DSCPL_EXISTS_MSG, programDiscipline.getProgram().getAbbreviation() + "-" + programDiscipline.getDiscipline().getAbbreviation()) // TODO - id is always null, print something different
+                    String.format(PROGRAM_DSCPL_EXISTS_MSG, programDiscipline.getProgram().getAbbreviation() + "-" + programDiscipline.getDiscipline().getAbbreviation())
             );
 
         if(!programService.existsById(programDiscipline.getProgram().getId()))
