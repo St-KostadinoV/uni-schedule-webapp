@@ -21,6 +21,9 @@ const LoginForm = () => {
                 history.push("/user")
                 window.location.reload()
             })
+            .catch(err => {
+                alert('Status Code: ' + err.response.status + '\n' + err.response.data.message)
+            })
     }
 
   return (

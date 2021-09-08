@@ -61,36 +61,44 @@ const InstructorDetails = () => {
             <h4 className='alt'><b>Кабинет: </b>{instructor.office}</h4>
             <h4 className='alt'><b>E-mail адрес: </b>{instructor.email}</h4>
             <h4 className='alt'><b>Телефон за връзка: </b>{instructor.phone}</h4>
+            {timetable.length > 0 && (
+                <>
+                    <FilterForm>
+                        <h3>Седмичен разпис</h3>
+                        <select name='days' id='days' onChange={event => {setDay(event.target.value)}}>
+                            <option value='none'> - Изберете ден - </option>
+                            <option value='MONDAY'>Понеделник</option>
+                            <option value='TUESDAY'>Вторник</option>
+                            <option value='WEDNESDAY'>Сряда</option>
+                            <option value='THURSDAY'>Четвъртък</option>
+                            <option value='FRIDAY'>Петък</option>
+                            <option value='SATURDAY'>Събота</option>
+                            <option value='SUNDAY'>Неделя</option>
+                        </select>
+                    </FilterForm>
+                    {
+                        timetable.filter(tt => tt.dayOfWeek === day).length > 0 ? (
+                        timetable
+                            .filter(tt => tt.dayOfWeek === day)
+                            .map(tt => (
+                                <TimetableCard
+                                    key={tt.id}
+                                    timetable={tt}
+                                />
+                            ))
+                        ) : (
+                          day !== 'none' && <h4 className='alt'>Преподавателят няма занятия в този ден.</h4>
+                        )
+                    }
+                </>
+            )}
+
             {disciplines.length > 0 && <FilterForm><h3>Водени дисциплини</h3></FilterForm>}
             {
                 disciplines.map( discipline => (
                     <DisciplineCard
                         key={discipline.id}
                         discipline={discipline}
-                    />
-                ))
-            }
-
-            {timetable.length > 0 && (
-                <FilterForm>
-                    <h3>Седмичен разпис</h3>
-                    <select name='days' id='days' onChange={event => {setDay(event.target.value)}}>
-                        <option value='none'> - Изберете ден - </option>
-                        <option value='MONDAY'>Понеделник</option>
-                        <option value='TUESDAY'>Вторник</option>
-                        <option value='WEDNESDAY'>Сряда</option>
-                        <option value='THURSDAY'>Четвъртък</option>
-                        <option value='FRIDAY'>Петък</option>
-                        <option value='SATURDAY'>Събота</option>
-                        <option value='SUNDAY'>Неделя</option>
-                    </select>
-                </FilterForm>
-            )}
-            {
-                timetable.filter(tt => tt.dayOfWeek === day).map(tt => (
-                    <TimetableCard
-                        key={tt.id}
-                        timetable={tt}
                     />
                 ))
             }

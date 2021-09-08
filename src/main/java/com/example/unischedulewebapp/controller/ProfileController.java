@@ -2,12 +2,13 @@ package com.example.unischedulewebapp.controller;
 
 import com.example.unischedulewebapp.auth.UserDetailsImpl;
 import com.example.unischedulewebapp.model.enums.UserRole;
-import com.example.unischedulewebapp.auth.UserDetailsServiceImpl;
 import com.example.unischedulewebapp.auth.exception.PasswordsMatchException;
 import com.example.unischedulewebapp.exception.ResourceNotFoundException;
 import com.example.unischedulewebapp.model.AcademicTimetable;
 import com.example.unischedulewebapp.model.Student;
 import com.example.unischedulewebapp.model.Instructor;
+import com.example.unischedulewebapp.payload.EmailChangeRequest;
+import com.example.unischedulewebapp.payload.PasswordChangeRequest;
 import com.example.unischedulewebapp.service.AcademicTimetableService;
 import com.example.unischedulewebapp.service.StudentService;
 import com.example.unischedulewebapp.service.InstructorService;
@@ -112,219 +113,238 @@ public class ProfileController {
                     .body(e.getMessage());
         }
     }
-//
-//    @PostMapping(
-//            path = "email-change"
-//    )
-//    public ResponseEntity<Object> updateAuthenticatedUserEmail(@RequestParam("email") String email) {
-//        UserDetailsImpl currentUser = (UserDetailsImpl) userService
-//                .loadUserByUsername((String) SecurityContextHolder
-//                        .getContext()
-//                        .getAuthentication()
-//                        .getPrincipal());
-//
-//        try {
-//            Instructor instructor = instructorService
-//                    .findByUserDetails(currentUser);
-//
-//            instructorService.updateInstructorEmail(instructor, email);
-//
-//            return ResponseEntity
-//                    .status(HttpStatus.OK)
-//                    .build();
-//
-//        } catch (ResourceNotFoundException e) {
-//            // TODO - log stack trace
-//            return ResponseEntity
-//                    .status(HttpStatus.NOT_FOUND)
-//                    .body(e.getMessage());
-//        }
-//
-//    }
-//
-//    @PostMapping(
-//            path = "pass-change"
-//    )
-//    public ResponseEntity<Object> updateAuthenticatedUserPassword(@RequestParam("newPassword") String newPassword,
-//                                                                  @RequestParam("oldPassword") String oldPassword) {
-//        UserDetailsImpl currentUser = (UserDetailsImpl) userService
-//                .loadUserByUsername((String) SecurityContextHolder
-//                        .getContext()
-//                        .getAuthentication()
-//                        .getPrincipal());
-//
-//        try {
-//            userService.updatePassword(currentUser, newPassword, oldPassword);
-//
-//            return ResponseEntity
-//                    .status(HttpStatus.OK)
-//                    .build();
-//
-//        } catch (PasswordsMatchException e) {
-//            // TODO - log stack trace
-//            return ResponseEntity
-//                    .status(HttpStatus.BAD_REQUEST)
-//                    .body(e.getMessage());
-//        }
-//    }
-//
-//    @GetMapping(
-//            path = "timetable/daily"
-//    )
-//    public ResponseEntity<Object> getAuthenticatedUserDailyTimetable() {
-//        UserDetailsImpl currentUser = (UserDetailsImpl) userService
-//                .loadUserByUsername((String) SecurityContextHolder
-//                        .getContext()
-//                        .getAuthentication()
-//                        .getPrincipal());
-//
-//        try {
-//            List<AcademicTimetable> timetable;
-//
-//            FilterProvider filters;
-//
-//            if (currentUser.getAppUserRole().equals(UserRole.INSTRUCTOR)) {
-//                Instructor instructor = instructorService
-//                        .findByUserDetails(currentUser);
-//
-//                timetable = timetableService
-//                        .findInstructorDailySchedule(instructor);
-//
-//                filters = new SimpleFilterProvider()
-//                        .addFilter("TimetableFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("startTime",
-//                                                                                "endTime",
-//                                                                                "classType",
-//                                                                                "programDiscipline",
-//                                                                                "designatedRoom",
-//                                                                                "studentGroup"))
-//                        .addFilter("ProgramDisciplineFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("program",
-//                                                                                "discipline",
-//                                                                                "academicYear"))
-//                        .addFilter("ProgramFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
-//                        .addFilter("DisciplineFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("name"));
-//            }
-//            else {
-//                Student student = studentService
-//                        .findByUserDetails(currentUser);
-//
-//                timetable = timetableService
-//                        .findStudentDailySchedule(student);
-//
-//                filters = new SimpleFilterProvider()
-//                        .addFilter("TimetableFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("startTime",
-//                                                                                "endTime",
-//                                                                                "classType",
-//                                                                                "programDiscipline",
-//                                                                                "designatedRoom",
-//                                                                                "assignedInstructor"))
-//                        .addFilter("ProgramDisciplineFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("discipline"))
-//                        .addFilter("DisciplineFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("name"))
-//                        .addFilter("InstructorFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
-//                                                                                "title",
-//                                                                                "firstName",
-//                                                                                "lastName"));
-//            }
-//
-//            MappingJacksonValue wrapper = new MappingJacksonValue(timetable);
-//            wrapper.setFilters(filters);
-//
-//            return ResponseEntity
-//                    .status(HttpStatus.OK)
-//                    .body(wrapper);
-//
-//        } catch (ResourceNotFoundException e) {
-//            // TODO - log stack trace
-//            return ResponseEntity
-//                    .status(HttpStatus.NOT_FOUND)
-//                    .body(e.getMessage());
-//        }
-//    }
-//
-//    @GetMapping(
-//            path = "timetable/weekly"
-//    )
-//    public ResponseEntity<Object> getAuthenticatedUserWeeklyTimetable() {
-//        UserDetailsImpl currentUser = (UserDetailsImpl) userService
-//                .loadUserByUsername((String) SecurityContextHolder
-//                        .getContext()
-//                        .getAuthentication()
-//                        .getPrincipal());
-//
-//        try {
-//            List<AcademicTimetable> timetable;
-//
-//            FilterProvider filters;
-//
-//            if (currentUser.getAppUserRole().equals(UserRole.INSTRUCTOR)) {
-//                Instructor instructor = instructorService
-//                        .findByUserDetails(currentUser);
-//
-//                timetable = timetableService
-//                        .findByAssignedInstructor(instructor);
-//
-//                filters = new SimpleFilterProvider()
-//                        .addFilter("TimetableFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("startTime",
-//                                                                                "endTime",
-//                                                                                "classType",
-//                                                                                "programDiscipline",
-//                                                                                "designatedRoom",
-//                                                                                "studentGroup"))
-//                        .addFilter("ProgramDisciplineFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("program",
-//                                                                                "discipline",
-//                                                                                "academicYear"))
-//                        .addFilter("ProgramFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
-//                        .addFilter("DisciplineFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("name"));
-//            }
-//            else {
-//                Student student = studentService
-//                        .findByUserDetails(currentUser);
-//
-//                timetable = timetableService
-//                        .findStudentWeeklySchedule(student);
-//
-//                filters = new SimpleFilterProvider()
-//                        .addFilter("TimetableFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("startTime",
-//                                                                                "endTime",
-//                                                                                "classType",
-//                                                                                "programDiscipline",
-//                                                                                "designatedRoom",
-//                                                                                "assignedInstructor"))
-//                        .addFilter("ProgramDisciplineFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("discipline"))
-//                        .addFilter("DisciplineFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("name"))
-//                        .addFilter("InstructorFilter",
-//                                    SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
-//                                                                                "title",
-//                                                                                "firstName",
-//                                                                                "lastName"));
-//            }
-//
-//            MappingJacksonValue wrapper = new MappingJacksonValue(timetable);
-//            wrapper.setFilters(filters);
-//
-//            return ResponseEntity
-//                    .status(HttpStatus.OK)
-//                    .body(wrapper);
-//
-//        } catch (ResourceNotFoundException e) {
-//            // TODO - log stack trace
-//            return ResponseEntity
-//                    .status(HttpStatus.NOT_FOUND)
-//                    .body(e.getMessage());
-//        }
-//    }
+
+    @PostMapping(
+            path = "email-change"
+    )
+    public ResponseEntity<Object> updateAuthenticatedUserEmail(@RequestBody EmailChangeRequest request) {
+        UserDetailsImpl currentUser = (UserDetailsImpl) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        try {
+            Instructor instructor = instructorService
+                    .findByUser(
+                            userService.findByUsername(currentUser.getUsername())
+                    );
+
+            instructorService.updateInstructorEmail(instructor, request.getEmail());
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .build();
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+
+    }
+
+    @PostMapping(
+            path = "pass-change"
+    )
+    public ResponseEntity<Object> updateAuthenticatedUserPassword(@RequestBody PasswordChangeRequest request) {
+        UserDetailsImpl currentUser = (UserDetailsImpl) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        try {
+            userService
+                    .updatePassword(
+                            userService.findByUsername(currentUser.getUsername()), request.getNewPassword(), request.getOldPassword()
+                    );
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .build();
+
+        } catch (PasswordsMatchException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
+
+    @GetMapping(
+            path = "timetable/daily"
+    )
+    public ResponseEntity<Object> getAuthenticatedUserDailyTimetable() {
+        UserDetailsImpl currentUser = (UserDetailsImpl) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        try {
+            List<AcademicTimetable> timetable;
+
+            FilterProvider filters;
+
+            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_" + UserRole.INSTRUCTOR.name()))) {
+                Instructor instructor = instructorService
+                        .findByUser(
+                                userService.findByUsername(currentUser.getUsername())
+                        );
+
+                timetable = timetableService
+                        .findInstructorDailySchedule(instructor);
+
+                filters = new SimpleFilterProvider()
+                        .addFilter("TimetableFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                                "startTime",
+                                                                                "endTime",
+                                                                                "classType",
+                                                                                "programDiscipline",
+                                                                                "designatedRoom",
+                                                                                "studentGroup"))
+                        .addFilter("ProgramDisciplineFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("program",
+                                                                                "discipline",
+                                                                                "academicYear"))
+                        .addFilter("ProgramFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
+                        .addFilter("DisciplineFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("name"));
+            }
+            else {
+                Student student = studentService
+                        .findByUser(
+                                userService.findByUsername(currentUser.getUsername())
+                        );
+
+                timetable = timetableService
+                        .findStudentDailySchedule(student);
+
+                filters = new SimpleFilterProvider()
+                        .addFilter("TimetableFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                                "startTime",
+                                                                                "endTime",
+                                                                                "classType",
+                                                                                "programDiscipline",
+                                                                                "designatedRoom",
+                                                                                "assignedInstructor"))
+                        .addFilter("ProgramDisciplineFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("discipline"))
+                        .addFilter("DisciplineFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("name"))
+                        .addFilter("InstructorFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
+                                                                                "title",
+                                                                                "firstName",
+                                                                                "lastName"));
+            }
+
+            MappingJacksonValue wrapper = new MappingJacksonValue(timetable);
+            wrapper.setFilters(filters);
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(wrapper);
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
+
+    @GetMapping(
+            path = "timetable"
+    )
+    public ResponseEntity<Object> getAuthenticatedUserWeeklyTimetable() {
+        UserDetailsImpl currentUser = (UserDetailsImpl) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        try {
+            List<AcademicTimetable> timetable;
+
+            FilterProvider filters;
+
+            if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_" + UserRole.INSTRUCTOR.name()))) {
+                Instructor instructor = instructorService
+                        .findByUser(
+                                userService.findByUsername(currentUser.getUsername())
+                        );
+
+                timetable = timetableService
+                        .findByAssignedInstructor(instructor);
+
+                filters = new SimpleFilterProvider()
+                        .addFilter("TimetableFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                                "dayOfWeek",
+                                                                                "startTime",
+                                                                                "endTime",
+                                                                                "classType",
+                                                                                "programDiscipline",
+                                                                                "designatedRoom",
+                                                                                "studentGroup"))
+                        .addFilter("ProgramDisciplineFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("program",
+                                                                                "discipline",
+                                                                                "academicYear"))
+                        .addFilter("ProgramFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("abbreviation"))
+                        .addFilter("DisciplineFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("name"));
+            }
+            else {
+                Student student = studentService
+                        .findByUser(
+                                userService.findByUsername(currentUser.getUsername())
+                        );
+
+                timetable = timetableService
+                        .findStudentWeeklySchedule(student);
+
+                filters = new SimpleFilterProvider()
+                        .addFilter("TimetableFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("id",
+                                                                                "dayOfWeek",
+                                                                                "startTime",
+                                                                                "endTime",
+                                                                                "classType",
+                                                                                "programDiscipline",
+                                                                                "designatedRoom",
+                                                                                "assignedInstructor"))
+                        .addFilter("ProgramDisciplineFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("discipline"))
+                        .addFilter("DisciplineFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("name"))
+                        .addFilter("InstructorFilter",
+                                    SimpleBeanPropertyFilter.filterOutAllExcept("honoraryStatus",
+                                                                                "title",
+                                                                                "firstName",
+                                                                                "lastName"));
+            }
+
+            MappingJacksonValue wrapper = new MappingJacksonValue(timetable);
+            wrapper.setFilters(filters);
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(wrapper);
+
+        } catch (ResourceNotFoundException e) {
+            // TODO - log stack trace
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
 }

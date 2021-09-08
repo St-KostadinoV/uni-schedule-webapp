@@ -153,10 +153,8 @@ public class StudentService {
                     String.format(STUDENT_EXISTS_MSG, "with faculty number '" + student.getFacultyNumber() + "'")
             );
 
-        if(!programService.existsById(student.getAcademicProgram().getId()))
-            throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
-
         student.setAcademicProgram(programService.findById(student.getAcademicProgram().getId()));
+
         if(student.getAcademicYear() > student.getAcademicProgram().getEducationPeriod())
             throw new BadResourceException(STUDENT_INVALID_YEAR_MSG);
 
@@ -171,10 +169,8 @@ public class StudentService {
         if(!oldStudent.getFacultyNumber().equals(student.getFacultyNumber()))
             throw new BadResourceException(STUDENT_FAC_NUMBER_OVERWRITE_MSG);
 
-        if(!programService.existsById(student.getAcademicProgram().getId()))
-            throw new ResourceNotFoundException(STUDENT_PROGRAM_NOT_FOUND_MSG);
-
         student.setAcademicProgram(programService.findById(student.getAcademicProgram().getId()));
+
         if(student.getAcademicYear() > student.getAcademicProgram().getEducationPeriod())
             throw new BadResourceException(STUDENT_INVALID_YEAR_MSG);
 

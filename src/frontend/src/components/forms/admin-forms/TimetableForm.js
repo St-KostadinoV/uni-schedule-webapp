@@ -139,7 +139,7 @@ const TimetableForm = ({onAdd}) => {
                             name='discipline'
                             id='discipline'
                             disabled={year === 'none'}
-                            onChange={event => changeDiscipline(event)}>
+                            onChange={event => changeDiscipline(event.target.value)}>
                         <option value='none'> - Изберете дисциплина - </option>
                         {
                             disciplines.map(d => (
@@ -194,7 +194,7 @@ const TimetableForm = ({onAdd}) => {
                     </select>
                 </p>
             </div>
-            <input type="submit" value="Потвърди"/>
+            <input type="submit" value="ДОБАВИ"/>
         </Form>
     )
 }

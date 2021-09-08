@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -182,7 +183,7 @@ public class DepartmentController {
                     .findById(id);
 
             List<Instructor> departmentInstructors = instructorService
-                    .findByDepartment(department);
+                    .findByDepartment(department, Sort.by(Sort.Direction.ASC, "title", "lastName", "firstName"));
 
             MappingJacksonValue wrapper = new MappingJacksonValue(departmentInstructors);
 

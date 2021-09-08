@@ -84,8 +84,7 @@ public class AcademicDepartmentService {
                     String.format(DEPT_EXISTS_MSG, "with id=" + department.getId())
             );
 
-        if(!facultyService.existsById(department.getFaculty().getId()))
-            throw new ResourceNotFoundException(DEPT_FACULTY_NOT_FOUND_MSG);
+        department.setFaculty(facultyService.findById(department.getFaculty().getId()));
 
         return departmentRepository.save(department);
     }
@@ -96,8 +95,7 @@ public class AcademicDepartmentService {
                     String.format(DEPT_NOT_FOUND_MSG, "with id=" + id)
             );
 
-        if(!facultyService.existsById(department.getFaculty().getId()))
-            throw new ResourceNotFoundException(DEPT_FACULTY_NOT_FOUND_MSG);
+        department.setFaculty(facultyService.findById(department.getFaculty().getId()));
 
         department.setId(id);
         return departmentRepository.save(department);

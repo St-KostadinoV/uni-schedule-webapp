@@ -95,8 +95,7 @@ public class AcademicProgramService {
                     String.format(PROGRAM_EXISTS_MSG, "with id=" + program.getId())
             );
 
-        if(!departmentService.existsById(program.getDepartment().getId()))
-            throw new ResourceNotFoundException(PROGRAM_DEPT_NOT_FOUND);
+        program.setDepartment(departmentService.findById(program.getDepartment().getId()));
 
         return programRepository.save(program);
     }
@@ -107,8 +106,7 @@ public class AcademicProgramService {
                     String.format(PROGRAM_NOT_FOUND_MSG, "with id=" + id)
             );
 
-        if(!departmentService.existsById(program.getDepartment().getId()))
-            throw new ResourceNotFoundException(PROGRAM_DEPT_NOT_FOUND);
+        program.setDepartment(departmentService.findById(program.getDepartment().getId()));
 
         program.setId(id);
         return programRepository.save(program);

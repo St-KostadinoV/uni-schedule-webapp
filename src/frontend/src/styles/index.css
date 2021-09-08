@@ -129,10 +129,16 @@ button:hover {
     background-color: #04438b;
 }
 
+button.selected {
+    background-color: #C9D3E1;
+    color: #C9D3E1;
+}
+
 .profile-buttons {
     margin: 16px 8px;
     display: flex;
 }
+
 
 .contact-info {
     margin-top: 32px;

@@ -12,7 +12,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AcademicDisciplineService {
@@ -25,12 +27,15 @@ public class AcademicDisciplineService {
             "Discipline is taught by non-existent instructor!";
 
     private final AcademicDisciplineRepo disciplineRepository;
+    private final AcademicDepartmentService departmentService;
     private final InstructorService instructorService;
 
     @Autowired
     public AcademicDisciplineService(AcademicDisciplineRepo disciplineRepository,
+                                     AcademicDepartmentService departmentService,
                                      InstructorService instructorService) {
         this.disciplineRepository = disciplineRepository;
+        this.departmentService = departmentService;
         this.instructorService = instructorService;
     }
 
@@ -96,12 +101,14 @@ public class AcademicDisciplineService {
                     String.format(DSCPL_EXISTS_MSG, "with id=" + discipline.getId())
             );
 
-        if(!instructorService.existsById(discipline.getLeadingInstructor().getId()))
-            throw new ResourceNotFoundException(DSCPL_INSTRUCTOR_NOT_FOUND_MSG);
+        discipline.setDepartment(departmentService.findById(discipline.getDepartment().getId()));
 
+        discipline.setLeadingInstructor(instructorService.findById(discipline.getLeadingInstructor().getId()));
+
+        Set<Instructor> instructors = new HashSet<>();
         for(Instructor instructor : discipline.getAssistingInstructors())
-            if(!instructorService.existsById(instructor.getId()))
-                throw new ResourceNotFoundException(DSCPL_INSTRUCTOR_NOT_FOUND_MSG);
+            instructors.add(instructorService.findById(instructor.getId()));
+        discipline.setAssistingInstructors(instructors);
 
         return disciplineRepository.save(discipline);
     }
@@ -112,12 +119,14 @@ public class AcademicDisciplineService {
                     String.format(DSCPL_NOT_FOUND_MSG, "with id=" + id)
             );
 
-        if(!instructorService.existsById(discipline.getLeadingInstructor().getId()))
-            throw new ResourceNotFoundException(DSCPL_INSTRUCTOR_NOT_FOUND_MSG);
+        discipline.setDepartment(departmentService.findById(discipline.getDepartment().getId()));
 
+        discipline.setLeadingInstructor(instructorService.findById(discipline.getLeadingInstructor().getId()));
+
+        Set<Instructor> instructors = new HashSet<>();
         for(Instructor instructor : discipline.getAssistingInstructors())
-            if(!instructorService.existsById(instructor.getId()))
-                throw new ResourceNotFoundException(DSCPL_INSTRUCTOR_NOT_FOUND_MSG);
+            instructors.add(instructorService.findById(instructor.getId()));
+        discipline.setAssistingInstructors(instructors);
 
         discipline.setId(id);
         return disciplineRepository.save(discipline);

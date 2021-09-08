@@ -40,6 +40,12 @@ input[type=text], input[type=password] {
     height: 21px;
 }
 
+input[type=text].alt {
+    margin: 0;
+    width: auto;
+    flex: auto;
+}
+
 input[type=checkbox] {
     width: 16px;
     height: 16px;

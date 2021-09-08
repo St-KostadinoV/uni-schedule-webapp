@@ -112,18 +112,15 @@ public class ProgramDisciplineService {
                     String.format(PROGRAM_DSCPL_EXISTS_MSG, programDiscipline.getId())
             );
 
+        programDiscipline.setProgram(programService.findById(programDiscipline.getProgram().getId()));
+
+        programDiscipline.setDiscipline(disciplineService.findById(programDiscipline.getDiscipline().getId()));
+
         if(!findByProgramAndDiscipline(programDiscipline.getProgram(), programDiscipline.getDiscipline()).isEmpty())
             throw new ResourceAlreadyExistsException(
                     String.format(PROGRAM_DSCPL_EXISTS_MSG, programDiscipline.getProgram().getAbbreviation() + "-" + programDiscipline.getDiscipline().getAbbreviation())
             );
 
-        if(!programService.existsById(programDiscipline.getProgram().getId()))
-            throw new ResourceNotFoundException(PROGRAM_NOT_FOUND_MSG);
-
-        if(!disciplineService.existsById(programDiscipline.getDiscipline().getId()))
-            throw new ResourceNotFoundException(DSCPL_NOT_FOUND_MSG);
-
-        programDiscipline.setProgram(programService.findById(programDiscipline.getProgram().getId()));
         if(programDiscipline.getAcademicYear() > programDiscipline.getProgram().getEducationPeriod())
             throw new BadResourceException(PROGRAM_DSCPL_INVALID_YEAR_MSG);
 
@@ -136,13 +133,10 @@ public class ProgramDisciplineService {
                     String.format(PROGRAM_DSCPL_NOT_FOUND_MSG, id)
             );
 
-        if(!programService.existsById(programDiscipline.getProgram().getId()))
-            throw new ResourceNotFoundException(PROGRAM_NOT_FOUND_MSG);
-
-        if(!disciplineService.existsById(programDiscipline.getDiscipline().getId()))
-            throw new ResourceNotFoundException(DSCPL_NOT_FOUND_MSG);
-
         programDiscipline.setProgram(programService.findById(programDiscipline.getProgram().getId()));
+
+        programDiscipline.setDiscipline(disciplineService.findById(programDiscipline.getDiscipline().getId()));
+
         if(programDiscipline.getAcademicYear() > programDiscipline.getProgram().getEducationPeriod())
             throw new BadResourceException(PROGRAM_DSCPL_INVALID_YEAR_MSG);
 

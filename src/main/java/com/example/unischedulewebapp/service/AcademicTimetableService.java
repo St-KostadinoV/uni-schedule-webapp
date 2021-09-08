@@ -144,11 +144,7 @@ public class AcademicTimetableService {
                     String.format(TIMETBL_EXISTS_MSG, "with id=" + timetable.getId())
             );
 
-        if(!programDisciplineService.existsById(timetable.getProgramDiscipline().getId()))
-            throw new ResourceNotFoundException(TIMETBL_PD_NOT_FOUND_MSG);
-
-        if(!instructorService.existsById(timetable.getAssignedInstructor().getId()))
-            throw new ResourceNotFoundException(TIMETBL_INSTRUCTOR_NOT_FOUND_MSG);
+        timetable.setAssignedInstructor(instructorService.findById(timetable.getAssignedInstructor().getId()));
 
         timetable.setProgramDiscipline(programDisciplineService.findById(timetable.getProgramDiscipline().getId()));
         boolean isLeadingInstructorAssigned = timetable
@@ -175,11 +171,7 @@ public class AcademicTimetableService {
                     String.format(TIMETBL_NOT_FOUND_MSG, "with id=" + id)
             );
 
-        if(!programDisciplineService.existsById(timetable.getProgramDiscipline().getId()))
-            throw new ResourceNotFoundException(TIMETBL_PD_NOT_FOUND_MSG);
-
-        if(!instructorService.existsById(timetable.getAssignedInstructor().getId()))
-            throw new ResourceNotFoundException(TIMETBL_INSTRUCTOR_NOT_FOUND_MSG);
+        timetable.setAssignedInstructor(instructorService.findById(timetable.getAssignedInstructor().getId()));
 
         timetable.setProgramDiscipline(programDisciplineService.findById(timetable.getProgramDiscipline().getId()));
         boolean isLeadingInstructorAssigned = timetable

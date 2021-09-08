@@ -1,8 +1,8 @@
 package com.example.unischedulewebapp.controller;
 
-import com.example.unischedulewebapp.auth.payload.JwtResponse;
+import com.example.unischedulewebapp.payload.JwtResponse;
 import com.example.unischedulewebapp.auth.jwt.JwtUtils;
-import com.example.unischedulewebapp.auth.payload.LoginRequest;
+import com.example.unischedulewebapp.payload.LoginRequest;
 import com.example.unischedulewebapp.auth.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

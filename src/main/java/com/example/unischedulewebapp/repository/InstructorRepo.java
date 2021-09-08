@@ -6,6 +6,7 @@ import com.example.unischedulewebapp.model.enums.AcademicTitle;
 import com.example.unischedulewebapp.model.Instructor;
 import com.example.unischedulewebapp.model.enums.ProfessionalQualification;
 import com.example.unischedulewebapp.repository.base.PersonRepo;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -21,4 +22,6 @@ public interface InstructorRepo
     Collection<Instructor> findByQualification(ProfessionalQualification qualification);
 
     Collection<Instructor> findByDepartment(AcademicDepartment department);
+
+    Collection<Instructor> findByDepartment(AcademicDepartment department, Sort sort);
 }

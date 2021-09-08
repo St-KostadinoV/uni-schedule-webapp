@@ -1,4 +1,4 @@
-package com.example.unischedulewebapp.auth.payload;
+package com.example.unischedulewebapp.payload;
 
 import java.util.List;
 

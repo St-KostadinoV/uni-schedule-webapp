@@ -94,6 +94,11 @@ public class InstructorService {
                 .findByDepartment(department));
     }
 
+    public List<Instructor> findByDepartment(AcademicDepartment department, Sort sort) {
+        return new ArrayList<>(instructorRepo
+                .findByDepartment(department, sort));
+    }
+
     public List<Instructor> findAll() {
         return instructorRepo
                 .findAll();
@@ -116,8 +121,7 @@ public class InstructorService {
                     String.format(INSTRUCTOR_EXISTS_MSG, "with id=" + instructor.getId())
             );
 
-        if (!departmentService.existsById(instructor.getDepartment().getId()))
-            throw new ResourceNotFoundException(INSTRUCTOR_DEPT_NOT_FOUND_MSG);
+        instructor.setDepartment(departmentService.findById(instructor.getDepartment().getId()));
 
         userService.registerUser(instructor.getUser());
 
@@ -130,8 +134,7 @@ public class InstructorService {
                     String.format(INSTRUCTOR_NOT_FOUND_MSG, "with id=" + id)
             );
 
-        if(!departmentService.existsById(instructor.getDepartment().getId()))
-            throw new ResourceNotFoundException(INSTRUCTOR_DEPT_NOT_FOUND_MSG);
+        instructor.setDepartment(departmentService.findById(instructor.getDepartment().getId()));
 
         instructor.setId(id);
         return instructorRepo.save(instructor);
@@ -143,8 +146,7 @@ public class InstructorService {
                     String.format(INSTRUCTOR_NOT_FOUND_MSG, "with id=" + instructor.getId())
             );
 
-        if(!departmentService.existsById(instructor.getDepartment().getId()))
-            throw new ResourceNotFoundException(INSTRUCTOR_DEPT_NOT_FOUND_MSG);
+        instructor.setDepartment(departmentService.findById(instructor.getDepartment().getId()));
 
         instructor.setEmail(email);
         return instructorRepo.save(instructor);

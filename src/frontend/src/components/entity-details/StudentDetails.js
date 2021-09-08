@@ -52,28 +52,37 @@ const StudentDetails = () => {
             <h4 className='alt' style={{display: isContactInfoVisible() && 'none' }}><b>E-mail адрес: </b>{student.email}</h4>
             <h4 className='alt' style={{display: isContactInfoVisible() && 'none' }}><b>Телефон за връзка: </b>{student.phone}</h4>
             {timetable.length > 0 && (
-                <FilterForm>
-                    <h3>Седмичен разпис</h3>
-                    <select name='days' id='days' onChange={event => {setDay(event.target.value)}}>
-                        <option value='none'> - Изберете ден - </option>
-                        <option value='MONDAY'>Понеделник</option>
-                        <option value='TUESDAY'>Вторник</option>
-                        <option value='WEDNESDAY'>Сряда</option>
-                        <option value='THURSDAY'>Четвъртък</option>
-                        <option value='FRIDAY'>Петък</option>
-                        <option value='SATURDAY'>Събота</option>
-                        <option value='SUNDAY'>Неделя</option>
-                    </select>
-                </FilterForm>
+                <>
+                    <FilterForm>
+                        <h3>Седмичен разпис</h3>
+                        <select name='days' id='days' onChange={event => {setDay(event.target.value)}}>
+                            <option value='none'> - Изберете ден - </option>
+                            <option value='MONDAY'>Понеделник</option>
+                            <option value='TUESDAY'>Вторник</option>
+                            <option value='WEDNESDAY'>Сряда</option>
+                            <option value='THURSDAY'>Четвъртък</option>
+                            <option value='FRIDAY'>Петък</option>
+                            <option value='SATURDAY'>Събота</option>
+                            <option value='SUNDAY'>Неделя</option>
+                        </select>
+                    </FilterForm>
+                    {
+                        timetable.filter(tt => tt.dayOfWeek === day).length > 0 ? (
+                        timetable
+                            .filter(tt => tt.dayOfWeek === day)
+                            .map(tt => (
+                                <TimetableCard
+                                    key={tt.id}
+                                    timetable={tt}
+                                />
+                            ))
+                        ) : (
+                            day !== 'none' && <h4 className='alt'>Студентът няма занятия в този ден.</h4>
+                        )
+                    }
+                </>
             )}
-            {
-                timetable.filter(t => t.dayOfWeek === day).map(tt => (
-                    <TimetableCard
-                        key={tt.id}
-                        timetable={tt}
-                    />
-                ))
-            }
+
         </>
     )
 }
